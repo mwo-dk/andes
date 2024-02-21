@@ -24,8 +24,8 @@ jobs:
       run: dotnet publish ds-explorer.csproj -c Release -o release --nologo
     
     # changes the base-tag in index.html from '/' to 'ds-explorer' to match GitHub Pages repository subdirectory
-    - name: Change base-tag in index.html from / to ds-explorer 
-      run: sed -i 's/<base href="\/" \/>/<base href="\/ds-explorer\/" \/>/g' release/wwwroot/index.html
+    # - name: Change base-tag in index.html from / to ds-explorer 
+    #   run: sed -i 's/<base href="\/" \/>/<base href="\/ds-explorer\/" \/>/g' release/wwwroot/index.html
 
     # changes the base-tag in index.html from '/' to 'BlazorWASMPWAStaticPublish' to match GitHub Pages repository subdirectory
     # - name: Fix service-worker-assets.js hashes
