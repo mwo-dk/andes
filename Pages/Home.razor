@@ -8,26 +8,42 @@
 Welcome to your new Fluent Blazor app.
 
 @{
-    Expression<Func<double, double, double>> expr = (x, y) => System.Math.Cos(x) + System.Math.Sin(y);
+    Expression<Func<double, double>> cos = x => System.Math.Cos(x);
+    Expression<Func<double, double>> sin = x => System.Math.Sin(x);
+    Expression<Func<double, double, double>> expr =
+        add ? (Expression<Func<double, double, double>>)Expression.Lambda<Func<double, double, double>>(
+            Expression.Add(cos.Body, sin.Body),
+            cos.Parameters[0],
+            sin.Parameters[0]
+        ) : (Expression<Func<double, double, double>>)Expression.Lambda<Func<double, double, double>>(
+            Expression.Subtract(cos.Body, sin.Body),
+            cos.Parameters[0],
+            sin.Parameters[0]
+        );
     var f = expr.Compile();
 }
 
 <table style="padding: 2rem">
     <tr>
-        <td>x</td>
+        <td>x: </td>
         <td><input type="number" @bind="x" /></td>
     </tr>
     <tr>
-        <td>y</td>
+        <td>y: </td>
         <td><input type="number" @bind="y" /></td>
     </tr>
     <tr>
-        <td>result</td>
+        <td>add / subtract: </td>
+        <td><input type="checkbox" @bind="add" /></td>
+    </tr>
+    <tr>
+        <td>result (@expr.ToString()) </td>
         <td>@(result = f(x, y))</td>
     </tr>
 </table>
 
 @code {
+    private bool add = true;
     private double x = 1;
     private double y = 2;
     private double result;
