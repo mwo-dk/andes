@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "ds-explorer",
   "resources": {
-    "hash": "sha256-CvaB4mKeaS17Xy0oZREfcOTY9C2oHy0q7Qg0WX9ALew=",
+    "hash": "sha256-/GJMStgWoCQ+ncDnHOcIn2aWII/u8amBkxKI/biF190=",
     "jsModuleNative": {
       "dotnet.native.8.0.2.jgt5nhn140.js": "sha256-gPMK16QWoJSTxorlZJqcVtbBRTniIQWlLsJN2O4cJHg="
     },
@@ -17,7 +17,7 @@
       "icudt_no_CJK.dat": "sha256-L7sV7NEYP37/Qr2FPCePo5cJqRgTXRwGHuwF5Q+0Nfs="
     },
     "assembly": {
-      "ds-explorer.wasm": "sha256-G3tQdyNSI7NZQT2NOqHMkGU+zubJUUwgIufGd/GNdq8=",
+      "ds-explorer.wasm": "sha256-D41OHNRcXVGuVz0urXknYXC95aRQp0QhdnO0m3ejPj0=",
       "Microsoft.AspNetCore.Components.wasm": "sha256-GppPXvcd5C6x6BUk2eq/FClWnUwGt4KyckjIiqAITh8=",
       "Microsoft.AspNetCore.Components.Web.wasm": "sha256-U27fWd7ywzD6ZG7jVoDiD+eqtRRenuEnIqHwTMM0qDA=",
       "Microsoft.AspNetCore.Components.WebAssembly.wasm": "sha256-9o31WPkNEPQJTGTtHBlGC6YZ2Cgs7bitpWE4dIvW9vA=",
