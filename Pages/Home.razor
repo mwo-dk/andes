@@ -1,6 +1,12 @@
 ﻿@page "/"
 @using System.Linq.Expressions
 
+<style>
+    th, td {
+        padding: 0.5rem;
+    }
+</style>
+
 <PageTitle>Home</PageTitle>
 
 <h1>Hello, world! </h1>
@@ -23,7 +29,7 @@ Welcome to your new Fluent Blazor app.
     var f = expr.Compile();
 }
 
-<table style="padding: 2rem">
+<table>
     <tr>
         <td>x: </td>
         <td><input type="number" @bind="x" /></td>
