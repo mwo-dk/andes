@@ -3,9 +3,24 @@
     <label for="navmenu-toggle" class="navmenu-icon"><FluentIcon Value="@(new Icons.Regular.Size20.Navigation())" Color="Color.Fill" /></label>
     <nav class="sitenav" aria-labelledby="main-menu" onclick="document.getElementById('navmenu-toggle').click();">
         <FluentNavMenu Id="main-menu" Width="250" Collapsible="true" Title="Navigation menu" @bind-Expanded="expanded">
-             <FluentNavLink Href="/" Match="NavLinkMatch.All" Icon="@(new Icons.Regular.Size20.Home())" IconColor="Color.Accent">Home</FluentNavLink>
-             <FluentNavLink Href="counter" Icon="@(new Icons.Regular.Size20.NumberSymbolSquare())" IconColor="Color.Accent">Counter</FluentNavLink>
-             <FluentNavLink Href="weather" Icon="@(new Icons.Regular.Size20.WeatherPartlyCloudyDay())" IconColor="Color.Accent">Weather</FluentNavLink>
+            <FluentNavLink Href="/" Match="NavLinkMatch.All" Icon="@(new Icons.Regular.Size20.Home())" IconColor="Color.Accent">Home</FluentNavLink>
+            <FluentNavGroup Title="Cellular automata" Href="cellular-automata" Icon="@(new Icons.Regular.Size20.Box())" IconColor="Color.Accent">
+                <FluentNavLink Href="game-of-life" Icon="@(new Icons.Regular.Size20.Info())" IconColor="Color.Accent">Game of Life</FluentNavLink>
+                <FluentNavLink Href="langtons-ant" Icon="@(new Icons.Regular.Size20.Info())" IconColor="Color.Accent">Langton's ant</FluentNavLink>
+            </FluentNavGroup>
+            <FluentNavGroup Title="Dynamical systems" Href="dynamical-systems" Icon="@(new Icons.Regular.Size20.ArrowFlowUpRight())" IconColor="Color.Accent">
+                <FluentNavLink Href="game-of-life" Icon="@(new Icons.Regular.Size20.Info())" IconColor="Color.Accent">Game of Life</FluentNavLink>
+                <FluentNavLink Href="langtons-ant" Icon="@(new Icons.Regular.Size20.Info())" IconColor="Color.Accent">Langton's ant</FluentNavLink>
+            </FluentNavGroup>
+            <FluentNavGroup Title="Fractals" Href="fractals" Icon="@(new Icons.Regular.Size20.ArrowFlowUpRight())" IconColor="Color.Accent">
+                <FluentNavLink Href="game-of-life" Icon="@(new Icons.Regular.Size20.Info())" IconColor="Color.Accent">Game of Life</FluentNavLink>
+                <FluentNavLink Href="langtons-ant" Icon="@(new Icons.Regular.Size20.Info())" IconColor="Color.Accent">Langton's ant</FluentNavLink>
+            </FluentNavGroup>
+            <FluentNavGroup Title="Settings">
+                <FluentNavLink Href="mandelbrot" Icon="@(new Icons.Regular.Size20.Info())" IconColor="Color.Accent">Mandelbrot</FluentNavLink>
+                <FluentNavLink Href="julia" Icon="@(new Icons.Regular.Size20.Info())" IconColor="Color.Accent">Julia</FluentNavLink>
+            </FluentNavGroup>
+            <FluentNavLink Href="about" Icon="@(new Icons.Regular.Size20.Info())" IconColor="Color.Accent">About</FluentNavLink>
         </FluentNavMenu>
     </nav>
 </div>
