@@ -17,4 +17,8 @@
 		<PackageReference Include="Plotly.NET" Version="4.2.0" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\ode\single-step\runge-kutta\runge-kutta.fsproj" />
+	</ItemGroup>
+
 </Project>

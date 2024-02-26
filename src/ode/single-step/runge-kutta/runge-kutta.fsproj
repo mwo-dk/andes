@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+		<RootNamespace>DSE.Ode.SingleStep.RungeKutta</RootNamespace>
+		<AssemblyName>DSE.Ode.SingleStep.RungeKutta</AssemblyName>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="ButcherTableau.fs" />
+  </ItemGroup>
+
+</Project>
