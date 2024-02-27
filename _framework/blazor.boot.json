@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "DSE",
   "resources": {
-    "hash": "sha256-8JYXjEX82qCntcy70Aea3DatTDdOxXKYJJdy/1IsSnI=",
+    "hash": "sha256-AJdWIYi+D/7kygMYGCdXcOUJfNlQ66toqvlVav6HLTM=",
     "jsModuleNative": {
       "dotnet.native.8.0.2.jgt5nhn140.js": "sha256-gPMK16QWoJSTxorlZJqcVtbBRTniIQWlLsJN2O4cJHg="
     },
@@ -17,8 +17,8 @@
     "assembly": {
       "Blazor.Extensions.Canvas.JS.wasm": "sha256-ctyeKHsvFswpiKQJpTUUWdSrDGr4UNirukOrWYnwW78=",
       "Blazor.Extensions.Canvas.wasm": "sha256-2AOrAB5tgoiK9wMMmwiE/pKPAtTjzgFudxSl6g4dt9s=",
-      "DSE.Ode.SingleStep.RungeKutta.wasm": "sha256-ftd3GbQrNtWbDNxoMxjtnIVtZBqCOKXcj771K86AgUc=",
-      "DSE.wasm": "sha256-Q6BaFPMFk9Tpdlf3FmJXRJQljwKNot93XkXVjOP7OWo=",
+      "DSE.Ode.SingleStep.RungeKutta.wasm": "sha256-HiIfVwyKjAlIloZgVBAF7ELP9xD+KABNQ7KWEGUpcnE=",
+      "DSE.wasm": "sha256-UDRfe4Km4TctiGh6I+tC9wpnpzTylBm7QEmzwzU5+CM=",
       "DynamicObj.wasm": "sha256-QvvWROODrYXA6Wu6a6UVnClW6ei36+37TaMzKSSrBwk=",
       "Fluxor.Blazor.Web.ReduxDevTools.wasm": "sha256-lOCILKMbxVdDFXIgH0661+1gp21QYXrGyV18H82OORg=",
       "Fluxor.Blazor.Web.wasm": "sha256-UsMVqQD3E7Bup+MRRY1Udxxql/Xm538xXKUmlgIY+Qw=",
@@ -97,13 +97,13 @@
         "FSharp.Core.resources.wasm": "sha256-k50HnD/JpQjRz4oQYl5vPYfaIYRBA980BJuxHcU6/5Y="
       },
       "da-dk": {
-        "DSE.resources.wasm": "sha256-oLMcPB0lH5QvIpVQiFFi27ZIuTdn6fIuChp+KxGTyIQ="
+        "DSE.resources.wasm": "sha256-vw8sJrPoFBThGWh/dRZKd3lv6VPtHFSO5PzFrt1NEzA="
       },
       "de": {
         "FSharp.Core.resources.wasm": "sha256-LF5XwRxwoAdedl9umNsqYaaaj/hACxJCmuJ4SjFeA2k="
       },
       "en-us": {
-        "DSE.resources.wasm": "sha256-6t000zVeZDpDhrrKVuHJaxWMFSPeWfaBPzgbOcbVT7c="
+        "DSE.resources.wasm": "sha256-cKVsx96cXF8bPPgvOw5CvAFUsIRXy3SQIlMX4rE5Nr8="
       },
       "es": {
         "FSharp.Core.resources.wasm": "sha256-iYPs4hvpR+c0orhfXpx1zJQ2ChEHmHFsfdiNKghVUKY="
