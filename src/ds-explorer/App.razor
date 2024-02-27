@@ -1,4 +1,8 @@
-﻿<Router AppAssembly="@typeof(App).Assembly">
+﻿<FluentDesignTheme @bind-Mode="@Mode"
+@bind-OfficeColor="@OfficeColor"
+                   StorageName="theme" />
+<Fluxor.Blazor.Web.StoreInitializer />
+<Router AppAssembly="@typeof(App).Assembly">
     <Found Context="routeData">
         <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
     </Found>
@@ -9,3 +13,8 @@
         </LayoutView>
     </NotFound>
 </Router>
+
+@code {
+    private DesignThemeModes Mode { get; set; } = DesignThemeModes.System;
+    private OfficeColor? OfficeColor { get; set; } = Microsoft.FluentUI.AspNetCore.Components.OfficeColor.Windows;
+}

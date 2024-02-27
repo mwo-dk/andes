@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages
 # Run workflow on every push to the master branch
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
 
 jobs:
   deploy-to-github-pages:
@@ -13,7 +13,7 @@ jobs:
     # uses GitHub's checkout action to checkout code form the master branch
     - uses: actions/checkout@v3
     
-    # sets up .NET Core SDK 7.x.x
+    # sets up .NET Core SDK 8.x.x
     - name: Setup .NET Core SDK
       uses: actions/setup-dotnet@v3
       with:
