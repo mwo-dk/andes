@@ -7,6 +7,8 @@
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData>
+		<RunAOTCompilation>true</RunAOTCompilation>
+		<WasmStripILAfterAOT>true</WasmStripILAfterAOT>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -22,7 +24,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\ode\single-step\runge-kutta\runge-kutta.fsproj" />
+		<ProjectReference Include="..\ode\single-step\runge-kutta\runge-kutta.fsproj" />
 	</ItemGroup>
 
 </Project>
