@@ -6,6 +6,76 @@ fluent-anchored-region[b-2ov9fhztky] {
     fluent-anchored-region > *[b-2ov9fhztky] {
         pointer-events: all;
     }
+/* _content/Microsoft.FluentUI.AspNetCore.Components/Components/AppBar/FluentAppBar.razor.rz.scp.css */
+
+[b-dkkdhxy2t7] .fluent-appbar-item {
+    width: 100%;
+    --appbar-active-indicator-width: calc(var(--design-unit) * 0.5px);
+    height: 56px;
+}
+
+    [b-dkkdhxy2t7] .fluent-appbar-item:hover {
+        background-color: var(--neutral-fill-secondary-rest);
+    }
+
+[b-dkkdhxy2t7] a[role="listitem"] {
+    color: inherit;
+    text-decoration: none;
+    font-size: var(--type-ramp-minus-2-font-size);
+    line-height: var(--type-ramp-minus-2-line-height);
+    position: relative;
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+}
+
+[b-dkkdhxy2t7] a[role="listitem"] .stack-vertical {
+    padding: calc(var(--design-unit) * 1px) calc(var(--appbar-active-indicator-width) + (var(--design-unit) * 1.5px));
+    height: 100%;
+}
+
+[b-dkkdhxy2t7] div[part="label"] {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+    text-align: center;
+}
+
+[b-dkkdhxy2t7] .fluent-appbar-item:not(.popover) a[role="listitem"].active::before {
+    content: "";
+    position: absolute;
+    width: var(--appbar-active-indicator-width);
+    height: 100%;
+    background-color: var(--accent-fill-rest);
+    border-radius: calc(var(--control-corner-radius) * 1px);
+    top: 0;
+    left: calc(var(--design-unit) * 0.5px);
+    right: unset;
+}
+
+[dir='rtl'] *[b-dkkdhxy2t7]  .fluent-appbar-item:not(.popover) a[role="listitem"].active::before {
+    right: calc(var(--design-unit) * 0.5px);
+    left: unset;
+}
+
+[b-dkkdhxy2t7] .fluent-popover-content .fluent-popover-body {
+    margin-top: 0 !important;
+}
+
+[b-dkkdhxy2t7] .fluent-appbar-item[role="listitem"]:hover svg[part="icon-rest"],
+[b-dkkdhxy2t7] .fluent-appbar-item[role="listitem"]:not(:hover):not(.active) svg[part="icon-active"],
+[b-dkkdhxy2t7] .fluent-appbar-item[role="listitem"]:not(:hover).active svg[part="icon-rest"],
+[b-dkkdhxy2t7] .fluent-appbar-item[overflow] {
+    display: none;
+}
+/* _content/Microsoft.FluentUI.AspNetCore.Components/Components/AppBar/FluentAppBarItem.razor.rz.scp.css */
+[b-eakb9mygz6].fluent-appbar-item:hover a[role="listitem"] svg[part="icon-rest"],
+[b-eakb9mygz6].fluent-appbar-item:not(:hover) a[role="listitem"]:not(.active) svg[part="icon-active"],
+[b-eakb9mygz6].fluent-appbar-item:not(:hover) a[role="listitem"].active svg[part="icon-rest"],
+[b-eakb9mygz6].fluent-appbar-item[overflow] {
+    display: none;
+}
 /* _content/Microsoft.FluentUI.AspNetCore.Components/Components/BodyContent/FluentBodyContent.razor.rz.scp.css */
 .body-content[b-9l28a7kahd] {
     margin: 0;
@@ -36,6 +106,18 @@ fluent-anchored-region[b-2ov9fhztky] {
 /* _content/Microsoft.FluentUI.AspNetCore.Components/Components/Card/FluentCard.razor.rz.scp.css */
 fluent-card[b-6epdlk0xtt]  {
     padding: calc(var(--design-unit) * 5px);
+}
+
+.fluent-card-minimal-style[b-6epdlk0xtt]  {
+    height: var(--card-height, 100%);
+    width: var(--card-width, 100%);
+    contain: content;
+    background: var(--fill-color);
+    color: var(--neutral-foreground-rest);
+    border: calc(var(--stroke-width)* 1px) solid var(--neutral-stroke-layer-rest);
+    border-radius: calc(var(--layer-corner-radius)* 1px);
+    box-shadow: var(--elevation-shadow-card-rest);
+    padding: calc(var(--design-unit)* 5px);
 }
 /* _content/Microsoft.FluentUI.AspNetCore.Components/Components/CollapsibleRegion/FluentCollapsibleRegion.razor.rz.scp.css */
 .fluent-collapsible-region-container[b-hk0m26j2or] {
@@ -1795,12 +1877,14 @@ div[dragged-over][b-qxma62j335] {
         .fluent-persona .initials img[b-n7zog0zvqi] {
             border-radius: 50%;
             aspect-ratio: 1 / 1;
-            height: 100%;
-            width: 100%;
+            width: auto;
+            height: auto;
+            margin-left: auto;
+            margin-right: auto;
         }
 
     .fluent-persona .name[b-n7zog0zvqi] {
-        margin-left: 16px;
+        margin-inline-start: 16px;
     }
 
     .fluent-persona .close[b-n7zog0zvqi] {
