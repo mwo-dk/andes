@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.FluentUI.AspNetCore.Components;
 using DSE;
-using DSE.Shared;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
@@ -20,5 +19,4 @@ builder.Services.AddFluentUIComponents();
 builder.Services.AddLocalization();
 
 var host = builder.Build();
-await host.SetDefaultCulture();
 await host.RunAsync();

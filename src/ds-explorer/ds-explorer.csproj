@@ -18,11 +18,14 @@
 		<PackageReference Include="Microsoft.FluentUI.AspNetCore.Components.Icons" Version="4.*-* " />
 		<PackageReference Include="Blazor.Extensions.Canvas" Version="1.1.1" />
 		<PackageReference Include="Plotly.NET" Version="4.2.0" />
-		<PackageReference Include="PSC.Blazor.Components.Icons" Version="6.0.6" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\ode\single-step\runge-kutta\runge-kutta.fsproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Shared\" />
 	</ItemGroup>
 
 </Project>

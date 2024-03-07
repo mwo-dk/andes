@@ -17,8 +17,20 @@
                 <FluentNavLink Href="langtons-ant" Icon="@(new Icons.Regular.Size20.Info())" IconColor="Color.Accent">Langton's ant</FluentNavLink>
             </FluentNavGroup>
             <FluentNavGroup Title="Settings">
-                <FluentNavLink Href="mandelbrot" Icon="@(new Icons.Regular.Size20.Info())" IconColor="Color.Accent">Mandelbrot</FluentNavLink>
-                <FluentNavLink Href="julia" Icon="@(new Icons.Regular.Size20.Info())" IconColor="Color.Accent">Julia</FluentNavLink>
+                <FluentNavGroup Title="Numerics">
+                    <FluentNavGroup Title="Ordinary differential equations">
+                        <FluentNavGroup Title="Single step">
+                            <FluentNavGroup Title="Runge Kutta">
+                                <FluentNavLink Href="numerics/ode/single-step/runge-kutta/explicit" Icon="@(new Icons.Regular.Size20.Info())" IconColor="Color.Accent">Explicit</FluentNavLink>
+                                <FluentNavLink Href="numerics/ode/single-step/runge-kutta/implicit" Disabled=true Icon="@(new Icons.Regular.Size20.Info())" IconColor="Color.Accent">Implicit</FluentNavLink>
+                            </FluentNavGroup>
+                        </FluentNavGroup>
+                        <FluentNavGroup Title="Multi step" Disabled=true>
+                            <FluentNavLink Href="mandelbrot" Icon="@(new Icons.Regular.Size20.Info())" IconColor="Color.Accent">Mandelbrot</FluentNavLink>
+                            <FluentNavLink Href="julia" Icon="@(new Icons.Regular.Size20.Info())" IconColor="Color.Accent">Julia</FluentNavLink>
+                        </FluentNavGroup>
+                    </FluentNavGroup>
+                </FluentNavGroup>
             </FluentNavGroup>
             <FluentNavLink Href="about" Icon="@(new Icons.Regular.Size20.Info())" IconColor="Color.Accent">@CommonLocalizer![Common.ResourceStrings.About]</FluentNavLink>
         </FluentNavMenu>

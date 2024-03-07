@@ -8,6 +8,32 @@ type ButcherTableau<'T> =
       C: 'T[]   // Coefficients for the time steps
       Name: string // Name of the Butcher tableau
     }
+    with
+        member this.Validate() =
+            let aRows = this.A.Length
+            if aRows = 0 then
+                invalidArg "A" "A must have at least one row"
+            let bs = this.B.Length
+            if bs = 0 then
+                invalidArg "B" "B must have at least one element"
+            let cs = this.C.Length
+            if cs = 0 then
+                invalidArg "C" "C must have at least one element"
+            if aRows <> bs || bs <> cs then
+                invalidArg "A" "Number of rows in A must be equal to the length of B which in turn must be equal to the length of c"
+            let maxACols = this.A |> Array.maxBy Array.length |> Array.length
+            if cs < maxACols then
+                invalidArg "C" "Length of C must be greater than or equal to the maximum number of columns in A"
+        member this.Steps = this.C.Length
+        member this.IsExplicit isZero =
+            let isAijZero i j =
+                let aRow = this.A[i]
+                let aRowLength = aRow.Length
+                if j < aRowLength then
+                    isZero aRow.[j]
+                else
+                    true
+            { 0 .. this.Steps - 1 } |> Seq.forall (fun i -> { 0 .. i - 1 } |> Seq.forall (fun j -> isAijZero i j))
 
 type EmbeddedButcherTableau<'T> =
     { A: 'T[][] // Coefficients for the stages
@@ -16,6 +42,8 @@ type EmbeddedButcherTableau<'T> =
       C: 'T[]   // Coefficients for the time steps
       Name: string // Name of the Butcher tableau
     }
+    with
+        member this.Steps = this.C.Length
 
 type Coefficient =
 | Z
@@ -38,6 +66,13 @@ with
         | Q (a, b) when a = 0.0 && b <> 0.0 -> true
         | IQ (a, b) when a = 0 && b <> 0 -> true
         | _ -> false
+    member this.Simplify() =
+        match this with
+        | N 0 -> Z
+        | R 0.0 -> Z
+        | Q (a, b) when b = 1.0 -> (N (int a)).Simplify()
+        | IQ (a, b) when b = 1 -> (N a).Simplify()
+        | _ -> this
 
 //type CoefficientButcherTableau = ButcherTableau<Coefficient>
 //with
@@ -49,6 +84,26 @@ with
 //        this.A |> Array.exists (fun row -> row |> Array.exists (fun x -> x.IsZero)) ||
 //        this.B |> Array.exists (fun x -> x.IsZero) ||
 //        this.C |> Array.exists (fun x -> x.IsZero)
+
+module ButcherTableaus =
+    type private BT =
+    | T of ButcherTableau<Coefficient>
+    | ET of EmbeddedButcherTableau<Coefficient>
+
+    let mutable private _builtInButcherTableaus : BT list = List.empty
+    
+    let registerBuiltInButcherTableau (x: ButcherTableau<Coefficient>) =
+        _builtInButcherTableaus <- T x :: _builtInButcherTableaus
+    let unregisterBuiltInButcherTableau (x: ButcherTableau<Coefficient>) =
+        _builtInButcherTableaus <- _builtInButcherTableaus |> List.filter (fun y -> y <> T x)
+
+    let mutable private _customInButcherTableaus : BT list = List.empty
+    [<CompiledName("RegisterCustomButcherTableau")>]
+    let register (x: ButcherTableau<Coefficient>) =
+        _customInButcherTableaus <- T x :: _customInButcherTableaus
+    [<CompiledName("UnRegisterCustomButcherTableau")>]
+    let unregister (x: ButcherTableau<Coefficient>) =
+        _customInButcherTableaus <- _customInButcherTableaus |> List.filter (fun y -> y <> T x)
 
 module CoefficientHelpers =
 
