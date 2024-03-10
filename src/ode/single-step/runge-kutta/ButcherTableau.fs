@@ -180,7 +180,7 @@ module CoefficientHelpers =
                 | (true, a), (true, b) -> 
                     if b = 0 then invalidArg "s" "Denominator cannot be zero"
                     else
-                        if a = 0 then Z else IQ (a, b)
+                        if a = 0 then Z else NQ (a, b)
                 | _ -> 
                     match System.Double.TryParse(items.[0], englishNumber), 
                         System.Double.TryParse(items.[1], englishNumber) with
@@ -196,7 +196,7 @@ module CoefficientHelpers =
         | N n -> float n
         | R d -> d
         | Q (a, b) -> a / b
-        | IQ (a, b) -> float a / float b
+        | NQ (a, b) -> float a / float b
         | _ -> 0.0
 
     let inline toFloat32 (x: Coefficient) =
@@ -204,7 +204,7 @@ module CoefficientHelpers =
         | N n -> float32 n
         | R d -> float32 d
         | Q (a, b) -> float32 a / float32 b
-        | IQ (a, b) -> float32 a / float32 b
+        | NQ (a, b) -> float32 a / float32 b
         | _ -> 0.0f
 
     let toFloatArray (x: Coefficient[]) =
