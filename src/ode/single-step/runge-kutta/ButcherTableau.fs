@@ -1,8 +1,10 @@
 ﻿namespace DSE.Ode.SingleStep.RungeKutta
 
 open System.Numerics
+open DSE
 open System.Linq.Expressions
 
+[<AutoOpen>]
 module SchemaHelpers =
     let internal getArrayDimensions (x: 'T[]) =
         if x = null then 0
@@ -60,7 +62,7 @@ module SchemaHelpers =
                     else
                         row[j]
 
-type ButcherTableau<'T> =
+type ButcherTableau<'T when 'T: equality> =
     { A: 'T[][] // Coefficients for the stages
       B: 'T[]   // Coefficients for the solution
       C: 'T[]   // Coefficients for the time steps
@@ -69,32 +71,23 @@ type ButcherTableau<'T> =
     }
     with
         member this.Validate() =
-            
-            let aRows = this.A.Length
-            if aRows = 0 then
-                invalidArg "A" "A must have at least one row"
-            let bs = this.B.Length
-            if bs = 0 then
-                invalidArg "B" "B must have at least one element"
-            let cs = this.C.Length
-            if cs = 0 then
-                invalidArg "C" "C must have at least one element"
-            if aRows <> bs || bs <> cs then
-                invalidArg "A" "Number of rows in A must be equal to the length of B which in turn must be equal to the length of c"
-            let maxACols = this.A |> Array.maxBy Array.length |> Array.length
-            if cs < maxACols then
-                invalidArg "C" "Length of C must be greater than or equal to the maximum number of columns in A"
-        member this.IsExplicit isZero =
-            let isAijZero i j =
-                let aRow = this.A[i]
-                let aRowLength = aRow.Length
-                if j < aRowLength then
-                    isZero aRow.[j]
-                else
-                    true
-            { 0 .. this.Steps - 1 } |> Seq.forall (fun i -> { 0 .. i - 1 } |> Seq.forall (fun j -> isAijZero i j))
+            let (aRows, aCols) = this.A |> getMatrixDimensions
+            if this.Steps < aRows || this.Steps < aCols then
+                invalidArg "A" "A must not be larger than number of steps"
+            let bs = this.B |> getArrayDimensions
+            if this.Steps < bs then
+                invalidArg "B" "B must not be larger than number of steps"
+            let cs = this.C |> getArrayDimensions
+            if this.Steps < cs then
+                invalidArg "C" "C must not be larger than number of steps"
+            this
+        member this.IsExplicit zeroValue =
+            let n = this.Steps
+            {0..n-1} |>
+                Seq.fold (fun ok i -> 
+                    {i..n-1} |> Seq.fold (fun ok j -> ok && zeroValue = (getMatrixItem  i j n n zeroValue this.A)) ok) true
 
-type EmbeddedButcherTableau<'T> =
+type EmbeddedButcherTableau<'T when 'T: equality> =
     { A: 'T[][] // Coefficients for the stages
       B1: 'T[]   // Coefficients for the solution
       B2: 'T[]   // Coefficients for the solution
@@ -102,58 +95,28 @@ type EmbeddedButcherTableau<'T> =
       Steps: int // Number of stages
       Name: string // Name of the Butcher tableau
     }
-
-type Coefficient =
-| Z
-| N of int
-| IQ of int*int
-| Q of float*float
-| R of float
-| C of Complex
-
 with
-    member this.IsInfinite =
-        match this with
-        | IQ (a, b) -> b = 0
-        | Q (a, b) -> System.Double.IsInfinity a || System.Double.IsInfinity b || b = 0.0
-        | R r -> System.Double.IsInfinity r
-        | C c -> System.Double.IsInfinity c.Real || System.Double.IsInfinity c.Imaginary
-        | _ -> false
-    member this.IsNaN =
-        match this with
-            | Q (a, b) -> System.Double.IsNaN a || System.Double.IsNaN b || b = 0.0
-            | R r -> System.Double.IsNaN r
-            | C c -> System.Double.IsNaN c.Real || System.Double.IsNaN c.Imaginary
-            | _ -> false
-    member this.IsZero =
-        match this.Simplify() with
-        | Z -> true
-        | N 0 -> true
-        | IQ (0, b) when b <> 0 -> true
-        | R 0.0 -> true
-        | Q (0.0, b) when b <> 0.0 -> true
-        | C c when c = Complex.Zero -> true
-        | _ -> false
-    member this.IsOne =
-        match this.Simplify() with
-        | N 1 -> true
-        | IQ (a, b) when a = b && b <> 0 -> true
-        | Q (a, b) when a = b && b <> 0.0 -> true
-        | R 1.0 -> true
-        | C c when c = Complex.One -> true
-        | _ -> false
-    member this.Simplify() =
-        match this with
-        | N 0 -> Z
-        | IQ (a, b) when b = 1 -> (N a).Simplify()
-        | Q (a, b) when b = 1.0 -> (N (int a)).Simplify()
-        | R 0.0 -> Z
-        | C c when c = Complex.Zero -> Z
-        | C c when c = Complex.One -> N 1
-        | C c when c.Imaginary = 0.0 -> (R c.Real).Simplify()
-        | C c when c.Real = 0.0 && c.Imaginary = 1.0 -> C Complex.ImaginaryOne
-        | _ -> this
+    member this.Validate() =
+        let (aRows, aCols) = this.A |> getMatrixDimensions
+        if this.Steps < aRows || this.Steps < aCols then
+            invalidArg "A" "A must not be larger than number of steps"
+        let b1s = this.B1 |> getArrayDimensions
+        if this.Steps < b1s then
+            invalidArg "B1" "B1 must not be larger than number of steps"
+        let b2s = this.B2 |> getArrayDimensions
+        if this.Steps < b2s then
+            invalidArg "B2" "B2 must not be larger than number of steps"
+        let cs = this.C |> getArrayDimensions
+        if this.Steps < cs then
+           invalidArg "C" "C must not be larger than number of steps"
+        this
+    member this.IsExplicit zeroValue =
+        let n = this.Steps
+        {0..n-1} |>
+            Seq.fold (fun ok i -> 
+            {i..n-1} |> Seq.fold (fun ok j -> ok && zeroValue = (getMatrixItem  i j n n zeroValue this.A)) ok) true
 
+type Coefficient = Number
 type CoefficientButcherTableau = ButcherTableau<Coefficient>
 type EmbeddedCoefficientButcherTableau = EmbeddedButcherTableau<Coefficient>
 

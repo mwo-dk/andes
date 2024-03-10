@@ -8,8 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="Marker.fs" />
     <Compile Include="ButcherTableau.fs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\number\number.fsproj" />
   </ItemGroup>
 
 </Project>
