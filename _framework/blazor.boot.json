@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "DSE",
   "resources": {
-    "hash": "sha256-PFMrskBNFmKd5JKmEzIGaGw6bwXvDWXJxjIzERRtEME=",
+    "hash": "sha256-UUXD/7wBmq+MzazQDTmditdEh0SNHSfYy7052mjDy/s=",
     "jsModuleNative": {
       "dotnet.native.8.0.2.jgt5nhn140.js": "sha256-gPMK16QWoJSTxorlZJqcVtbBRTniIQWlLsJN2O4cJHg="
     },
@@ -17,9 +17,9 @@
     "assembly": {
       "Blazor.Extensions.Canvas.JS.wasm": "sha256-ctyeKHsvFswpiKQJpTUUWdSrDGr4UNirukOrWYnwW78=",
       "Blazor.Extensions.Canvas.wasm": "sha256-2AOrAB5tgoiK9wMMmwiE/pKPAtTjzgFudxSl6g4dt9s=",
-      "DSE.Number.wasm": "sha256-9w3JjD541tkP7tuOHDBe7ZHq+LkLnTE0Lx5/8huynLI=",
-      "DSE.Ode.SingleStep.RungeKutta.wasm": "sha256-JyE2EkgExY6ui1C7OpLFlxW7ho8mIrKAJA76WNbHDAo=",
-      "DSE.wasm": "sha256-alAyB0dNSQ9K9Nq/3oVUnqmc6ANC9KjOa5g+X9Zk1ew=",
+      "DSE.Number.wasm": "sha256-H5sfU7nOe1uQdBWeVobApCm5rxoilNThekuM2TsbX/c=",
+      "DSE.Ode.SingleStep.RungeKutta.wasm": "sha256-LashuEQzGTjsXGYxRaPi3e7FvaM61BnkU6T0+njc07E=",
+      "DSE.wasm": "sha256-tphp1EpoOJrlElfR02MPqY0cSXoKPEiUz3f6LMCTu7Y=",
       "DynamicObj.wasm": "sha256-QvvWROODrYXA6Wu6a6UVnClW6ei36+37TaMzKSSrBwk=",
       "Fluxor.Blazor.Web.ReduxDevTools.wasm": "sha256-lOCILKMbxVdDFXIgH0661+1gp21QYXrGyV18H82OORg=",
       "Fluxor.Blazor.Web.wasm": "sha256-UsMVqQD3E7Bup+MRRY1Udxxql/Xm538xXKUmlgIY+Qw=",
@@ -96,13 +96,13 @@
         "FSharp.Core.resources.wasm": "sha256-k50HnD/JpQjRz4oQYl5vPYfaIYRBA980BJuxHcU6/5Y="
       },
       "da-dk": {
-        "DSE.resources.wasm": "sha256-VNTyj79SPv56ymKczPe81DxrMLa0Q4m2UFHycyi2hVw="
+        "DSE.resources.wasm": "sha256-Y42Iu2YuA/fwqjQgJcjm8RXyNBJBti5DRxCY4kxaejo="
       },
       "de": {
         "FSharp.Core.resources.wasm": "sha256-LF5XwRxwoAdedl9umNsqYaaaj/hACxJCmuJ4SjFeA2k="
       },
       "en-us": {
-        "DSE.resources.wasm": "sha256-l5grB/tawKAdH0iammJ6Alu0n9Sg/m2JNCNgsi+50BU="
+        "DSE.resources.wasm": "sha256-bAeWW29QyWJlym8IAF9r+Kn2h4a44goTh736zQIVwZI="
       },
       "es": {
         "FSharp.Core.resources.wasm": "sha256-iYPs4hvpR+c0orhfXpx1zJQ2ChEHmHFsfdiNKghVUKY="
