@@ -1,5 +1,4 @@
-﻿<FluentDesignTheme Mode="DesignThemeModes.Dark" CustomColor="#c3b091" />
-<Fluxor.Blazor.Web.StoreInitializer />
+﻿<Fluxor.Blazor.Web.StoreInitializer />
 <Router AppAssembly="@typeof(App).Assembly">
     <Found Context="routeData">
         <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
@@ -11,8 +10,3 @@
         </LayoutView>
     </NotFound>
 </Router>
-
-@code {
-    // private DesignThemeModes Mode { get; set; } = DesignThemeModes.Dark;
-    // private OfficeColor? OfficeColor { get; set; } = Microsoft.FluentUI.AspNetCore.Components.OfficeColor.Windows;
-}
