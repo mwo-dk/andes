@@ -1,20 +1,15 @@
 ﻿@page "/"
 @using System.Linq.Expressions
 
-<FluentDesignTheme @bind-Mode="@Mode"
-                   @bind-OfficeColor="@OfficeColor" 
-                   StorageName="theme" />
 <style>
     th, td {
         padding: 0.5rem;
     }
 </style>
 
-<PageTitle>Home</PageTitle>
+<PageTitle>Dynamical systems explorer</PageTitle>
 
-<h1>Hello, world! </h1>
-
-Welcome to your new Fluent Blazor app.
+<h1>Welcome</h1>
 
 @{
     Expression<Func<double, double>> cos = x => System.Math.Cos(x);
@@ -51,43 +46,11 @@ Welcome to your new Fluent Blazor app.
     </tr>
 </table>
 
-<div style="min-height: 250px;">
-    <FluentGrid>
-        <FluentGridItem>
-            <FluentSelect Label="Theme"
-                          Width="250px"
-                          Items="@(Enum.GetValues<DesignThemeModes>())"
-                          @bind-SelectedOption="@Mode" />
-        </FluentGridItem>
-
-        <FluentGridItem>
-            <FluentSelect Label="Color"
-                          Items="@(Enum.GetValues<OfficeColor>().Select(i => (OfficeColor?)i))"
-                          Height="200px"
-                          Width="250px"
-                          @bind-SelectedOption="@OfficeColor">
-                <OptionTemplate>  
-                    <FluentStack>
-                        <FluentIcon Value="@(new Icons.Filled.Size20.RectangleLandscape())"
-                                    Color="Color.Custom"
-                                    CustomColor="@(@context.ToAttributeValue() != "default" ? context.ToAttributeValue() : "#036ac4" )" />
-                        <FluentLabel>@context</FluentLabel>  
-                    </FluentStack>
-                </OptionTemplate> 
-            </FluentSelect>
-        </FluentGridItem>
-    </FluentGrid>
-</div>
-
 @code {
     private bool add = true;
     private double x = 1;
     private double y = 2;
     private double result;
 
-    public DesignThemeModes Mode { get; set; }
-
-
-
-    public OfficeColor? OfficeColor { get; set; }
+    
 }
