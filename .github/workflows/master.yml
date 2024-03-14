@@ -19,6 +19,10 @@ jobs:
       with:
         dotnet-version: 8.x.x
 
+    # adds Wasm tool workload 
+    - name: Add Wasm tool workload
+      run: dotnet workload install wasm-tools
+
     # publishes Blazor project to the release-folder
     - name: Publish .NET Core Project
       run: dotnet publish src/ds-explorer/ds-explorer.csproj -c Release -o release --nologo

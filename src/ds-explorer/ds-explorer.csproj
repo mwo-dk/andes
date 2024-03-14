@@ -6,6 +6,8 @@
 		<AssemblyName>DSE</AssemblyName>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
+  		<RunAOTCompilation>true</RunAOTCompilation>
+  		<WasmStripILAfterAOT>true</WasmStripILAfterAOT>
 		<BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData>
 	</PropertyGroup>
 
