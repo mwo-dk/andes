@@ -18,6 +18,7 @@
 		<PackageReference Include="Microsoft.FluentUI.AspNetCore.Components.Icons" Version="4.*-* " />
 		<PackageReference Include="Blazor.Extensions.Canvas" Version="1.1.1" />
 		<PackageReference Include="Plotly.NET" Version="4.2.0" />
+		<PackageReference Include="SkiaSharp.Views.Blazor" Version="3.0.0-preview.2.1" />
 	</ItemGroup>
 
 	<ItemGroup>
