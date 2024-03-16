@@ -1,6 +1,14 @@
 @page "/test/expressions"
 @using System.Linq.Expressions
 
+<style>
+    th, td {
+        padding: 0.5rem;
+    }
+</style>
+
+<h1>Expressions</h1>
+
 @{
     Expression<Func<double, double>> cos = x => System.Math.Cos(x);
     Expression<Func<double, double>> sin = x => System.Math.Sin(x);
