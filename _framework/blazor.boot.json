@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "DSE",
   "resources": {
-    "hash": "sha256-uRi1ipeze+HVLdn7SLTvoWWedv4tSEV6WVCzIWQ9BSs=",
+    "hash": "sha256-LFLFSQc+XjnE6mhK5hir8lasQwFbRDPDO565lhHUqB4=",
     "jsModuleNative": {
       "dotnet.native.8.0.3.wzxwl5s97r.js": "sha256-D4sYBYmDfH/YekgYRgX959/2RG6k28sJSHmcsn+iikk="
     },
@@ -17,9 +17,9 @@
     "assembly": {
       "Blazor.Extensions.Canvas.JS.wasm": "sha256-ctyeKHsvFswpiKQJpTUUWdSrDGr4UNirukOrWYnwW78=",
       "Blazor.Extensions.Canvas.wasm": "sha256-2AOrAB5tgoiK9wMMmwiE/pKPAtTjzgFudxSl6g4dt9s=",
-      "DSE.Number.wasm": "sha256-gLmv8jIdvEmzYbMvAQOv12juOAVoPf2Ol9IPPOk8BaM=",
-      "DSE.Ode.SingleStep.RungeKutta.wasm": "sha256-yuRDl1ZQbQsGgZTvWx1OtCt7C9JfS8O7qTvL8kIo8hg=",
-      "DSE.wasm": "sha256-lsdL9a6rMJVvbksyT7gMD8TFa0HDo39JSPj/LLJ0i2U=",
+      "DSE.Number.wasm": "sha256-iyi/DwdkHcMdyCteI+81LooE/k54Hytpj7u0oNJ4V3A=",
+      "DSE.Ode.SingleStep.RungeKutta.wasm": "sha256-h6omCf0iBUOATlML3S+0TwMhowq7CPQpcHmXXm1mtnY=",
+      "DSE.wasm": "sha256-uEZZvqiPlh+Z/4fC3T5fPzmjFFDNgkeVXIRec1dz/eg=",
       "DynamicObj.wasm": "sha256-QvvWROODrYXA6Wu6a6UVnClW6ei36+37TaMzKSSrBwk=",
       "Fluxor.Blazor.Web.ReduxDevTools.wasm": "sha256-lOCILKMbxVdDFXIgH0661+1gp21QYXrGyV18H82OORg=",
       "Fluxor.Blazor.Web.wasm": "sha256-UsMVqQD3E7Bup+MRRY1Udxxql/Xm538xXKUmlgIY+Qw=",
@@ -98,13 +98,13 @@
         "FSharp.Core.resources.wasm": "sha256-hvbta5JrDex1HsjSP9VFMoEM3VVI72WKwBGzAOU4/Ws="
       },
       "da-dk": {
-        "DSE.resources.wasm": "sha256-ardCXcH4BwleDy+eM3Ge9KjWyMMFAfmherBK6MoHN2A="
+        "DSE.resources.wasm": "sha256-HiDbqD8+vNrbCOILQ7w96kZ9P0CTSKgb5dofoCZTGQg="
       },
       "de": {
         "FSharp.Core.resources.wasm": "sha256-Cv9n5ZLCakZZ654om+o0EZnl1Nv5zpukIX4io7k0gcM="
       },
       "en-us": {
-        "DSE.resources.wasm": "sha256-uoW6Y2UogJA4OOSPnYSceazHPnadZps+DDFIoTv28iQ="
+        "DSE.resources.wasm": "sha256-Vgxvy4rWBpbtXsolDYA078Ow0kNs6zKoTuad+YBj0Gg="
       },
       "es": {
         "FSharp.Core.resources.wasm": "sha256-X/LnzZ3t78fWgA0bok5Eo0L3wtxotujSCZxnh1e5hWA="
