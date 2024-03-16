@@ -1,5 +1,6 @@
 ﻿@page "/"
 @using System.Linq.Expressions
+@using static DSE.NumberHelpers
 
 <style>
     th, td {
@@ -46,11 +47,34 @@
     </tr>
 </table>
 
+<table>
+    <tr>
+        <td>Tekst</td>
+        <td><input @bind="Text" /></td>
+    </tr>
+    <tr>
+        <td>Is integer: </td>
+        <td>@DSE.NumberHelpers.IsInteger(Text)</td>
+    </tr>
+    <tr>
+        <td>Is real: </td>
+        <td>@DSE.NumberHelpers.IsReal(Text)</td>
+    </tr>
+    <tr>
+        <td>Is Imaginary: </td>
+        <td>@DSE.NumberHelpers.isImaginary(Text)</td>
+    </tr>
+    <tr>
+        <td>Is complex: </td>
+        <td>@DSE.NumberHelpers.IsComplex(Text)</td>
+    </tr>
+</table>
+
 @code {
     private bool add = true;
     private double x = 1;
     private double y = 2;
     private double result;
 
-    
+    private string? Text { get; set; }
 }
