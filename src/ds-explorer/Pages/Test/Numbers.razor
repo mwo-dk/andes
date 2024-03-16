@@ -1,0 +1,36 @@
+@page "/test/numbers"
+
+<style>
+    th, td {
+        padding: 0.5rem;
+    }
+</style>
+
+<h1>Numbers</h1>
+
+<table>
+    <tr>
+        <td>Text</td>
+        <td><input @bind="Text" /></td>
+    </tr>
+    <tr>
+        <td>Is integer: </td>
+        <td>@DSE.NumberHelpers.IsInteger(Text)</td>
+    </tr>
+    <tr>
+        <td>Is real: </td>
+        <td>@DSE.NumberHelpers.IsReal(Text)</td>
+    </tr>
+    <tr>
+        <td>Is Imaginary: </td>
+        <td>@DSE.NumberHelpers.isImaginary(Text)</td>
+    </tr>
+    <tr>
+        <td>Is complex: </td>
+        <td>@DSE.NumberHelpers.IsComplex(Text)</td>
+    </tr>
+</table>
+
+@code {
+    private string? Text { get; set; }
+}
