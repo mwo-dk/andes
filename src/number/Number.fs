@@ -20,16 +20,18 @@ module NumberHelpers =
         if System.String.IsNullOrWhiteSpace(s) then false
         else
             let s = s.Trim()
-            if s.StartsWith("i") then
-                isReal (s.Substring(1, s.Length-1))
+            if s = "i" || s = "-i" then true
             else
-                if s.StartsWith("-i") then
-                    isReal (s.Substring(2, s.Length-2))
+                if s.StartsWith("i") then
+                    isReal (s.Substring(1, s.Length-1))
                 else
-                    if s.EndsWith("i") then
-                        isReal (s.Substring(0, s.Length-1))
+                    if s.StartsWith("-i") then
+                        isReal (s.Substring(2, s.Length-2))
                     else
-                        false
+                        if s.EndsWith("i") then
+                            isReal (s.Substring(0, s.Length-1))
+                        else
+                            false
     [<CompiledName("IsComplex")>]
     let isComplex (s: string) = 
         if System.String.IsNullOrWhiteSpace(s) then false
@@ -46,10 +48,12 @@ module NumberHelpers =
     [<CompiledName("IsNumber")>]
     let isNumber (s: string) = isInteger s || isReal s || isComplex s
     [<CompiledName("IsFraction")>]
-    let isFraction (s: string) = 
-        match s.Split('/', System.StringSplitOptions.RemoveEmptyEntries) with
-        | [|a; b|] when isNumber a && isNumber b -> true
-        | _ -> false
+    let isFraction (s: string) =
+        if System.String.IsNullOrWhiteSpace(s) then false
+        else 
+            match s.Split('/', System.StringSplitOptions.RemoveEmptyEntries) with
+            | [|a; b|] when isNumber a && isNumber b -> true
+            | _ -> false
 
     [<CompiledName("TryParseInteger")>]
     let tryParseInteger (s: string) =
@@ -63,23 +67,29 @@ module NumberHelpers =
         | _ -> None
     [<CompiledName("TryParseImaginary")>]
     let tryParseImaginary (s: string) =
-        let s = s.Trim()
-        if s.StartsWith("i") then
-            match System.Double.TryParse(s.Substring(1, s.Length-1), englishNumber) with
-            | true, n -> Some n
-            | _ -> None
-        else 
-            if s.StartsWith("-i") then
-                match System.Double.TryParse(s.Substring(2, s.Length-2), englishNumber) with
-                | true, n -> Some -n
-                | _ -> None
+        if System.String.IsNullOrWhiteSpace(s) then None
+        else
+            let s = s.Trim()
+            if s = "i" then Some 1.0
             else
-                if s.EndsWith("i") then
-                    match System.Double.TryParse(s.Substring(0, s.Length-1), englishNumber) with
+                if s = "-i" then Some -1.0
+                else
+                if s.StartsWith("i") then
+                    match System.Double.TryParse(s.Substring(1, s.Length-1), englishNumber) with
                     | true, n -> Some n
                     | _ -> None
-                else
-                    None
+                else 
+                    if s.StartsWith("-i") then
+                        match System.Double.TryParse(s.Substring(2, s.Length-2), englishNumber) with
+                        | true, n -> Some -n
+                        | _ -> None
+                    else
+                        if s.EndsWith("i") then
+                            match System.Double.TryParse(s.Substring(0, s.Length-1), englishNumber) with
+                            | true, n -> Some n
+                            | _ -> None
+                        else
+                            None
     [<CompiledName("TryParseComplex")>]
     let tryParseComplex (s: string) =
         let s = s.Trim()
@@ -280,26 +290,8 @@ with
         result.Simplify()
 
     static member TryParse (s: string) =
-        let result =
-            match s.Split('/', System.StringSplitOptions.RemoveEmptyEntries) with
-            | [|a; b|] when isNumber a && isNumber b -> 
-                match tryParseInteger a, tryParseInteger b with
-                | Some a, Some b -> NQ (a, b)
-                | _, _ -> 
-                    match tryParseReal a, tryParseReal b with
-                    | Some a, Some b -> Q (a, b)
-                    | _, _ -> 
-                        match tryParseComplex a, tryParseComplex b with
-                        | Some a, Some b -> QC (a, b)
-                        | _, _ -> NotANumber
-            | _ -> 
-                match tryParseInteger s with
-                | Some n -> N n
-                | _ -> 
-                    match tryParseReal s with
-                    | Some n -> R n
-                    | _ -> 
-                        match tryParseComplex s with
-                        | Some n -> C n
-                        | _ -> NotANumber
-        result.Simplify()
+        if System.String.IsNullOrWhiteSpace(s) then NotANumber
+        else 
+            let result =
+                NotANumber
+            result.Simplify()

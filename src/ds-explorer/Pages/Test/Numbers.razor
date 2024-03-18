@@ -29,7 +29,15 @@
         <td>Is complex: </td>
         <td>@DSE.NumberHelpers.IsComplex(Text)</td>
     </tr>
-</table>
+    <tr>
+        <td>Is fraction: </td>
+        <td>@DSE.NumberHelpers.IsFraction(Text)</td>
+    </tr>
+    @* <tr>
+        <td>Parsed value: </td>
+        <td>@DSE.Number.TryParse(Text)</td>
+    </tr> *@
+</table> 
 
 @code {
     private string? Text { get; set; }
