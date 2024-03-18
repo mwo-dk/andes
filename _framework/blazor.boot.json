@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "DSE",
   "resources": {
-    "hash": "sha256-nFf967b2hufcCZCaEJulwwK1b7fm8DqMXUI+Vl4Wh68=",
+    "hash": "sha256-W9hN+fCrlmjkgpy7tEnQ+nwZqsEqe3xgO8rRzW63WEQ=",
     "jsModuleNative": {
       "dotnet.native.8.0.3.wzxwl5s97r.js": "sha256-D4sYBYmDfH/YekgYRgX959/2RG6k28sJSHmcsn+iikk="
     },
@@ -17,9 +17,9 @@
     "assembly": {
       "Blazor.Extensions.Canvas.JS.wasm": "sha256-ctyeKHsvFswpiKQJpTUUWdSrDGr4UNirukOrWYnwW78=",
       "Blazor.Extensions.Canvas.wasm": "sha256-2AOrAB5tgoiK9wMMmwiE/pKPAtTjzgFudxSl6g4dt9s=",
-      "DSE.Number.wasm": "sha256-nOm4i4E9KZEVBiebXewUXQOqZjr84nOG9PV7Hi/gfZ0=",
-      "DSE.Ode.SingleStep.RungeKutta.wasm": "sha256-RrU5gJiHwojxAJtE0efb12ixc7UvaDP0hhuJe/teuxY=",
-      "DSE.wasm": "sha256-x1jQOCqiylScopJ8KkCR3yPbA2Fi+LX1trr0eJY51Tk=",
+      "DSE.Number.wasm": "sha256-ax84NXQUvuGZTwejZV3tqTRMPIPU7blnJl1GhK6BcAA=",
+      "DSE.Ode.SingleStep.RungeKutta.wasm": "sha256-oqCjP/JrsBdDjgbCwIQQ8I4QSlkQLDPy2B0CpRfHvvo=",
+      "DSE.wasm": "sha256-VAvApKlCsZIZP2pkv8yEccW2qLM0dtES81eGHr7kCCQ=",
       "DynamicObj.wasm": "sha256-QvvWROODrYXA6Wu6a6UVnClW6ei36+37TaMzKSSrBwk=",
       "Fluxor.Blazor.Web.ReduxDevTools.wasm": "sha256-lOCILKMbxVdDFXIgH0661+1gp21QYXrGyV18H82OORg=",
       "Fluxor.Blazor.Web.wasm": "sha256-UsMVqQD3E7Bup+MRRY1Udxxql/Xm538xXKUmlgIY+Qw=",
