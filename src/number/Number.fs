@@ -172,6 +172,7 @@ with
 
     member this.Simplify() =
         match this with
+        | NotANumber -> NotANumber
         | x when x.IsZero -> Z
         | x when x.IsOne -> N 1
         | NQ (a, 1) -> N a
@@ -293,5 +294,30 @@ with
         if System.String.IsNullOrWhiteSpace(s) then NotANumber
         else 
             let result =
-                NotANumber
+                if isFraction s then
+                    match s.Split('/', System.StringSplitOptions.RemoveEmptyEntries) with
+                    | [|a; b|] -> 
+                        match tryParseInteger a, tryParseInteger b with
+                        | Some a, Some b -> NQ (a, b)
+                        | _, _ -> 
+                            match tryParseReal a, tryParseReal b with
+                            | Some a, Some b -> Q (a, b)
+                            | _, _ -> 
+                                match tryParseComplex a, tryParseComplex b with
+                                | Some a, Some b -> QC (a, b)
+                                | _, _ -> NotANumber
+                    | _ -> NotANumber
+                else
+                    match tryParseInteger s with
+                    | Some n -> N n
+                    | _ ->
+                        match tryParseReal s with
+                        | Some n -> R n
+                        | _ ->
+                            match tryParseImaginary s with
+                            | Some n -> C (Complex(0.0, n))
+                            | _ ->
+                                match tryParseComplex s with
+                                | Some n -> C n
+                                | _ -> NotANumber
             result.Simplify()
