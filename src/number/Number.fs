@@ -335,3 +335,23 @@ with
                                 | Some n -> C n
                                 | _ -> NotANumber
             result.Simplify()
+
+    override this.ToString() =
+        let formatComplex (c: Complex) =
+            if c.Imaginary = 0.0 then c.Real.ToString()
+            else
+                if c.Real = 0.0 then sprintf "%fi" c.Imaginary
+                else 
+                    if c.Imaginary > 0.0 then
+                        sprintf "%f+%fi" c.Real c.Imaginary
+                    else
+                        sprintf "%f%fi" c.Real c.Imaginary
+        match this with
+        | NotANumber -> "NaN"
+        | Z -> "0"
+        | N n -> n.ToString()
+        | NQ (a, b) -> sprintf "%d/%d" a b
+        | Q (a, b) -> sprintf "%f/%f" a b
+        | R r -> r.ToString()
+        | C c -> formatComplex c
+        | QC (a, b) -> sprintf "%s/%s" (formatComplex a) (formatComplex b)
