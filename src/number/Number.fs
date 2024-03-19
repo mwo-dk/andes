@@ -150,8 +150,8 @@ with
         | QC (a, b) -> 
             isNaN a.Real || isNaN a.Imaginary || isNaN b.Real || isNaN b.Imaginary
         | _ -> false
-    member this.IsZero =
-        match this.Simplify() with
+    member private this.IsZero' =
+        match this with
         | Z -> true
         | N 0 -> true
         | NQ (0, b) when b <> 0 -> true
@@ -160,8 +160,8 @@ with
         | C c when c = Complex.Zero -> true
         | QC (a, b) when a = Complex.Zero && b <> Complex.Zero -> true
         | _ -> false
-    member this.IsOne =
-        match this.Simplify() with
+    member private this.IsOne' =
+        match this with
         | N 1 -> true
         | NQ (a, b) when a = b && b <> 0 -> true
         | Q (a, b) when a = b && b <> 0.0 -> true
@@ -169,20 +169,34 @@ with
         | C c when c = Complex.One -> true
         | QC (a, b) when a = b && b <> Complex.Zero -> true
         | _ -> false
+    member this.IsZero = 
+        let simplified: Number = this.Simplify()
+        simplified.IsZero'
+    member this.IsOne = 
+        let simplified: Number = this.Simplify()
+        simplified.IsOne'
 
     member this.Simplify() =
         match this with
         | NotANumber -> NotANumber
-        | x when x.IsZero -> Z
-        | x when x.IsOne -> N 1
+        | x when x.IsZero' -> Z
+        | x when x.IsOne' -> N 1
         | NQ (a, 1) -> N a
         | NQ (_, 0) -> NotANumber
-        | Q (a, 1.0) -> R a
+        | NQ (a, b) when a = b -> N 1
+        | NQ (a, b) when a = -b -> N (-1)
+        | Q (a, 1.0) -> (R a).Simplify()
         | Q (_, 0.0) -> NotANumber
-        | C c when c.Imaginary = 0.0 -> R c.Real
-        | C c when c.Real = 0.0 && c.Imaginary = 1.0 -> C Complex.ImaginaryOne
-        | QC (a, b) when b = Complex.One -> C a
+        | Q (a, b) when a = b -> (R 1.0).Simplify()
+        | Q (a, b) when a = -b -> (R -1.0).Simplify()
+        | Q (a, b) when float (int a) = a && float (int b) = b -> (NQ (int a, int b)).Simplify()
+        | R x when float (int x) = x -> (N (int x)).Simplify()
+        | C c when c.Imaginary = 0.0 -> (R c.Real).Simplify()
+        | QC (a, b) when b = Complex.One -> (C a).Simplify()
         | QC (a, b) when b = Complex.Zero -> NotANumber
+        | QC (a, b) when a = b -> R 1.0
+        | QC (a, b) when a = -b -> R -1.0
+        | QC (a, b) -> (C (a/b)).Simplify()
         | _ -> this
 
     static member Lift (x: Number) (y: Number) =
