@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-		<RootNamespace>DSE.Ode.SingleStep.RungeKutta</RootNamespace>
-		<AssemblyName>DSE.Ode.SingleStep.RungeKutta</AssemblyName>
+		<RootNamespace>Andes.Ode.SingleStep.RungeKutta</RootNamespace>
+		<AssemblyName>Andes.Ode.SingleStep.RungeKutta</AssemblyName>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 

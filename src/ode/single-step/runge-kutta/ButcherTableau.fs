@@ -1,6 +1,6 @@
-﻿namespace DSE.Ode.SingleStep.RungeKutta
+﻿namespace Andes.Ode.SingleStep.RungeKutta
 
-open DSE
+open Andes
 open System.Runtime.CompilerServices
 
 [<AutoOpen>]
@@ -145,28 +145,77 @@ type TableauExtensions =
     static member inline IsExplicit(tableau: Float32EmbeddedButcherTableau) = tableau.IsExplicit 0.0f
 
 module ButcherTableauRegistry =
+    type Subscriber = unit -> unit
+    let mutable private newId = 1
+    let mutable private _subscribers : (Subscriber*int) list = List.empty
+    [<CompiledName("SubscribeToTableauChanges")>]
+    let subscribeToTableauChanges (listener: System.Action) =
+        let id = newId
+        newId <- newId + 1
+        let subscriber : Subscriber = (fun () -> listener.Invoke())
+        _subscribers <- (subscriber, id) :: _subscribers
+        id
+    [<CompiledName("UnsubscribeFromTableauChanges")>]
+    let unsubscribeFromTableauChanges (id: int) =
+        _subscribers <- _subscribers |> List.filter (fun (_, x) -> x <> id)
+    let private notifyListeners () =
+        _subscribers |> 
+        List.iter (fun (subscriber, _) -> 
+            try
+                subscriber()
+            with
+            | _ -> ())
+
     type private BT =
-    | T of ButcherTableau<Coefficient>
-    | ET of EmbeddedButcherTableau<Coefficient>
+    | T of CoefficientButcherTableau
+    | ET of EmbeddedCoefficientButcherTableau
 
     let mutable private _builtInButcherTableaus : BT list = List.empty
-    
-    let registerBuiltInButcherTableau (x: ButcherTableau<Coefficient>) =
+    let registerBuiltInButcherTableau (x: CoefficientButcherTableau) =
         _builtInButcherTableaus <- T x :: _builtInButcherTableaus
-    let unregisterBuiltInButcherTableau (x: ButcherTableau<Coefficient>) =
+        notifyListeners()
+    let unregisterBuiltInButcherTableau (x: CoefficientButcherTableau) =
         _builtInButcherTableaus <- _builtInButcherTableaus |> List.filter (fun y -> y <> T x)
-    let registerBuiltInEmbeddedButcherTableau (x: EmbeddedButcherTableau<Coefficient>) =
+        notifyListeners()
+    let registerBuiltInEmbeddedButcherTableau (x: EmbeddedCoefficientButcherTableau) =
         _builtInButcherTableaus <- ET x :: _builtInButcherTableaus
-    let unregisterBuiltInEmbeddedButcherTableau (x: EmbeddedButcherTableau<Coefficient>) =
+        notifyListeners()
+    let unregisterBuiltInEmbeddedButcherTableau (x: EmbeddedCoefficientButcherTableau) =
         _builtInButcherTableaus <- _builtInButcherTableaus |> List.filter (fun y -> y <> ET x)
+        notifyListeners()
 
-    let mutable private _customInButcherTableaus : BT list = List.empty
+    let mutable private _customButcherTableaus : BT list = List.empty
     [<CompiledName("RegisterCustomButcherTableau")>]
-    let register (x: ButcherTableau<Coefficient>) =
-        _customInButcherTableaus <- T x :: _customInButcherTableaus
+    let registerCustomButcherTableau (x: CoefficientButcherTableau) =
+        _customButcherTableaus <- T x :: _customButcherTableaus
+        notifyListeners()
     [<CompiledName("UnRegisterCustomButcherTableau")>]
-    let unregister (x: ButcherTableau<Coefficient>) =
-        _customInButcherTableaus <- _customInButcherTableaus |> List.filter (fun y -> y <> T x)
+    let unRegisterCustomButcherTableau (x: CoefficientButcherTableau) =
+        _customButcherTableaus <- _customButcherTableaus |> List.filter (fun y -> y <> T x)
+        notifyListeners()
+    [<CompiledName("RegisterCustomEmbeddedButcherTableau")>]
+    let registerCustomEmbeddedButcherTableau (x: EmbeddedCoefficientButcherTableau) =
+        _customButcherTableaus <- ET x :: _customButcherTableaus
+        notifyListeners()
+    [<CompiledName("UnRegisterCustomEmbeddedButcherTableau")>]
+    let unRegisterCustomEmbeddedButcherTableau (x: EmbeddedCoefficientButcherTableau) =
+        _customButcherTableaus <- _customButcherTableaus |> List.filter (fun y -> y <> ET x)
+        notifyListeners()
+
+    type ButcherTableaus = {
+        BuiltInButcherTableaus: CoefficientButcherTableau list
+        EmbeddedBuiltInButcherTableaus: EmbeddedCoefficientButcherTableau list 
+        CustomButcherTableaus: CoefficientButcherTableau list 
+        EmbeddedCustomButcherTableaus: EmbeddedCoefficientButcherTableau list 
+    }
+
+    [<CompiledName("GetButcherTableaus")>]
+    let getButcherTableaus () = {
+        BuiltInButcherTableaus = _builtInButcherTableaus |> List.choose (function | T x -> Some x | _ -> None)
+        EmbeddedBuiltInButcherTableaus = _builtInButcherTableaus |> List.choose (function | ET x -> Some x | _ -> None)
+        CustomButcherTableaus = _customButcherTableaus |> List.choose (function | T x -> Some x | _ -> None)
+        EmbeddedCustomButcherTableaus = _customButcherTableaus |> List.choose (function | ET x -> Some x | _ -> None)
+    }
 
 module CoefficientHelpers =
 

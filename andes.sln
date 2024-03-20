@@ -17,16 +17,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{2C97
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{E0C23838-BD36-4B0E-9F50-F1F584276E96}"
 	ProjectSection(SolutionItems) = preProject
-		.github\workflows\main.yml = .github\workflows\main.yml
+		.github\workflows\master.yml = .github\workflows\master.yml
 	EndProjectSection
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "number", "src\number\number.fsproj", "{2C181DFA-C85B-4EE9-B04D-E902F7AD3FA0}"
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "number", "src\number\number.fsproj", "{2C181DFA-C85B-4EE9-B04D-E902F7AD3FA0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tst", "tst", "{A165B915-7D10-4BA4-B803-DB94D6EDAA43}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "number.Tests", "tst\number.Tests\number.Tests.fsproj", "{5A9EFE3A-F90E-4F0C-A184-F6DFABD2A65A}"
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "number.Tests", "tst\number.Tests\number.Tests.fsproj", "{5A9EFE3A-F90E-4F0C-A184-F6DFABD2A65A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "andes", "src\andes\andes.csproj", "{609E0C36-4E45-48D2-8990-182D2CCEC4B8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "andes", "src\andes\andes.csproj", "{609E0C36-4E45-48D2-8990-182D2CCEC4B8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

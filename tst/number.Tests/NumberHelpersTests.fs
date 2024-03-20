@@ -1,9 +1,9 @@
-namespace DSE.Tests
+namespace Andes.Tests
 
 module NumberHelpersTests =
 
     open System
-    open DSE.NumberHelpers
+    open Andes.NumberHelpers
     open Xunit
     open FsCheck
     open FsCheck.Xunit
