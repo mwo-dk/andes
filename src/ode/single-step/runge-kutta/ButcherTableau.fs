@@ -1,19 +1,18 @@
 ﻿namespace DSE.Ode.SingleStep.RungeKutta
 
-open System.Numerics
 open DSE
-open System.Linq.Expressions
+open System.Runtime.CompilerServices
 
 [<AutoOpen>]
 module SchemaHelpers =
-    let internal getArrayDimensions (x: 'T[]) =
+    let internal getArrayDimension (x: 'T[]) =
         if x = null then 0
-        else x.Length
+        else x |> Array.length
     let internal getMatrixDimensions (x: 'T[][]) =
-        if x = null then 0, 0
+        if x |> getArrayDimension = 0 then 0, 0
         else
             let rows = x.Length
-            let cols = x |> Array.map (fun row -> row |> getArrayDimensions)
+            let cols = x |> Array.map (fun row -> row |> getArrayDimension)
             if cols |> Array.length = 0 then
                 0, 0
             else
@@ -62,6 +61,15 @@ module SchemaHelpers =
                     else
                         row[j]
 
+    let validateA steps A =
+        let (aRows, aCols) = A |> getMatrixDimensions
+        if steps < aRows || steps < aCols then
+            invalidArg "A" "A must not be larger than number of steps"
+    let validate steps B name =
+        let bs = B |> getArrayDimension
+        if steps < bs then
+            invalidArg name $"{name} must not be larger than number of steps"
+
 type ButcherTableau<'T when 'T: equality> =
     { A: 'T[][] // Coefficients for the stages
       B: 'T[]   // Coefficients for the solution
@@ -70,55 +78,71 @@ type ButcherTableau<'T when 'T: equality> =
       Name: string // Name of the Butcher tableau
     }
     with
-        member this.Validate() =
-            let (aRows, aCols) = this.A |> getMatrixDimensions
-            if this.Steps < aRows || this.Steps < aCols then
-                invalidArg "A" "A must not be larger than number of steps"
-            let bs = this.B |> getArrayDimensions
-            if this.Steps < bs then
-                invalidArg "B" "B must not be larger than number of steps"
-            let cs = this.C |> getArrayDimensions
-            if this.Steps < cs then
-                invalidArg "C" "C must not be larger than number of steps"
-            this
+        member private this.ValidateLazy =
+            lazy (
+                validateA this.Steps this.A
+                validate this.Steps this.B "B"
+                validate this.Steps this.C "C"
+                this
+            )
+        member this.Validate() = this.ValidateLazy.Force()
         member this.IsExplicit zeroValue =
-            let n = this.Steps
-            {0..n-1} |>
+            let N = this.Steps
+            {0..N-1} |>
                 Seq.fold (fun ok i -> 
-                    {i..n-1} |> Seq.fold (fun ok j -> ok && zeroValue = (getMatrixItem  i j n n zeroValue this.A)) ok) true
+                    {i..N-1} |> Seq.fold (fun ok j -> ok && zeroValue = (getMatrixItem  i j N N zeroValue this.A)) ok) true
 
 type EmbeddedButcherTableau<'T when 'T: equality> =
     { A: 'T[][] // Coefficients for the stages
       B1: 'T[]   // Coefficients for the solution
       B2: 'T[]   // Coefficients for the solution
       C: 'T[]   // Coefficients for the time steps
+      B1Order: 'T
+      B2Order: 'T
       Steps: int // Number of stages
       Name: string // Name of the Butcher tableau
     }
 with
-    member this.Validate() =
-        let (aRows, aCols) = this.A |> getMatrixDimensions
-        if this.Steps < aRows || this.Steps < aCols then
-            invalidArg "A" "A must not be larger than number of steps"
-        let b1s = this.B1 |> getArrayDimensions
-        if this.Steps < b1s then
-            invalidArg "B1" "B1 must not be larger than number of steps"
-        let b2s = this.B2 |> getArrayDimensions
-        if this.Steps < b2s then
-            invalidArg "B2" "B2 must not be larger than number of steps"
-        let cs = this.C |> getArrayDimensions
-        if this.Steps < cs then
-           invalidArg "C" "C must not be larger than number of steps"
-        this
+    member private this.ValidateLazy =
+            lazy (
+                validateA this.Steps this.A
+                validate this.Steps this.B1 "B1"
+                validate this.Steps this.B2 "B2"
+                validate this.Steps this.C "C"
+                this
+            )
+    member this.Validate() = this.ValidateLazy.Force()
     member this.IsExplicit zeroValue =
         let n = this.Steps
         {0..n-1} |>
             Seq.fold (fun ok i -> 
             {i..n-1} |> Seq.fold (fun ok j -> ok && zeroValue = (getMatrixItem  i j n n zeroValue this.A)) ok) true
 
+type FloatButcherTableau = ButcherTableau<float>
+type FloatEmbeddedButcherTableau = EmbeddedButcherTableau<float>
+
+type Float32ButcherTableau = ButcherTableau<float32>
+type Float32EmbeddedButcherTableau = EmbeddedButcherTableau<float32>
+
 type Coefficient = Number
 type CoefficientButcherTableau = ButcherTableau<Coefficient>
 type EmbeddedCoefficientButcherTableau = EmbeddedButcherTableau<Coefficient>
+
+[<Extension>]
+type TableauExtensions =
+    [<Extension>]
+    static member inline IsExplicit(tableau: FloatButcherTableau) = tableau.IsExplicit 0.0
+    [<Extension>]
+    static member inline IsExplicit(tableau: Float32ButcherTableau) = tableau.IsExplicit 0.0f
+    [<Extension>]
+    static member inline IsExplicit(tableau: CoefficientButcherTableau) = tableau.IsExplicit Z
+
+    [<Extension>]
+    static member inline IsExplicit(tableau: EmbeddedCoefficientButcherTableau) = tableau.IsExplicit Z
+    [<Extension>]
+    static member inline IsExplicit(tableau: FloatEmbeddedButcherTableau) = tableau.IsExplicit 0.0
+    [<Extension>]
+    static member inline IsExplicit(tableau: Float32EmbeddedButcherTableau) = tableau.IsExplicit 0.0f
 
 module ButcherTableauRegistry =
     type private BT =
@@ -131,6 +155,10 @@ module ButcherTableauRegistry =
         _builtInButcherTableaus <- T x :: _builtInButcherTableaus
     let unregisterBuiltInButcherTableau (x: ButcherTableau<Coefficient>) =
         _builtInButcherTableaus <- _builtInButcherTableaus |> List.filter (fun y -> y <> T x)
+    let registerBuiltInEmbeddedButcherTableau (x: EmbeddedButcherTableau<Coefficient>) =
+        _builtInButcherTableaus <- ET x :: _builtInButcherTableaus
+    let unregisterBuiltInEmbeddedButcherTableau (x: EmbeddedButcherTableau<Coefficient>) =
+        _builtInButcherTableaus <- _builtInButcherTableaus |> List.filter (fun y -> y <> ET x)
 
     let mutable private _customInButcherTableaus : BT list = List.empty
     [<CompiledName("RegisterCustomButcherTableau")>]
@@ -230,6 +258,11 @@ module ButcherTableauHelpers =
           Steps = steps
           Name = name }
 
+    let internal createAndRegisterBuiltIn a b c steps name =
+        let x = create a b c steps name
+        ButcherTableauRegistry.registerBuiltInButcherTableau x
+        x
+
     let toFloatButcherTableau (x: CoefficientButcherTableau) =
         { A = toFloatMatrix x.A
           B = toFloatArray x.B
@@ -248,19 +281,28 @@ module EmbeddedButcherTableauHelpers =
 
     open CoefficientHelpers 
 
-    let create  a b1 b2 c steps name =
+    let create  a b1 b2 c b1Order b2Order steps name =
         { A = a
           B1 = b1
           B2 = b2
           C = c
+          B1Order = b1Order
+          B2Order = b2Order
           Steps = steps
           Name = name }
+
+    let internal createAndRegisterBuiltIn a b1 b2 c b1Order b2Order steps name =
+        let x = create a b1 b2 c b1Order b2Order steps name
+        ButcherTableauRegistry.registerBuiltInEmbeddedButcherTableau x
+        x
 
     let toFloatEmbeddedButcherTableau (x: EmbeddedCoefficientButcherTableau) =
         { A = toFloatMatrix x.A
           B1 = toFloatArray x.B1
           B2 = toFloatArray x.B2
           C = toFloatArray x.C
+          B1Order = toFloat x.B1Order
+          B2Order = toFloat x.B2Order
           Steps = x.Steps
           Name = x.Name }
 
@@ -269,5 +311,128 @@ module EmbeddedButcherTableauHelpers =
           B1 = toFloat32Array x.B1
           B2 = toFloat32Array x.B2
           C = toFloat32Array x.C
+          B1Order = toFloat32 x.B1Order
+          B2Order = toFloat32 x.B2Order
           Steps = x.Steps
           Name = x.Name }
+
+module Tableaus =
+
+    let _1 = N 1
+    let _M1 = N -1
+    let _1_2 = NQ (1, 2)
+    let _1_3 = NQ (1, 3)
+    let _M1_3 = NQ (-1, 3)
+    let _1_4 = NQ (1, 4)
+    let _1_6 = NQ (1, 6)
+    let _1_8 = NQ (1, 8)
+    let _2_3 = NQ (2, 3)
+    let _2_9 = NQ (2, 9)
+    let _3_4 = NQ (3, 4)
+    let _3_8 = NQ (3, 8)
+    let _4_9 = NQ (4, 9)
+    let _5_12 = NQ (5, 12)
+    let _8_15 = NQ (8, 15)
+    let _2 = N 2
+    let forwardEuler =
+        ButcherTableauHelpers.createAndRegisterBuiltIn
+            [|[|Z|]|]
+            [|_1|]
+            [|Z|]
+            1
+            "Forward Euler"
+
+    let explicitMidpoint =
+        ButcherTableauHelpers.createAndRegisterBuiltIn
+            [|[|Z;Z|];[|_1_2;Z|]|]
+            [|Z;_1|]
+            [|Z;_1_2|]
+            2
+            "Explicit midpoint method"
+
+    let heun =
+        ButcherTableauHelpers.createAndRegisterBuiltIn
+            [|[|Z;Z|];[|_1;Z|]|]
+            [|_1_2;_1_2|]
+            [|Z;_1|]
+            2
+            "Heun's method"
+
+    let ralston =
+        ButcherTableauHelpers.createAndRegisterBuiltIn
+            [|[|Z;Z|];[|_2_3;Z|]|]
+            [|_1_4;_3_4;|]
+            [|Z;_2_3|]
+            2
+            "Ralston's method"
+
+    let kutta3 =
+        ButcherTableauHelpers.createAndRegisterBuiltIn
+            [|[|Z;Z;Z|];[|_1_2;Z;Z|];[|_M1;_2;Z|]|]
+            [|_1_6;_2_3;_1_6|]
+            [|Z;_1_2;_1|]
+            3
+            "Kutta's third-order method"
+
+    let heun3 = 
+        ButcherTableauHelpers.createAndRegisterBuiltIn
+            [|[|Z;Z;Z|];[|_1_3;Z;Z|];[|Z;_2_3;Z|]|]
+            [|_1_4;Z;_3_4|]
+            [|Z;_1_3;_2_3|]
+            3
+            "Heun's third-order method"
+
+    let vanDerHouwenWray3 =
+        ButcherTableauHelpers.createAndRegisterBuiltIn
+            [|[|Z;Z;Z|];[|_8_15;Z;Z|];[|_1_4;_5_12;Z|]|]
+            [|_1_4;Z;_3_4|]
+            [|Z;_8_15;_2_3|]
+            3
+            "van der Houwen-Wray third-order method"
+
+    let ralston3 = 
+        ButcherTableauHelpers.createAndRegisterBuiltIn
+            [|[|Z;Z;Z|];[|_1_2;Z;Z|];[|Z;_3_4;Z|]|]
+            [|_2_9;_1_3;_4_9|]
+            [|Z;_1_2;_3_4|]
+            3
+            "Ralston's third-order method"
+
+    let strongStabilityPreservingRK3 =
+        ButcherTableauHelpers.createAndRegisterBuiltIn
+            [|[|Z;Z;Z|];[|_1;Z;Z|];[|_1_4;_1_4;Z|]|]
+            [|_1_6;_1_6;_2_3|]
+            [|Z;_1;_1_2|]
+            3
+            "Strong stability preserving Runge-Kutta third-order method"
+
+    let rk4 = 
+        ButcherTableauHelpers.createAndRegisterBuiltIn
+            [|[|Z;Z;Z;Z|];[|_1_2;Z;Z;Z|];[|Z;_1_2;Z;Z|];[|Z;Z;_1;Z|]|]
+            [|_1_6;_1_3;_1_3;_1_6|]
+            [|Z;_1_2;_1_2;_1|]
+            4
+            "Classical Runge-Kutta method"
+
+    let threeEighthsRule =
+        ButcherTableauHelpers.createAndRegisterBuiltIn
+            [|[|Z;Z;Z;Z|];[|_1_3;Z;Z;Z|];[|_M1_3;_1;Z;Z|];[|_1;_M1;_1;Z|]|]
+            [|_1_8;_3_8;_3_8;_1_8|]
+            [|Z;_1_3;_2_3;_1|]
+            4
+            "Three-eighths rule"
+
+    let ralston4 =
+        ButcherTableauHelpers.createAndRegisterBuiltIn
+            [|[|Z;Z;Z;Z|];[|R 0.4;Z;Z;Z|];[|R 0.29697761;R 0.15875964;Z;Z|];[|R 0.2181004;R -3.05096516;R 3.83286476;Z|]|]
+            [|R 0.17476028;R -0.55148066;R 1.2055356;R 0.17118478|]
+            [|Z;R 0.4;R 0.45573725;_1|]
+            4
+            "Ralston's fourth-order method"
+    //let bogackiShampine =
+    //    ButcherTableauHelpers.create
+    //        [|[|Z;Z;Z;Z|];[|_1_2;Z;Z;Z|];[|Z;_3_4;Z;Z|];[|_2_9;_1_3;_4_9;Z|]|]
+    //        [|_2_9;_1_3;_4_9;Z|]
+    //        [|Z;_1_2;_3_4;_1|]
+    //        4
+    //        "Bogacki-Shampine method"
