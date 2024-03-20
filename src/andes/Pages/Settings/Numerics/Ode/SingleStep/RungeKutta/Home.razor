@@ -1,0 +1,16 @@
+﻿@page "/numerics/ode/single-step/runge-kutta"
+@inherits Fluxor.Blazor.Web.Components.FluxorComponent
+
+<PageTitle>Runge-Kutta</PageTitle>
+
+@if (State is null || State.Value.IsLoading)
+{
+    <FluentProgressRing style="width: 102px; height: 102px;"></FluentProgressRing>
+}
+else
+{
+    <h1>Runge-Kutta</h1>
+    
+    <FluentProgressRing style="width: 102px; height: 102px;"></FluentProgressRing>
+}
+
