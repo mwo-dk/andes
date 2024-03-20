@@ -25,11 +25,11 @@ jobs:
 
     # publishes Blazor project to the release-folder
     - name: Publish .NET Core Project
-      run: dotnet publish src/ds-explorer/ds-explorer.csproj -c Release -o release --nologo
+      run: dotnet publish src/andes/andes.csproj -c Release -o release --nologo
     
-    # changes the base-tag in index.html from '/' to 'ds-explorer' to match GitHub Pages repository subdirectory
-    # - name: Change base-tag in index.html from / to ds-explorer 
-    #   run: sed -i 's/<base href="\/" \/>/<base href="\/ds-explorer\/" \/>/g' release/wwwroot/index.html
+    # changes the base-tag in index.html from '/' to 'andes' to match GitHub Pages repository subdirectory
+    # - name: Change base-tag in index.html from / to andes 
+    #   run: sed -i 's/<base href="\/" \/>/<base href="\/andes\/" \/>/g' release/wwwroot/index.html
 
     # changes the base-tag in index.html from '/' to 'BlazorWASMPWAStaticPublish' to match GitHub Pages repository subdirectory
     # - name: Fix service-worker-assets.js hashes

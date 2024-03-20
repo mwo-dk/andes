@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Localization;
 
-namespace DSE.Layout;
+namespace Andes.Layout;
 
 public partial class NavMenu
 {

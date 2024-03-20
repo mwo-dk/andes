@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<RootNamespace>Andes</RootNamespace>
+		<AssemblyName>Andes</AssemblyName>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+  		<!-- <RunAOTCompilation>true</RunAOTCompilation> -->
+  		<!-- <WasmStripILAfterAOT>true</WasmStripILAfterAOT> -->
+		<BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Fluxor.Blazor.Web.ReduxDevTools" Version="5.9.1" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.*-*" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="8.*-*" PrivateAssets="all" />
+		<PackageReference Include="Microsoft.Extensions.Localization" Version="8.0.2" />
+		<PackageReference Include="Microsoft.FluentUI.AspNetCore.Components" Version="4.*-* " />
+		<PackageReference Include="Microsoft.FluentUI.AspNetCore.Components.Icons" Version="4.*-* " />
+		<PackageReference Include="Blazor.Extensions.Canvas" Version="1.1.1" />
+		<PackageReference Include="Plotly.NET" Version="4.2.0" />
+		<PackageReference Include="SkiaSharp.Views.Blazor" Version="3.0.0-preview.2.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\ode\single-step\runge-kutta\runge-kutta.fsproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Shared\" />
+	</ItemGroup>
+
+</Project>
