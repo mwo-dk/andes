@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "DSE",
   "resources": {
-    "hash": "sha256-3jPze1wBZwQJr7+I6QrXea1AWWcbN0LvZ2gKVNDRP3c=",
+    "hash": "sha256-WkBXHmH5U9xrhnyVHeaUPR2heTeRXTMeeWsIsYz6wpA=",
     "jsModuleNative": {
       "dotnet.native.8.0.3.wzxwl5s97r.js": "sha256-D4sYBYmDfH/YekgYRgX959/2RG6k28sJSHmcsn+iikk="
     },
@@ -17,9 +17,9 @@
     "assembly": {
       "Blazor.Extensions.Canvas.JS.wasm": "sha256-ctyeKHsvFswpiKQJpTUUWdSrDGr4UNirukOrWYnwW78=",
       "Blazor.Extensions.Canvas.wasm": "sha256-2AOrAB5tgoiK9wMMmwiE/pKPAtTjzgFudxSl6g4dt9s=",
-      "DSE.Number.wasm": "sha256-zDLt0JufAY32ztCXE158P3ygWo81VbWUPcKkSkGh8Gk=",
-      "DSE.Ode.SingleStep.RungeKutta.wasm": "sha256-u4cwBIEMobnwOwIA85+SPULXnP8MLUNX4KFwYXJZWVk=",
-      "DSE.wasm": "sha256-414bdUVTdHPPUFP5CpL5tkfVyy2AijCrbC9Dj7yVjoM=",
+      "DSE.Number.wasm": "sha256-KFq8jMkvEJ9ItdxkGUpGQGhzOkLIgi5UOnU7stTYFjY=",
+      "DSE.Ode.SingleStep.RungeKutta.wasm": "sha256-ITiHfOjOuxlZxBoLXILNuXInPKdxrb8p9liyVdTLAOM=",
+      "DSE.wasm": "sha256-CRUnsxlq9sLi63zqXWwBkGLiHhAbDXTeMm+O0sgb/Sc=",
       "DynamicObj.wasm": "sha256-QvvWROODrYXA6Wu6a6UVnClW6ei36+37TaMzKSSrBwk=",
       "Fluxor.Blazor.Web.ReduxDevTools.wasm": "sha256-lOCILKMbxVdDFXIgH0661+1gp21QYXrGyV18H82OORg=",
       "Fluxor.Blazor.Web.wasm": "sha256-UsMVqQD3E7Bup+MRRY1Udxxql/Xm538xXKUmlgIY+Qw=",
@@ -49,7 +49,7 @@
       "Newtonsoft.Json.wasm": "sha256-PaicHOw1U7HF05kEvZI0Rgg1nwdA8hrzbzdkw1qgUuU=",
       "Plotly.NET.wasm": "sha256-fe1o/2Gz0N9SBnn0xl7+YtLqqRHvy/EOypbtKEQaNnQ=",
       "SkiaSharp.Views.Blazor.wasm": "sha256-8kLVbkv4ZUwVIxdu76cr/3fAhFUF0Y8JhCTvux2rU8o=",
-      "SkiaSharp.wasm": "sha256-f/iRBKzUruTCr91OckvaDTBTGVTRW+90DkHy1pBpXIM=",
+      "SkiaSharp.wasm": "sha256-bxfirmJLwEbAXc1pkR+OQqYxjJhvVGkR0QAspYcUWkI=",
       "System.Collections.Concurrent.wasm": "sha256-moU2Z2BznFfXCXtF4IAVFTXiU/B3bFTln6+PuHsMWM4=",
       "System.Collections.NonGeneric.wasm": "sha256-AuHXXRmPVe9alAE2QQ5SIpKmxzGhYfr5neE7ZypWnAo=",
       "System.Collections.Specialized.wasm": "sha256-I5udU9+vdS6Yh4/TQbkanHI9/6EP7IA6ATk3+IpwER8=",
