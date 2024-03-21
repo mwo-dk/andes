@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "Andes",
   "resources": {
-    "hash": "sha256-3QX05zwHvazvCMtOqufSaru9AW2Pqfn6PGbhAjDxxm8=",
+    "hash": "sha256-VKRqUwp8DgXodOohSJXpjw3AoeXoE/aUHe9XbpYaVaY=",
     "jsModuleNative": {
       "dotnet.native.8.0.3.wzxwl5s97r.js": "sha256-D4sYBYmDfH/YekgYRgX959/2RG6k28sJSHmcsn+iikk="
     },
@@ -15,9 +15,9 @@
       "icudt.dat": "sha256-tO5O5YzMTVSaKBboxAqezOQL9ewmupzV2JrB5Rkc8a4="
     },
     "assembly": {
-      "Andes.Number.wasm": "sha256-7RYbRG3EIe98yIOURpwBzT2tVBhVi/brtP6it5gOK14=",
-      "Andes.Ode.SingleStep.RungeKutta.wasm": "sha256-JZg2XCrof/EIzcZASuASCSEQ/4xkHs2jarS8yox8XHw=",
-      "Andes.wasm": "sha256-GLOHXvMyOdJ+anTgk2LKxxQe9+LP+gTZ3WmXakqQfvI=",
+      "Andes.Number.wasm": "sha256-FCqalQ3QN0M4mooZGUxrZC6Eg/Ckt0j4r91k+cnm3P8=",
+      "Andes.Ode.SingleStep.RungeKutta.wasm": "sha256-lwZP/QDnmomsekcJl+MwLD7wXYp7W92lQoPP7wQZeNk=",
+      "Andes.wasm": "sha256-56iR5MznN3lTJf2E8S9EbesVu7RCCaFowqyYJ3xlfks=",
       "Blazor.Extensions.Canvas.JS.wasm": "sha256-ctyeKHsvFswpiKQJpTUUWdSrDGr4UNirukOrWYnwW78=",
       "Blazor.Extensions.Canvas.wasm": "sha256-2AOrAB5tgoiK9wMMmwiE/pKPAtTjzgFudxSl6g4dt9s=",
       "DynamicObj.wasm": "sha256-QvvWROODrYXA6Wu6a6UVnClW6ei36+37TaMzKSSrBwk=",
