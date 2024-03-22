@@ -1,4 +1,3 @@
-using Fluxor;
 using static Andes.Ode.SingleStep.RungeKutta.ButcherTableauRegistry;
 
 namespace Andes.Store.Numerics.Ode.SingleStep.RungeKutta;
