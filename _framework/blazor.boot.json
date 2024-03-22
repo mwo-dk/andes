@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "Andes",
   "resources": {
-    "hash": "sha256-skWrIY+UrbTQ7Hci2euYPVotcvsY0Ijlp985ySowPJM=",
+    "hash": "sha256-3DW81eecWMsrGzTud5AzA8232VNdrxHU6BLW8UYh0NI=",
     "jsModuleNative": {
       "dotnet.native.8.0.3.wzxwl5s97r.js": "sha256-D4sYBYmDfH/YekgYRgX959/2RG6k28sJSHmcsn+iikk="
     },
@@ -15,9 +15,9 @@
       "icudt.dat": "sha256-tO5O5YzMTVSaKBboxAqezOQL9ewmupzV2JrB5Rkc8a4="
     },
     "assembly": {
-      "Andes.Number.wasm": "sha256-bwDfYXLTwHGTq1k40GHvMbs6CdplqZ2NQMxqgxMvYsM=",
-      "Andes.Ode.SingleStep.RungeKutta.wasm": "sha256-V/DFPbq2hzR+6Nn/zUZGBItJwZH1Ai6V+U1QDgZuqJ8=",
-      "Andes.wasm": "sha256-K3zDafcZoDsAl/dOh+qy1xFDFZSL8Hx9qFJBnUpjjvo=",
+      "Andes.Number.wasm": "sha256-bJYM/Ddex9tlXP20olsCYCc6pg75vbaKK5K1HMWpGSI=",
+      "Andes.Ode.SingleStep.RungeKutta.wasm": "sha256-zUWLdKePKp76kbCi8e1bZUrTdP9L1AuB1QOG1XXeSgM=",
+      "Andes.wasm": "sha256-aRni0VnNn8b+8kkICLP5EdcxI/rW/yzqSYTPc6subW0=",
       "Blazor.Extensions.Canvas.JS.wasm": "sha256-ctyeKHsvFswpiKQJpTUUWdSrDGr4UNirukOrWYnwW78=",
       "Blazor.Extensions.Canvas.wasm": "sha256-2AOrAB5tgoiK9wMMmwiE/pKPAtTjzgFudxSl6g4dt9s=",
       "DynamicObj.wasm": "sha256-QvvWROODrYXA6Wu6a6UVnClW6ei36+37TaMzKSSrBwk=",
@@ -39,7 +39,7 @@
       "Microsoft.Extensions.Logging.wasm": "sha256-8BH+kQfjYuZWxprOICXJ4+tU0OdJOYDKN7G0S3zYYHI=",
       "Microsoft.Extensions.Options.wasm": "sha256-ezKJDNjeghS/qMdQmUpBPdH7bCDLrqkNqS6RsLxlpOY=",
       "Microsoft.Extensions.Primitives.wasm": "sha256-Ms2HR5Gpug/0uRAzdk4SUNT76Ml3CjFv9Jo+dUIMGac=",
-      "Microsoft.FluentUI.AspNetCore.Components.Icons.wasm": "sha256-bJclkOpMnZjtZ+s0F/uwCrCziqTlBhTModkmu8G4+X0=",
+      "Microsoft.FluentUI.AspNetCore.Components.Icons.wasm": "sha256-zFJpVT26mXpMDrZr3qL9S2K6XMGiK0QCV3dkirQhc1E=",
       "Microsoft.FluentUI.AspNetCore.Components.wasm": "sha256-laayblRVPIsTOi4dDwHjDRGvTqiQfxxq8TfHIckJnBA=",
       "Microsoft.JSInterop.wasm": "sha256-FNkqegSmboLq/1QHGPIL+8r4+HaeqK6+mCYq/DtgpAA=",
       "Microsoft.JSInterop.WebAssembly.wasm": "sha256-Kr13V+6zGL8rPvFmuBAsaEJfoMlR4Q8keJHKaVGVbGA=",
