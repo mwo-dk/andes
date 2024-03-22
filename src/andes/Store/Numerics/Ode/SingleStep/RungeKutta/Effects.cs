@@ -8,14 +8,16 @@ public sealed class Effects
     [EffectMethod]
     public Task Handle(InitializeAllAction _, IDispatcher dispatcher)
     {
-        dispatcher.Dispatch(new ButcherTableausResultAction(GetButcherTableaus()));
+        var tableaus = GetButcherTableaus();
+        dispatcher.Dispatch(new ButcherTableausResultAction(tableaus));
         return Task.CompletedTask;
     }
 
     [EffectMethod]
-    public Task Handle(ButcherTableeusChangedAction _, IDispatcher dispatcher)
+    public Task Handle(ButcherTableausChangedAction _, IDispatcher dispatcher)
     {
-        dispatcher.Dispatch(new ButcherTableausResultAction(GetButcherTableaus()));
+        var tableaus = GetButcherTableaus();
+        dispatcher.Dispatch(new ButcherTableausResultAction(tableaus));
         return Task.CompletedTask;
     }
 }

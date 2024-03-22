@@ -10,7 +10,12 @@
 else
 {
     <h1>Runge-Kutta</h1>
-    
-    <FluentProgressRing style="width: 102px; height: 102px;"></FluentProgressRing>
+
+    <FluentDataGrid Items="@Items">
+        <TemplateColumn Title="Name" Sortable="true">
+            <FluentButton Appearance="Appearance.Lightweight" @onclick="@(() => OpenPanelRightAsync(context.Id))">@context.Name</FluentButton>
+        </TemplateColumn>
+        <PropertyColumn Title="Is embedded" Property="@(x => x.IsEmbedded)" Sortable="false" />
+    </FluentDataGrid >
 }
 

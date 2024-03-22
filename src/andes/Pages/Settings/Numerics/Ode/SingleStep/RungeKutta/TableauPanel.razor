@@ -1,0 +1,23 @@
+﻿@inherits Fluxor.Blazor.Web.Components.FluxorComponent
+
+<FluentDialogBody>
+    <table>
+        <tr>
+            <td>Number of steps:</td>
+            <td>@Content.Steps</td>
+        </tr>
+        <tr>
+            <td>Is embedded:</td>
+            <td>
+                @if (Content.IsEmbedded)
+                {
+                    <FluentIcon Value="@(new Icons.Regular.Size24.CheckboxChecked())" />
+                }
+                else
+                {
+                    <FluentIcon Value="@(new Icons.Regular.Size24.CheckboxChecked())" />
+                }
+            </td>
+        </tr>
+    </table>
+</FluentDialogBody>

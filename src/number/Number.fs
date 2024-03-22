@@ -1,6 +1,7 @@
 ﻿namespace Andes 
 
 open System.Numerics
+open System
 
 [<AutoOpen>]
 module NumberHelpers =
@@ -132,6 +133,19 @@ type Number =
 | C of Complex
 | QC of Complex*Complex
 with
+    interface IComparable<Number> with
+        member this.CompareTo (other: Number) =
+            match this, other with
+            | Z, Z -> 0
+            | Z, _ -> -1
+            | _, Z -> 1
+            | N a, N b -> a.CompareTo b
+            | N a, NQ (c, d) -> (a*d).CompareTo c
+            | NQ (c, d), N a -> c.CompareTo (a*d)
+            | NQ (a, b), NQ (c, d) -> (a*d).CompareTo (c*b)
+            | Q (a, b), Q (c, d) -> (a*d).CompareTo (c*b)
+            | R a, R b -> a.CompareTo b
+            | _, _ -> failwith "Invalid operation"
     member this.IsInfinite =
         match this with
         | NQ (a, b) -> b = 0

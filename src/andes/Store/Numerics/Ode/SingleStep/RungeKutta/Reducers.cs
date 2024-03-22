@@ -9,7 +9,7 @@ public static class Reducers
 		new(true, null!);
 
     [ReducerMethod]
-    public static ButcherTableausState Reduce(ButcherTableausState _, ButcherTableeusChangedAction __) =>
+    public static ButcherTableausState Reduce(ButcherTableausState _, ButcherTableausChangedAction __) =>
         new(true, null!);
 
    [ReducerMethod]

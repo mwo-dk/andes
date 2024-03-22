@@ -12,7 +12,15 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Compile Remove="Shared\**" />
+	  <Content Remove="Shared\**" />
+	  <EmbeddedResource Remove="Shared\**" />
+	  <None Remove="Shared\**" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="Fluxor.Blazor.Web.ReduxDevTools" Version="5.9.1" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.QuickGrid" Version="8.0.3" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.*-*" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="8.*-*" PrivateAssets="all" />
 		<PackageReference Include="Microsoft.FluentUI.AspNetCore.Components" Version="4.*-* " />
@@ -24,10 +32,6 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\ode\single-step\runge-kutta\runge-kutta.fsproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Shared\" />
 	</ItemGroup>
 
 </Project>

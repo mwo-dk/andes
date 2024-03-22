@@ -1,5 +1,6 @@
 ﻿namespace Andes.Ode.SingleStep.RungeKutta
 
+open System
 open Andes
 open System.Runtime.CompilerServices
 
@@ -74,6 +75,7 @@ type ButcherTableau<'T when 'T: equality> =
     { A: 'T[][] // Coefficients for the stages
       B: 'T[]   // Coefficients for the solution
       C: 'T[]   // Coefficients for the time steps
+      Order: 'T
       Steps: int // Number of stages
       Name: string // Name of the Butcher tableau
     }
@@ -166,56 +168,79 @@ module ButcherTableauRegistry =
             with
             | _ -> ())
 
-    type private BT =
+    type BT =
     | T of CoefficientButcherTableau
     | ET of EmbeddedCoefficientButcherTableau
 
-    let mutable private _builtInButcherTableaus : BT list = List.empty
-    let registerBuiltInButcherTableau (x: CoefficientButcherTableau) =
-        _builtInButcherTableaus <- T x :: _builtInButcherTableaus
-        notifyListeners()
-    let unregisterBuiltInButcherTableau (x: CoefficientButcherTableau) =
-        _builtInButcherTableaus <- _builtInButcherTableaus |> List.filter (fun y -> y <> T x)
-        notifyListeners()
-    let registerBuiltInEmbeddedButcherTableau (x: EmbeddedCoefficientButcherTableau) =
-        _builtInButcherTableaus <- ET x :: _builtInButcherTableaus
-        notifyListeners()
-    let unregisterBuiltInEmbeddedButcherTableau (x: EmbeddedCoefficientButcherTableau) =
-        _builtInButcherTableaus <- _builtInButcherTableaus |> List.filter (fun y -> y <> ET x)
-        notifyListeners()
-
-    let mutable private _customButcherTableaus : BT list = List.empty
-    [<CompiledName("RegisterCustomButcherTableau")>]
-    let registerCustomButcherTableau (x: CoefficientButcherTableau) =
-        _customButcherTableaus <- T x :: _customButcherTableaus
-        notifyListeners()
-    [<CompiledName("UnRegisterCustomButcherTableau")>]
-    let unRegisterCustomButcherTableau (x: CoefficientButcherTableau) =
-        _customButcherTableaus <- _customButcherTableaus |> List.filter (fun y -> y <> T x)
-        notifyListeners()
-    [<CompiledName("RegisterCustomEmbeddedButcherTableau")>]
-    let registerCustomEmbeddedButcherTableau (x: EmbeddedCoefficientButcherTableau) =
-        _customButcherTableaus <- ET x :: _customButcherTableaus
-        notifyListeners()
-    [<CompiledName("UnRegisterCustomEmbeddedButcherTableau")>]
-    let unRegisterCustomEmbeddedButcherTableau (x: EmbeddedCoefficientButcherTableau) =
-        _customButcherTableaus <- _customButcherTableaus |> List.filter (fun y -> y <> ET x)
-        notifyListeners()
-
-    type ButcherTableaus = {
-        BuiltInButcherTableaus: CoefficientButcherTableau list
-        EmbeddedBuiltInButcherTableaus: EmbeddedCoefficientButcherTableau list 
-        CustomButcherTableaus: CoefficientButcherTableau list 
-        EmbeddedCustomButcherTableaus: EmbeddedCoefficientButcherTableau list 
+    type ButcherTableauRegistration = {
+        Id: Guid
+        IsBuiltIn: bool
+        Tableau: BT
     }
+    with
+        member x.IsEmbedded =
+            match x.Tableau with
+            | ET _ -> true
+            | _ -> false
+        member x.Name = 
+            match x.Tableau with
+            | T x -> x.Name
+            | ET x -> x.Name
+        member x.Steps = 
+            match x.Tableau with
+            | T x -> x.Steps
+            | ET x -> x.Steps
+        member x.A =
+            match x.Tableau with
+            | T x -> x.A
+            | ET x -> x.A
+        member x.B =
+            match x.Tableau with
+            | T x -> x.B
+            | ET x -> Array.empty
+        member x.B1 =
+            match x.Tableau with
+            | ET x -> x.B1
+            | _ -> Array.empty
+        member x.B2 =
+            match x.Tableau with
+            | ET x -> x.B2
+            | _ -> Array.empty
+        member x.C =
+            match x.Tableau with
+            | T x -> x.C
+            | ET x -> x.C
+        member x.Order =
+            match x.Tableau with
+            | T x -> x.Order
+            | ET x -> x.B1Order
+
+
+    type ButcherTableauRegistrationList = ButcherTableauRegistration list
+
+    let mutable private _butcherTables : ButcherTableauRegistrationList = List.empty
+
+    let internal registerButcherTableau id isBuiltIn x =
+        _butcherTables <- {Id = id; IsBuiltIn = isBuiltIn; Tableau = T x} :: _butcherTables
+        notifyListeners()
+    let internal registerEmbeddedButcherTableau id isBuiltIn x =
+        _butcherTables <- {Id = id; IsBuiltIn = isBuiltIn; Tableau = ET x} :: _butcherTables
+        notifyListeners()
+
+    [<CompiledName("RegisterCustomButcherTableau")>]
+    let registerCustomButcherTableau x =
+        let id = Guid.NewGuid()
+        match x with
+        | T x -> registerButcherTableau id false x
+        | ET x -> registerEmbeddedButcherTableau id false x
+        id
+
+    [<CompiledName("TryGetButcherTableau")>]
+    let tryGetButcherTableau id =
+        _butcherTables |> List.tryFind (fun x -> x.Id = id) |> Option.map (fun x -> x.Tableau)
 
     [<CompiledName("GetButcherTableaus")>]
-    let getButcherTableaus () = {
-        BuiltInButcherTableaus = _builtInButcherTableaus |> List.choose (function | T x -> Some x | _ -> None)
-        EmbeddedBuiltInButcherTableaus = _builtInButcherTableaus |> List.choose (function | ET x -> Some x | _ -> None)
-        CustomButcherTableaus = _customButcherTableaus |> List.choose (function | T x -> Some x | _ -> None)
-        EmbeddedCustomButcherTableaus = _customButcherTableaus |> List.choose (function | ET x -> Some x | _ -> None)
-    }
+    let getButcherTableaus () = _butcherTables
 
 module CoefficientHelpers =
 
@@ -300,22 +325,23 @@ module ButcherTableauHelpers =
 
     open CoefficientHelpers
 
-    let create a b c steps name =
+    let create a b c order steps name =
         { A = a
           B = b
           C = c
+          Order = order
           Steps = steps
           Name = name }
 
-    let internal createAndRegisterBuiltIn a b c steps name =
-        let x = create a b c steps name
-        ButcherTableauRegistry.registerBuiltInButcherTableau x
-        x
+    let internal createAndRegister id a b c order steps name =
+        let x = create a b c order steps name
+        ButcherTableauRegistry.registerButcherTableau id true x
 
     let toFloatButcherTableau (x: CoefficientButcherTableau) =
         { A = toFloatMatrix x.A
           B = toFloatArray x.B
           C = toFloatArray x.C
+          Order = toFloat x.Order
           Steps = x.Steps
           Name = x.Name }
 
@@ -323,6 +349,7 @@ module ButcherTableauHelpers =
         { A = toFloat32Matrix x.A
           B = toFloat32Array x.B
           C = toFloat32Array x.C
+          Order = toFloat32 x.Order
           Steps = x.Steps
           Name = x.Name }
 
@@ -340,9 +367,9 @@ module EmbeddedButcherTableauHelpers =
           Steps = steps
           Name = name }
 
-    let internal createAndRegisterBuiltIn a b1 b2 c b1Order b2Order steps name =
+    let internal createAndRegister id n a b1 b2 c b1Order b2Order steps name =
         let x = create a b1 b2 c b1Order b2Order steps name
-        ButcherTableauRegistry.registerBuiltInEmbeddedButcherTableau x
+        ButcherTableauRegistry.registerEmbeddedButcherTableau id true x
         x
 
     let toFloatEmbeddedButcherTableau (x: EmbeddedCoefficientButcherTableau) =
@@ -383,99 +410,138 @@ module Tableaus =
     let _5_12 = NQ (5, 12)
     let _8_15 = NQ (8, 15)
     let _2 = N 2
+    let _3 = N 3
+    let _4 = N 4
+
+    let private forwarEulerId = Guid("{EE2C38AB-F4D4-429D-8BA1-50DA5BB4A44B}")
     let forwardEuler =
-        ButcherTableauHelpers.createAndRegisterBuiltIn
+        ButcherTableauHelpers.createAndRegister
+            forwarEulerId
             [|[|Z|]|]
             [|_1|]
             [|Z|]
+            _1
             1
             "Forward Euler"
 
+    let private explicitMidpointId = Guid("{BEC2D821-4104-46FB-B772-A7128ED6326E}")
     let explicitMidpoint =
-        ButcherTableauHelpers.createAndRegisterBuiltIn
+        ButcherTableauHelpers.createAndRegister
+            explicitMidpointId
             [|[|Z;Z|];[|_1_2;Z|]|]
             [|Z;_1|]
             [|Z;_1_2|]
+            _2
             2
             "Explicit midpoint method"
 
+    let private heunId = Guid("{E312917E-E9B5-4190-85DE-AAE6A2AAFB98}")
     let heun =
-        ButcherTableauHelpers.createAndRegisterBuiltIn
+        ButcherTableauHelpers.createAndRegister
+            heunId
             [|[|Z;Z|];[|_1;Z|]|]
             [|_1_2;_1_2|]
             [|Z;_1|]
+            _2
             2
             "Heun's method"
 
+    let private ralstonId = Guid("{34D7E6BE-1826-44A8-9A2A-F4A9091F7617}")
     let ralston =
-        ButcherTableauHelpers.createAndRegisterBuiltIn
+        ButcherTableauHelpers.createAndRegister
+            ralstonId
             [|[|Z;Z|];[|_2_3;Z|]|]
             [|_1_4;_3_4;|]
             [|Z;_2_3|]
+            _2
             2
             "Ralston's method"
 
+    let private kutta3Id = Guid("{22845F16-80E5-4884-966A-C79849E118C4}")
     let kutta3 =
-        ButcherTableauHelpers.createAndRegisterBuiltIn
+        ButcherTableauHelpers.createAndRegister
+            kutta3Id
             [|[|Z;Z;Z|];[|_1_2;Z;Z|];[|_M1;_2;Z|]|]
             [|_1_6;_2_3;_1_6|]
             [|Z;_1_2;_1|]
+            _3
             3
             "Kutta's third-order method"
 
+    let private heun3Id = Guid("{A294241A-7EB4-41EF-8776-57EFAAB87A38}")
     let heun3 = 
-        ButcherTableauHelpers.createAndRegisterBuiltIn
+        ButcherTableauHelpers.createAndRegister
+            heun3Id
             [|[|Z;Z;Z|];[|_1_3;Z;Z|];[|Z;_2_3;Z|]|]
             [|_1_4;Z;_3_4|]
             [|Z;_1_3;_2_3|]
+            _3
             3
             "Heun's third-order method"
 
+    let private vanderHouwenWray3Id = Guid("{992BF048-367B-4482-9621-A25C46D3A94E}")
     let vanDerHouwenWray3 =
-        ButcherTableauHelpers.createAndRegisterBuiltIn
+        ButcherTableauHelpers.createAndRegister
+            vanderHouwenWray3Id
             [|[|Z;Z;Z|];[|_8_15;Z;Z|];[|_1_4;_5_12;Z|]|]
             [|_1_4;Z;_3_4|]
             [|Z;_8_15;_2_3|]
+            _3
             3
             "van der Houwen-Wray third-order method"
 
+    let private ralston3Id = Guid("{26376934-7EC5-4CCD-B453-E971E570EF4E}")
     let ralston3 = 
-        ButcherTableauHelpers.createAndRegisterBuiltIn
+        ButcherTableauHelpers.createAndRegister
+            ralston3Id
             [|[|Z;Z;Z|];[|_1_2;Z;Z|];[|Z;_3_4;Z|]|]
             [|_2_9;_1_3;_4_9|]
             [|Z;_1_2;_3_4|]
+            _3
             3
             "Ralston's third-order method"
 
+    let private strongStabilityPreservingRK3Id = Guid("{C1424E94-F0A4-4CE3-9EEE-FA63CF7F21AB}")
     let strongStabilityPreservingRK3 =
-        ButcherTableauHelpers.createAndRegisterBuiltIn
+        ButcherTableauHelpers.createAndRegister
+            strongStabilityPreservingRK3Id
             [|[|Z;Z;Z|];[|_1;Z;Z|];[|_1_4;_1_4;Z|]|]
             [|_1_6;_1_6;_2_3|]
             [|Z;_1;_1_2|]
+            _3
             3
             "Strong stability preserving Runge-Kutta third-order method"
 
+    let rk4Id = Guid("{55DEFACE-B198-477D-BB3E-2E3EC45DA520}")
     let rk4 = 
-        ButcherTableauHelpers.createAndRegisterBuiltIn
+        ButcherTableauHelpers.createAndRegister
+            rk4Id
             [|[|Z;Z;Z;Z|];[|_1_2;Z;Z;Z|];[|Z;_1_2;Z;Z|];[|Z;Z;_1;Z|]|]
             [|_1_6;_1_3;_1_3;_1_6|]
             [|Z;_1_2;_1_2;_1|]
+            _4
             4
             "Classical Runge-Kutta method"
 
+    let private threeEighthsRuleId = Guid("{9F7DA2A1-32FE-454D-9621-C2C2275AC7F9}")
     let threeEighthsRule =
-        ButcherTableauHelpers.createAndRegisterBuiltIn
+        ButcherTableauHelpers.createAndRegister
+            threeEighthsRuleId
             [|[|Z;Z;Z;Z|];[|_1_3;Z;Z;Z|];[|_M1_3;_1;Z;Z|];[|_1;_M1;_1;Z|]|]
             [|_1_8;_3_8;_3_8;_1_8|]
             [|Z;_1_3;_2_3;_1|]
+            _4
             4
             "Three-eighths rule"
 
+    let private ralston4Id = Guid("{40212268-8598-49F1-ABDB-DAFA059AE469}")
     let ralston4 =
-        ButcherTableauHelpers.createAndRegisterBuiltIn
+        ButcherTableauHelpers.createAndRegister
+            ralston4Id
             [|[|Z;Z;Z;Z|];[|R 0.4;Z;Z;Z|];[|R 0.29697761;R 0.15875964;Z;Z|];[|R 0.2181004;R -3.05096516;R 3.83286476;Z|]|]
             [|R 0.17476028;R -0.55148066;R 1.2055356;R 0.17118478|]
             [|Z;R 0.4;R 0.45573725;_1|]
+            _4
             4
             "Ralston's fourth-order method"
     //let bogackiShampine =
