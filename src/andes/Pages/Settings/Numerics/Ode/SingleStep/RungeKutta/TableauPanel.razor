@@ -3,11 +3,25 @@
 <FluentDialogBody>
     <table>
         <tr>
-            <td>Number of steps:</td>
+            <td>Steps:</td>
             <td>@Content.Steps</td>
         </tr>
+
         <tr>
-            <td>Is embedded:</td>
+            <td>Explicit:</td>
+            <td>
+                @if (Content.IsExplicit)
+                {
+                    <FluentIcon Value="@(new Icons.Regular.Size24.CheckboxChecked())" />
+                }
+                else
+                {
+                    <FluentIcon Value="@(new Icons.Regular.Size24.CheckboxUnchecked())" />
+                }
+            </td>
+        </tr>
+        <tr>
+            <td>Embedded:</td>
             <td>
                 @if (Content.IsEmbedded)
                 {
@@ -15,8 +29,49 @@
                 }
                 else
                 {
-                    <FluentIcon Value="@(new Icons.Regular.Size24.CheckboxChecked())" />
+                    <FluentIcon Value="@(new Icons.Regular.Size24.CheckboxUnchecked())" />
                 }
+            </td>
+        </tr>
+        <tr>
+            <td>Order</td>
+            <td>
+                @if (Content.IsEmbedded) 
+            {
+                <div>@Content.B1Order / @Content.B2Order</div>
+            }
+            else
+            {
+                <div>@Content.Order</div>
+            }
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <table>
+                    @for (var i = 0; i < Content.Steps; i++)
+                    {
+                        <tr>
+                            @if (Content.C[i].IsZero) {<td/>}
+                            else { <td>@Content.C[i]</td> } 
+                            @for (var j = 0;j < Content.Steps;j++)
+                            {
+                                @if (Content.A[i][j].IsZero) {<td/>}
+                                else { <td>@Content.A[i][j]</td> }
+                            }
+                        </tr>
+                    }
+                    <tr>
+                        <td/>
+                        @for (var i = 0; i < Content.Steps; i++)
+                        {
+                            @if (Content.B[i].IsZero) {<td/>}
+                            else {
+                                <td>@Content.B[i]</td>
+                            }
+                        } 
+                    </tr>
+                </table>
             </td>
         </tr>
     </table>

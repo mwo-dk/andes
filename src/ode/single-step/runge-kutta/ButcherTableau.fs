@@ -213,8 +213,19 @@ module ButcherTableauRegistry =
         member x.Order =
             match x.Tableau with
             | T x -> x.Order
+            | ET x -> Z
+        member x.B1Order =
+            match x.Tableau with
             | ET x -> x.B1Order
-
+            | _ -> Z
+        member x.B2Order =
+            match x.Tableau with
+            | ET x -> x.B2Order
+            | _ -> Z
+        member x.IsExplicit =
+            match x.Tableau with
+            | T x -> x.IsExplicit Z
+            | ET x -> x.IsExplicit Z
 
     type ButcherTableauRegistrationList = ButcherTableauRegistration list
 

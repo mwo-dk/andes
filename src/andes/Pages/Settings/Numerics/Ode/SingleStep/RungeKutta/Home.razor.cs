@@ -17,16 +17,20 @@ public partial class Home
 
     private IDialogReference? _dialog;
 
-    public IQueryable<RungeKuttaMethod> Items
+    public IQueryable<Model> Items
     {
         get
         {
             if (State is null)
             {
-                return Enumerable.Empty<RungeKuttaMethod>().AsQueryable();
+                return Enumerable.Empty<Model>().AsQueryable();
             }
 
-            return State.Value.ButcherTableaus?.Select(x => new RungeKuttaMethod(x.Id, x.Name, x.IsEmbedded, x)).AsQueryable() ?? Enumerable.Empty<RungeKuttaMethod>().AsQueryable();
+            return State.Value.ButcherTableaus?
+                .Select(x => 
+                    new Model(x.Id, x.Name, x.Steps,
+                    x.IsEmbedded, x.IsExplicit, 
+                    x.Order, x.B1Order, x.B2Order, x)).AsQueryable() ?? Enumerable.Empty<Model>().AsQueryable();
         }
     }
 
@@ -41,7 +45,6 @@ public partial class Home
         });
         DialogResult result = await _dialog.Result;
         HandlePanel(result);
-
     }
 
     private static void HandlePanel(DialogResult result)
@@ -57,5 +60,13 @@ public partial class Home
         }
     }
 
-    public record RungeKuttaMethod(Guid Id, string Name, bool IsEmbedded, ButcherTableauRegistration ButcherTableauRegistration);
+    public record Model(Guid Id, 
+        string Name, 
+        int Steps,
+        bool IsEmbedded, 
+        bool IsExplicit,
+        Number Order,
+        Number B1Order,
+        Number B2Order,
+        ButcherTableauRegistration ButcherTableauRegistration);
 }

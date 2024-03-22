@@ -1,7 +1,7 @@
 ﻿@page "/numerics/ode/single-step/runge-kutta"
 @inherits Fluxor.Blazor.Web.Components.FluxorComponent
 
-<PageTitle>Runge-Kutta</PageTitle>
+<PageTitle>Runge-Kutta Butcher tableaus</PageTitle>
 
 @if (State is null || State.Value.IsLoading)
 {
@@ -9,13 +9,43 @@
 }
 else
 {
-    <h1>Runge-Kutta</h1>
+    <h1>Runge-Kutta Butcher tableaus</h1>
 
     <FluentDataGrid Items="@Items">
         <TemplateColumn Title="Name" Sortable="true">
             <FluentButton Appearance="Appearance.Lightweight" @onclick="@(() => OpenPanelRightAsync(context.Id))">@context.Name</FluentButton>
         </TemplateColumn>
-        <PropertyColumn Title="Is embedded" Property="@(x => x.IsEmbedded)" Sortable="false" />
+        <PropertyColumn Title="Steps" Property="@(p => p.Steps)" Sortable="true" />
+        <TemplateColumn Title="Explicit">
+            @if (context.IsExplicit)
+            {
+                <FluentIcon Value="@(new Icons.Regular.Size24.CheckboxChecked())" />
+            }
+            else
+            {
+                <FluentIcon Value="@(new Icons.Regular.Size24.CheckboxUnchecked())" />
+            }
+        </TemplateColumn>
+        <TemplateColumn Title="Embedded">
+            @if (context.IsEmbedded)
+            {
+                <FluentIcon Value="@(new Icons.Regular.Size24.CheckboxChecked())" />
+            }
+            else
+            {
+                <FluentIcon Value="@(new Icons.Regular.Size24.CheckboxUnchecked())" />
+            }
+        </TemplateColumn>
+        <TemplateColumn Title="Order">
+            @if (context.IsEmbedded) 
+            {
+                <div>@context.B1Order / @context.B2Order</div>
+            }
+            else
+            {
+                <div>@context.Order</div>
+            }
+        </TemplateColumn>
     </FluentDataGrid >
 }
 
