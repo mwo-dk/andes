@@ -424,6 +424,7 @@ module Tableaus =
     let _3 = N 3
     let _4 = N 4
     let _5 = N 5
+    let _6 = N 6
 
     let private forwarEulerId = Guid("{EE2C38AB-F4D4-429D-8BA1-50DA5BB4A44B}")
     let forwardEuler =
@@ -473,7 +474,11 @@ module Tableaus =
     let kutta3 =
         ButcherTableauHelpers.createAndRegister
             kutta3Id
-            [|[|Z;Z;Z|];[|_1_2;Z;Z|];[|_M1;_2;Z|]|]
+            [|
+                [|Z;Z;Z|]
+                [|_1_2;Z;Z|]
+                [|_M1;_2;Z|]
+            |]
             [|_1_6;_2_3;_1_6|]
             [|Z;_1_2;_1|]
             _3
@@ -484,7 +489,11 @@ module Tableaus =
     let heun3 = 
         ButcherTableauHelpers.createAndRegister
             heun3Id
-            [|[|Z;Z;Z|];[|_1_3;Z;Z|];[|Z;_2_3;Z|]|]
+            [|
+                [|Z;Z;Z|]
+                [|_1_3;Z;Z|]
+                [|Z;_2_3;Z|]
+            |]
             [|_1_4;Z;_3_4|]
             [|Z;_1_3;_2_3|]
             _3
@@ -495,7 +504,11 @@ module Tableaus =
     let vanDerHouwenWray3 =
         ButcherTableauHelpers.createAndRegister
             vanderHouwenWray3Id
-            [|[|Z;Z;Z|];[|_8_15;Z;Z|];[|_1_4;_5_12;Z|]|]
+            [|
+                [|Z;Z;Z|]
+                [|_8_15;Z;Z|]
+                [|_1_4;_5_12;Z|]
+            |]
             [|_1_4;Z;_3_4|]
             [|Z;_8_15;_2_3|]
             _3
@@ -506,7 +519,11 @@ module Tableaus =
     let ralston3 = 
         ButcherTableauHelpers.createAndRegister
             ralston3Id
-            [|[|Z;Z;Z|];[|_1_2;Z;Z|];[|Z;_3_4;Z|]|]
+            [|
+                [|Z;Z;Z|];
+                [|_1_2;Z;Z|];
+                [|Z;_3_4;Z|]
+            |]
             [|_2_9;_1_3;_4_9|]
             [|Z;_1_2;_3_4|]
             _3
@@ -517,7 +534,11 @@ module Tableaus =
     let strongStabilityPreservingRK3 =
         ButcherTableauHelpers.createAndRegister
             strongStabilityPreservingRK3Id
-            [|[|Z;Z;Z|];[|_1;Z;Z|];[|_1_4;_1_4;Z|]|]
+            [|
+                [|Z;Z;Z|]
+                [|_1;Z;Z|]
+                [|_1_4;_1_4;Z|]
+            |]
             [|_1_6;_1_6;_2_3|]
             [|Z;_1;_1_2|]
             _3
@@ -528,7 +549,12 @@ module Tableaus =
     let rk4 = 
         ButcherTableauHelpers.createAndRegister
             rk4Id
-            [|[|Z;Z;Z;Z|];[|_1_2;Z;Z;Z|];[|Z;_1_2;Z;Z|];[|Z;Z;_1;Z|]|]
+            [|
+                [|Z;Z;Z;Z|]
+                [|_1_2;Z;Z;Z|]
+                [|Z;_1_2;Z;Z|]
+                [|Z;Z;_1;Z|]
+            |]
             [|_1_6;_1_3;_1_3;_1_6|]
             [|Z;_1_2;_1_2;_1|]
             _4
@@ -539,7 +565,12 @@ module Tableaus =
     let threeEighthsRule =
         ButcherTableauHelpers.createAndRegister
             threeEighthsRuleId
-            [|[|Z;Z;Z;Z|];[|_1_3;Z;Z;Z|];[|_M1_3;_1;Z;Z|];[|_1;_M1;_1;Z|]|]
+            [|
+                [|Z;Z;Z;Z|]
+                [|_1_3;Z;Z;Z|]
+                [|_M1_3;_1;Z;Z|]
+                [|_1;_M1;_1;Z|]
+            |]
             [|_1_8;_3_8;_3_8;_1_8|]
             [|Z;_1_3;_2_3;_1|]
             _4
@@ -550,7 +581,12 @@ module Tableaus =
     let ralston4 =
         ButcherTableauHelpers.createAndRegister
             ralston4Id
-            [|[|Z;Z;Z;Z|];[|R 0.4;Z;Z;Z|];[|R 0.29697761;R 0.15875964;Z;Z|];[|R 0.2181004;R -3.05096516;R 3.83286476;Z|]|]
+            [|
+                [|Z;Z;Z;Z|]
+                [|R 0.4;Z;Z;Z|]
+                [|R 0.29697761;R 0.15875964;Z;Z|]
+                [|R 0.2181004;R -3.05096516;R 3.83286476;Z|]
+            |]
             [|R 0.17476028;R -0.55148066;R 1.2055356;R 0.17118478|]
             [|Z;R 0.4;R 0.45573725;_1|]
             _4
@@ -561,7 +597,10 @@ module Tableaus =
     let heunEuler =
         EmbeddedButcherTableauHelpers.createAndRegister
             heunEulerId
-            [|[|Z;Z;|];[|_1;Z|]|]
+            [|
+                [|Z;Z;|]
+                [|_1;Z|]
+            |]
             [|_1_2;_1_2|]
             [|Z;_1|]
             [|Z;_1|]
@@ -574,7 +613,11 @@ module Tableaus =
     let fehlbergRK1 =
         EmbeddedButcherTableauHelpers.createAndRegister
             fehlbergRK1Id
-            [|[|Z;Z;Z|];[|_1_2;Z;Z|];[|NQ (1,256);NQ (255,256);Z|]|]
+            [|
+                [|Z;Z;Z|]
+                [|_1_2;Z;Z|]
+                [|NQ (1,256);NQ (255,256);Z|]
+            |]
             [|NQ(1,512);NQ(255,256);NQ(1,512)|]
             [|NQ(1,256);NQ(255,256);Z|]
             [|Z;_1_2;_1|]
@@ -587,7 +630,12 @@ module Tableaus =
     let bogackiShampine =
         EmbeddedButcherTableauHelpers.createAndRegister
             bogackiShampineId
-            [|[|Z;Z;Z;Z|];[|_1_2;Z;Z;Z|];[|Z;_3_4;Z;Z|];[|_2_9;_1_3;_4_9;Z|]|]
+            [|
+                [|Z;Z;Z;Z|]
+                [|_1_2;Z;Z;Z|]
+                [|Z;_3_4;Z;Z|]
+                [|_2_9;_1_3;_4_9;Z|]
+            |]
             [|_2_9;_1_3;_4_9;Z|]
             [|NQ(7,24);_1_4;_1_3;_1_8|]
             [|Z;_1_2;_3_4;_1|]
@@ -600,7 +648,14 @@ module Tableaus =
     let fehlberg =
         EmbeddedButcherTableauHelpers.createAndRegister
             fehlbergId
-            [|[|Z;Z;Z;Z;Z;Z|];[|_1_4;Z;Z;Z;Z;Z|];[|NQ(3,32);NQ(9,32);Z;Z;Z;Z|];[|NQ(1932,2197);NQ(-7200,2197);NQ(7296,2197);Z;Z;Z|];[|NQ(439,216);N -8;NQ(3680,513);NQ(-845,4104);Z;Z|];[|NQ(-8,27);N 2;NQ(-3544,2565);NQ(1859,4104);NQ(-11,40);Z|]|]
+            [|
+                [|Z;Z;Z;Z;Z;Z|]
+                [|_1_4;Z;Z;Z;Z;Z|]
+                [|NQ(3,32);NQ(9,32);Z;Z;Z;Z|]
+                [|NQ(1932,2197);NQ(-7200,2197);NQ(7296,2197);Z;Z;Z|]
+                [|NQ(439,216);N -8;NQ(3680,513);NQ(-845,4104);Z;Z|]
+                [|NQ(-8,27);N 2;NQ(-3544,2565);NQ(1859,4104);NQ(-11,40);Z|]
+            |]
             [|NQ(16,135);Z;NQ(6656,12825);NQ(28561,56430);NQ(-9,50);NQ(2,55)|]
             [|NQ(25,216);Z;NQ(1408,2565);NQ(2197,4104);NQ(-1,5);Z|]
             [|Z;_1_4;_3_8;NQ(12,13);_1;_1_2|]
@@ -609,15 +664,150 @@ module Tableaus =
             6
             "Fehlberg's Runge-Kutta 4/5-order method"
 
-    // let cashCarpId = Guid("277e577f-a236-4946-a30c-ae918346776c")
-    // let cashCarp = 
-    //     EmbeddedButcherTableauHelpers.createAndRegister
-    //         cashCarpId
-    //         [|[|Z;Z;Z;Z;Z;Z;Z|];[|NQ(1,5);Z;Z;Z;Z;Z;Z|];[|NQ(3,40);NQ(9,40);Z;Z;Z;Z;Z|];[|NQ(3,10);NQ(-9,10);NQ(6,5);Z;Z;Z|];[|_3_5;_9_20;_27_100;_27_100;Z;Z;Z|];[|_6_5;_3_10;_3_5;_3_40;_9_40;Z;Z|];[|_1_6;_1_6;_1_6;_1_6;_1_6;_1_6;Z|]|]
-    //         [|_37_378;Z;_250_621;_125_594;_0;_512_177;_0|]
-    //         [|_2825_27648;Z;_18575_48384;_13525_55296;_277_14336;_1_4;_0|]
-    //         [|Z;_1_5;_3_10;_3_5;_1;_7_8;_1|]
-    //         _5
-    //         _4
-    //         7
-    //         "Cash-Karp Runge-Kutta 4/5-order method"
+    let cashCarpId = Guid("277e577f-a236-4946-a30c-ae918346776c")
+    let cashCarp = 
+        EmbeddedButcherTableauHelpers.createAndRegister
+            cashCarpId
+            [|
+                [|Z;Z;Z;Z;Z;Z|]
+                [|NQ(1,5);Z;Z;Z;Z;Z|]
+                [|NQ(3,40);NQ(9,40);Z;Z;Z;Z|]
+                [|NQ(3,10);NQ(-9,10);NQ(6,5);Z;Z;Z|]
+                [|NQ(-11,54);NQ(5,2);NQ(-70,27);NQ(35,27);Z;Z|]
+                [|NQ(1631,55296);NQ(175,512);NQ(575,13824);NQ(44275,110592);NQ(253, 4096);Z|]
+            |]
+            [|NQ(37,378);Z;NQ(250,621);NQ(125,594);Z;NQ(512,177)|]
+            [|NQ(2825,27648);Z;NQ(18575,48384);NQ(13525,55296);NQ(277,14336);_1_4;Z|]
+            [|Z;NQ(1,5);NQ(3,10);NQ(3,5);_1;NQ(7,8);|]
+            _5
+            _4
+            6
+            "Cash-Karp Runge-Kutta 4/5-order method"
+
+    let dormandPrinceId = Guid("d72c7269-4ee8-41df-90b4-304bd48cc2fe")
+    let dormandPrince =
+        EmbeddedButcherTableauHelpers.createAndRegister
+            dormandPrinceId
+            [|
+                [|Z;Z;Z;Z;Z;Z;Z|]
+                [|NQ(1,5);Z;Z;Z;Z;Z;Z|]
+                [|NQ(3,40);NQ(9,40);Z;Z;Z;Z;Z|]
+                [|NQ(44,45);NQ(-56,15);NQ(32,9);Z;Z;Z;Z|]
+                [|NQ(19372,6561);NQ(-25360,2187);NQ(64448,6561);NQ(-212,729);Z;Z;Z|]
+                [|NQ(9017,3168);NQ(-355,33);NQ(46732,5247);NQ(49,176);NQ(-5103,18656);Z;Z|]
+                [|NQ(35,384);Z;NQ(500,1113);NQ(125,192);NQ(-2187,6784);NQ(11,84);Z|]
+            |]
+            [|NQ(35,384);Z;NQ(500,1113);NQ(125,192);NQ(-2187,6784);NQ(11,84);Z|]
+            [|NQ(5179,57600);Z;NQ(7571,16695);NQ(393,640);NQ(-92097,339200);NQ(187,2100);NQ(1,40)|]
+            [|Z;NQ(1,5);NQ(3,10);NQ(4,5);_1;NQ(8,9);_1;_1|]
+            _6
+            _5
+            7
+            "Dormand-Prince Runge-Kutta 4/5-order method"
+
+    let backwardEulerId = Guid("042b419e-3524-4d96-a3fc-a8f8ee2a6f64")
+    let backwardEuler =
+        ButcherTableauHelpers.createAndRegister
+            backwardEulerId
+            [|
+                [|_1|]
+            |]
+            [|_1|]
+            [|_1|]
+            _1
+            1
+            "Backward Euler"
+
+    let implicitMidpointId = Guid("15872930-ca18-4147-a9fe-86dea5b1f46a")
+    let implicitMidpoint =
+        ButcherTableauHelpers.createAndRegister
+            implicitMidpointId
+            [|
+                [|_1_2|]
+            |]
+            [|_1|]
+            [|_1_2|]
+            _2
+            1
+            "Implicit midpoint method"
+
+    let crankNicolsonId = Guid("718591b7-b541-46e7-b3c0-7067be169a21")
+    let crankNicolson =
+        ButcherTableauHelpers.createAndRegister
+            crankNicolsonId
+            [|
+                [|Z;Z|]
+                [|_1_2;_1_2|]
+            |]
+            [|_1_2;_1_2|]
+            [|Z;_1|]
+            _2
+            2
+            "Crank-Nicolson method"
+
+    let gaussLegendre4Id = Guid("a5fb7e1a-fb1f-4d4e-9520-016dd6b94965")
+    let gaussLegendre4 =
+        let sqrt3_6 = R (sqrt 3.0 / 6.0)
+        let sqrt3_2 = R (sqrt 3.0 / 2.0)
+        EmbeddedButcherTableauHelpers.createAndRegister
+            gaussLegendre4Id
+            [|
+                [|_1_4;_1_4 - sqrt3_6|]
+                [|_1_4 + sqrt3_6;_1_4|]
+            |]
+            [|_1_2;_1_2|]
+            [|_1_2 + sqrt3_2;_1_2 - sqrt3_2|]
+            [|_1_2 - sqrt3_6;_1_2 + sqrt3_6|]
+            _4
+            _2
+            2
+            "Gauss-Legendre fourth-order method"
+
+    let gaussLegendre6Id = Guid("a86ab9d2-6489-45a2-a8bd-a808e75016ae")
+    let gaussLegendre6 =
+        let sqrt15_10 = R (sqrt 15.0 / 10.0)
+        let sqrt15_15 = R (sqrt 15.0 / 15.0)
+        let sqrt15_24 = R (sqrt 15.0 / 24.0)
+        let sqrt15_30 = R (sqrt 15.0 / 30.0)
+        EmbeddedButcherTableauHelpers.createAndRegister
+            gaussLegendre6Id
+            [|
+                [|NQ(5,36);NQ(2,9) - sqrt15_15;NQ(5,36) - sqrt15_30|]
+                [|NQ(5,36) + sqrt15_24;NQ(2,9);NQ(5,36) - sqrt15_24|]
+                [|NQ(5,36) + sqrt15_30;NQ(2,9) + sqrt15_15;NQ(5,36)|]
+            |]
+            [|NQ(5,18);_4_9;NQ(5,18)|]
+            [|NQ(-5,6);NQ(8,3);NQ(-5,6)|]
+            [|_1_2 - sqrt15_10;_1_2;_1_2 + sqrt15_10|]
+            _6
+            _4
+            3
+            "Gauss-Legendre sixth-order method"
+
+    let kraaljeVangerSpikerId = Guid("0c45467f-9b15-487e-8c6b-a531b84f0f67")
+    let kraaljeVangerSpiker =
+        ButcherTableauHelpers.createAndRegister
+            kraaljeVangerSpikerId
+            [|
+                [|_1_2;Z|]
+                [|-_1_2;_2|]
+            |]
+            [|-_1_2;NQ(3,2)|]
+            [|_1_2;NQ(3,2)|]
+            _2
+            2
+            "Kraalje-Vanger-Spiker method"
+
+    let qinZhangId = Guid("ffdf135c-95aa-461c-8481-f02c78763df8")
+    let qinZhang =
+        ButcherTableauHelpers.createAndRegister
+            qinZhangId
+            [|
+                [|_1_4;Z|]
+                [|-_1_2;Z|]
+            |]
+            [|_1_2;_1_2|]
+            [|_1_4;_3_4|]
+            _2
+            2
+            "Qin-Zhang method"
