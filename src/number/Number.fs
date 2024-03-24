@@ -309,7 +309,7 @@ with
             match Number.Lift x y with
             | NotANumber, _ | _, NotANumber | _, Z -> NotANumber
             | Z, _ -> Z
-            | N x, N y -> Q (float x, float y)
+            | N x, N y -> NQ (x, y)
             | NQ (a, b), NQ (c, d) -> NQ (a*d, b*c)
             | Q (a, b), Q (c, d) -> Q (a*d, b*c)
             | R a, R b -> R (a/b)
