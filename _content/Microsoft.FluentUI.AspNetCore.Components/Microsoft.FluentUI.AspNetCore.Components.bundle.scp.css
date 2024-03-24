@@ -1854,7 +1854,6 @@ div[dragged-over][b-qxma62j335] {
 /* _content/Microsoft.FluentUI.AspNetCore.Components/Components/List/FluentPersona.razor.rz.scp.css */
 .fluent-persona[b-n7zog0zvqi] {
     display: flex;
-    height: 100%;
     width: fit-content;
     border-radius: 999px;
     align-items: center;
@@ -2473,25 +2472,22 @@ div[dragged-over][b-qxma62j335] {
     padding: 1em;
 }
 
-    .fluent-popover-content .fluent-popover-header[b-qp3z8ghd2d] {
+    .fluent-popover-content div[part="header"][b-qp3z8ghd2d] {
         font-size: 20px;
         font-weight: 600;
         width: inherit;
+        margin-bottom: 12px;
     }
 
-    .fluent-popover-content .fluent-popover-body[b-qp3z8ghd2d] {
+    .fluent-popover-content div[part="body"][b-qp3z8ghd2d] {
         height: 100%;
-        width: inherit;
-        margin-top: 1em;
-        display: flex;
-        flex-direction: column;
     }
 
-    .fluent-popover-content .fluent-popover-footer[b-qp3z8ghd2d] {
+    .fluent-popover-content div[part="footer"][b-qp3z8ghd2d] {
         font-size: 14px;
         font-weight: normal;
         width: inherit;
-        margin-top: 1em;
+        margin-top: 12px;
     }
 /* _content/Microsoft.FluentUI.AspNetCore.Components/Components/PresenceBadge/FluentPresenceBadge.razor.rz.scp.css */
 .fluent-presence-badge[b-1o8tp31nhy] {
@@ -2517,6 +2513,13 @@ div[dragged-over][b-qxma62j335] {
         right: calc(-1 * var(--fluent-presence-badge-border-size));
         border-radius: 999px;
         border: var(--fluent-presence-badge-border-size) solid var(--neutral-layer-1);
+    }
+/* _content/Microsoft.FluentUI.AspNetCore.Components/Components/ProfileMenu/FluentProfileMenu.razor.rz.scp.css */
+.fluent-profile-menu[b-rsm9d6pikk] {
+}
+
+    .fluent-profile-menu[b-rsm9d6pikk]  > .fluent-persona > .name {
+        display: none;
     }
 /* _content/Microsoft.FluentUI.AspNetCore.Components/Components/Radio/FluentRadio.razor.rz.scp.css */
 fluent-radio[b-98313echfq] {
