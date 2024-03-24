@@ -34,6 +34,19 @@
             </td>
         </tr>
         <tr>
+            <td>Built in:</td>
+            <td>
+                @if (Content.IsBuiltIn)
+                {
+                    <FluentIcon Value="@(new Icons.Regular.Size24.CheckboxChecked())" />
+                }
+                else
+                {
+                    <FluentIcon Value="@(new Icons.Regular.Size24.CheckboxUnchecked())" />
+                }
+            </td>
+        </tr>
+        <tr>
             <td>Order</td>
             <td>
                 @if (Content.IsEmbedded) 
@@ -49,28 +62,46 @@
         <tr>
             <td colspan="2">
                 <table>
+                    <tr>
+                        <td><b>c</b></td>
+                        <td><b>A</b></td>
+                    </tr>
                     @for (var i = 0; i < Content.Steps; i++)
                     {
                         <tr>
-                            @if (Content.C[i].IsZero) {<td/>}
-                            else { <td>@Content.C[i]</td> } 
+                            <td>@Content.C[i]</td>
                             @for (var j = 0;j < Content.Steps;j++)
                             {
-                                @if (Content.A[i][j].IsZero) {<td/>}
-                                else { <td>@Content.A[i][j]</td> }
+                                <td>@Content.A[i][j]</td>
                             }
                         </tr>
                     }
-                    <tr>
-                        <td/>
-                        @for (var i = 0; i < Content.Steps; i++)
-                        {
-                            @if (Content.B[i].IsZero) {<td/>}
-                            else {
+                    @if (Content.IsEmbedded)
+                    {
+                        <tr>
+                            <td><b>b<sub>1</sub></b></td>
+                            @for (var i = 0; i < Content.Steps; i++)
+                            {
+                                <td>@Content.B1[i]</td>
+                            } 
+                        </tr>
+                        <tr>
+                            <td><b>b<sub>2</sub></b></td>
+                            @for (var i = 0; i < Content.Steps; i++)
+                            {
+                                <td>@Content.B2[i]</td>
+                            } 
+                        </tr>
+                    }
+                    else {
+                        <tr>
+                            <td><b>b</b></td>
+                            @for (var i = 0; i < Content.Steps; i++)
+                            {
                                 <td>@Content.B[i]</td>
-                            }
-                        } 
-                    </tr>
+                            } 
+                        </tr>
+                    }
                 </table>
             </td>
         </tr>

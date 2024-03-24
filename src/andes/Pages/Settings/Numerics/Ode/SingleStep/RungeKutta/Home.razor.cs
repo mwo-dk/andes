@@ -29,11 +29,28 @@ public partial class Home
             return State.Value.ButcherTableaus?
                 .Select(x => 
                     new Model(x.Id, x.Name, x.Steps,
-                    x.IsEmbedded, x.IsExplicit, 
-                    x.Order, x.B1Order, x.B2Order, x)).AsQueryable() ?? Enumerable.Empty<Model>().AsQueryable();
+                    x.IsEmbedded, x.IsExplicit, x.IsBuiltIn,
+                    x.Order, x.B1Order, x.B2Order, x))
+                    .Where(FilterExplicit)
+                    .Where(FilterEmbedded)
+                    .Where(FilterBuiltIn)
+                    .AsQueryable() ?? Enumerable.Empty<Model>().AsQueryable();
         }
     }
 
+    private GridSort<Model> sortByName = GridSort<Model>
+        .ByAscending(p => p.Name);
+    private bool FilterExplicit(Model item) => 
+        _explicitFilter == 1 ? item.IsExplicit : (_explicitFilter == 2 ? !item.IsExplicit : true) ;
+    private int _explicitFilter = 0;
+
+    private bool FilterEmbedded(Model item) => 
+        _embeddedFilter == 1 ? item.IsEmbedded : (_embeddedFilter == 2 ? !item.IsEmbedded : true) ;
+    private int _embeddedFilter = 0;
+
+    private bool FilterBuiltIn(Model item) => 
+        _builtInFilter == 1 ? item.IsBuiltIn : (_builtInFilter == 2 ? !item.IsBuiltIn : true) ;
+    private int _builtInFilter = 0;
     private async Task OpenPanelRightAsync(Guid tableauId)
     {
         var item = State!.Value.ButcherTableaus!.Single(x => x.Id == tableauId)!;
@@ -65,6 +82,7 @@ public partial class Home
         int Steps,
         bool IsEmbedded, 
         bool IsExplicit,
+        bool IsBuiltIn,
         Number Order,
         Number B1Order,
         Number B2Order,

@@ -11,6 +11,4 @@ public partial class TableauPanel : IDialogContentComponent<ButcherTableauRegist
 
     [Inject]
     private IState<Store.Numerics.Ode.SingleStep.RungeKutta.ButcherTableausState>? State { get; set; }
-
-
 }

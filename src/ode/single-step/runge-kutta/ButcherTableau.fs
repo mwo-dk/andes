@@ -378,7 +378,7 @@ module EmbeddedButcherTableauHelpers =
           Steps = steps
           Name = name }
 
-    let internal createAndRegister id n a b1 b2 c b1Order b2Order steps name =
+    let internal createAndRegister id a b1 b2 c b1Order b2Order steps name =
         let x = create a b1 b2 c b1Order b2Order steps name
         ButcherTableauRegistry.registerEmbeddedButcherTableau id true x
         x
@@ -555,6 +555,20 @@ module Tableaus =
             _4
             4
             "Ralston's fourth-order method"
+
+    // let private heunEulerId = Guid("{31fda9be-9fc4-40cc-ae88-4620b3ad165c")
+    // let heunEuler =
+    //     EmbeddedButcherTableauHelpers.createAndRegister
+    //         heunEulerId
+    //         [|[|Z;Z;|];[|Z;_1|]|]
+    //         [|_1_2;_1_2|]
+    //         [|Z;_1|]
+    //         [|Z;_1|]
+    //         _2
+    //         _1
+    //         2
+    //         "Heun-Euler method"
+
     //let bogackiShampine =
     //    ButcherTableauHelpers.create
     //        [|[|Z;Z;Z;Z|];[|_1_2;Z;Z;Z|];[|Z;_3_4;Z;Z|];[|_2_9;_1_3;_4_9;Z|]|]

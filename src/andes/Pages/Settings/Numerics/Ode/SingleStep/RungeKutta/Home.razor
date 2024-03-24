@@ -11,8 +11,23 @@ else
 {
     <h1>Runge-Kutta Butcher tableaus</h1>
 
+    <FluentRadioGroup Name="explicit" @bind-Value="_explicitFilter" Label="Explicit">
+        <FluentRadio Value="0">All</FluentRadio>
+        <FluentRadio Value="1">Yes</FluentRadio>
+        <FluentRadio Value="2">No</FluentRadio>
+    </FluentRadioGroup>
+    <FluentRadioGroup Name="embedded" @bind-Value="_embeddedFilter" Label="Embedded">
+        <FluentRadio Value="0">All</FluentRadio>
+        <FluentRadio Value="1">Yes</FluentRadio>
+        <FluentRadio Value="2">No</FluentRadio>
+    </FluentRadioGroup>
+    <FluentRadioGroup Name="builtIn" @bind-Value="_builtInFilter" Label="Built in">
+        <FluentRadio Value="0">All</FluentRadio>
+        <FluentRadio Value="1">Yes</FluentRadio>
+        <FluentRadio Value="2">No</FluentRadio>
+    </FluentRadioGroup>
     <FluentDataGrid Items="@Items">
-        <TemplateColumn Title="Name" Sortable="true">
+        <TemplateColumn Title="Name" Sortable="true" SortBy="@sortByName">
             <FluentButton Appearance="Appearance.Lightweight" @onclick="@(() => OpenPanelRightAsync(context.Id))">@context.Name</FluentButton>
         </TemplateColumn>
         <PropertyColumn Title="Steps" Property="@(p => p.Steps)" Sortable="true" />
@@ -28,6 +43,16 @@ else
         </TemplateColumn>
         <TemplateColumn Title="Embedded">
             @if (context.IsEmbedded)
+            {
+                <FluentIcon Value="@(new Icons.Regular.Size24.CheckboxChecked())" />
+            }
+            else
+            {
+                <FluentIcon Value="@(new Icons.Regular.Size24.CheckboxUnchecked())" />
+            }
+        </TemplateColumn>
+        <TemplateColumn Title="Built in">
+            @if (context.IsBuiltIn)
             {
                 <FluentIcon Value="@(new Icons.Regular.Size24.CheckboxChecked())" />
             }
