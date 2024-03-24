@@ -608,3 +608,16 @@ module Tableaus =
             _4
             6
             "Fehlberg's Runge-Kutta 4/5-order method"
+
+    // let cashCarpId = Guid("277e577f-a236-4946-a30c-ae918346776c")
+    // let cashCarp = 
+    //     EmbeddedButcherTableauHelpers.createAndRegister
+    //         cashCarpId
+    //         [|[|Z;Z;Z;Z;Z;Z;Z|];[|NQ(1,5);Z;Z;Z;Z;Z;Z|];[|NQ(3,40);NQ(9,40);Z;Z;Z;Z;Z|];[|NQ(3,10);NQ(-9,10);NQ(6,5);Z;Z;Z|];[|_3_5;_9_20;_27_100;_27_100;Z;Z;Z|];[|_6_5;_3_10;_3_5;_3_40;_9_40;Z;Z|];[|_1_6;_1_6;_1_6;_1_6;_1_6;_1_6;Z|]|]
+    //         [|_37_378;Z;_250_621;_125_594;_0;_512_177;_0|]
+    //         [|_2825_27648;Z;_18575_48384;_13525_55296;_277_14336;_1_4;_0|]
+    //         [|Z;_1_5;_3_10;_3_5;_1;_7_8;_1|]
+    //         _5
+    //         _4
+    //         7
+    //         "Cash-Karp Runge-Kutta 4/5-order method"
