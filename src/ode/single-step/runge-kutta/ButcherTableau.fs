@@ -423,6 +423,7 @@ module Tableaus =
     let _2 = N 2
     let _3 = N 3
     let _4 = N 4
+    let _5 = N 5
 
     let private forwarEulerId = Guid("{EE2C38AB-F4D4-429D-8BA1-50DA5BB4A44B}")
     let forwardEuler =
@@ -582,10 +583,28 @@ module Tableaus =
             3
             "Fehlberg's Runge-Kutta first-order method"
 
-    //let bogackiShampine =
-    //    ButcherTableauHelpers.create
-    //        [|[|Z;Z;Z;Z|];[|_1_2;Z;Z;Z|];[|Z;_3_4;Z;Z|];[|_2_9;_1_3;_4_9;Z|]|]
-    //        [|_2_9;_1_3;_4_9;Z|]
-    //        [|Z;_1_2;_3_4;_1|]
-    //        4
-    //        "Bogacki-Shampine method"
+    let bogackiShampineId = Guid("c41014c9-5abf-4d68-98f7-17560416eefe")
+    let bogackiShampine =
+        EmbeddedButcherTableauHelpers.createAndRegister
+            bogackiShampineId
+            [|[|Z;Z;Z;Z|];[|_1_2;Z;Z;Z|];[|Z;_3_4;Z;Z|];[|_2_9;_1_3;_4_9;Z|]|]
+            [|_2_9;_1_3;_4_9;Z|]
+            [|NQ(7,24);_1_4;_1_3;_1_8|]
+            [|Z;_1_2;_3_4;_1|]
+            _3
+            _2
+            4
+            "Bogacki-Shampine method"
+
+    let fehlbergId = Guid("158be900-43c2-4fca-b3a0-fec31a1eeaab")
+    let fehlberg =
+        EmbeddedButcherTableauHelpers.createAndRegister
+            fehlbergId
+            [|[|Z;Z;Z;Z;Z;Z|];[|_1_4;Z;Z;Z;Z;Z|];[|NQ(3,32);NQ(9,32);Z;Z;Z;Z|];[|NQ(1932,2197);NQ(-7200,2197);NQ(7296,2197);Z;Z;Z|];[|NQ(439,216);N -8;NQ(3680,513);NQ(-845,4104);Z;Z|];[|NQ(-8,27);N 2;NQ(-3544,2565);NQ(1859,4104);NQ(-11,40);Z|]|]
+            [|NQ(16,135);Z;NQ(6656,12825);NQ(28561,56430);NQ(-9,50);NQ(2,55)|]
+            [|NQ(25,216);Z;NQ(1408,2565);NQ(2197,4104);NQ(-1,5);Z|]
+            [|Z;_1_4;_3_8;NQ(12,13);_1;_1_2|]
+            _5
+            _4
+            6
+            "Fehlberg's Runge-Kutta 4/5-order method"
