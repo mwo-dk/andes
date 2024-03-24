@@ -556,18 +556,31 @@ module Tableaus =
             4
             "Ralston's fourth-order method"
 
-    // let private heunEulerId = Guid("{31fda9be-9fc4-40cc-ae88-4620b3ad165c")
-    // let heunEuler =
-    //     EmbeddedButcherTableauHelpers.createAndRegister
-    //         heunEulerId
-    //         [|[|Z;Z;|];[|Z;_1|]|]
-    //         [|_1_2;_1_2|]
-    //         [|Z;_1|]
-    //         [|Z;_1|]
-    //         _2
-    //         _1
-    //         2
-    //         "Heun-Euler method"
+    let private heunEulerId = Guid("31fda9be-9fc4-40cc-ae88-4620b3ad165c")
+    let heunEuler =
+        EmbeddedButcherTableauHelpers.createAndRegister
+            heunEulerId
+            [|[|Z;Z;|];[|_1;Z|]|]
+            [|_1_2;_1_2|]
+            [|Z;_1|]
+            [|Z;_1|]
+            _2
+            _1
+            2
+            "Heun-Euler method"
+
+    let private fehlbergRK1Id = Guid("14bd18e7-d44c-4a48-93ec-253f5384ee53")
+    let fehlbergRK1 =
+        EmbeddedButcherTableauHelpers.createAndRegister
+            fehlbergRK1Id
+            [|[|Z;Z;Z|];[|_1_2;Z;Z|];[|NQ (1,256);NQ (255,256);Z|]|]
+            [|NQ(1,512);NQ(255,256);NQ(1,512)|]
+            [|NQ(1,256);NQ(255,256);Z|]
+            [|Z;_1_2;_1|]
+            _2
+            _1
+            3
+            "Fehlberg's Runge-Kutta first-order method"
 
     //let bogackiShampine =
     //    ButcherTableauHelpers.create
