@@ -811,3 +811,69 @@ module Tableaus =
             _2
             2
             "Qin-Zhang method"
+
+    let crouze2Id = Guid("15bad55f-7375-41cf-aa4d-3581eaf83dee")
+    let crouze2 =
+        let sqrt3_6 = R (sqrt 3.0 / 6.0)
+        let sqrt3_3 = R (sqrt 3.0 / 3.0)
+        ButcherTableauHelpers.createAndRegister
+            crouze2Id
+            [|
+                [|_1_2+sqrt3_6;Z|]
+                [|-sqrt3_3;_1_2+sqrt3_6|]
+            |]
+            [|_1_2;_1_2|]
+            [|_1_2+sqrt3_6;_1_2-sqrt3_6|]
+            _3
+            2
+            "Crouzeix's second-order method"
+
+    let rki43id = Guid("2d5d9cec-8db2-4df8-90d3-e3bcd42e0704")
+    let rki43 =
+        ButcherTableauHelpers.createAndRegister
+            rki43id
+            [|
+                [|_1_2;Z;Z;Z|]
+                [|_1_6;_1_2;Z;Z|]
+                [|-_1_2;_1_2;_1_2;Z|]
+                [|NQ(3,2);NQ(-3,2);_1_2;_1_2|]
+            |]
+            [|NQ(3,2);NQ(-3,2);_1_2;_1_2|]
+            [|_1_2;_2_3;_1_2;_1|]
+            _3
+            4
+            "Runge-Kutta diagonal implicit third-order method"
+
+    let lobattoIIIA2Id = Guid("004a69ae-b05f-4ca1-8efe-7c2dbc26157f")   
+    let lobattoIIIA2 =
+        EmbeddedButcherTableauHelpers.createAndRegister
+            lobattoIIIA2Id
+            [|
+                [|Z;Z|]
+                [|_1_2;_1_2|]
+            |]
+            [|_1_2;_1_2|]
+            [|_1;Z|]
+            [|Z;_1|]
+            _2
+            _2
+            2
+            "Lobatto IIIA method of second order" 
+
+    let lobattoIIIA4Id = Guid("12d25856-4a4e-42ca-b0e8-b280e5ab9d34")   
+    let lobattoIIIA4 =
+        EmbeddedButcherTableauHelpers.createAndRegister
+            lobattoIIIA4Id
+            [|
+                [|Z;Z;Z|]
+                [|NQ(5,24);_1_3;NQ(-1,24)|]
+                [|_1_6;_2_3;_1_6|]
+            |]
+            [|_1_6;_2_3;_1_6|]
+            [|-_1_2;_2;-_1_2|]
+            [|Z;_1_2;_1|]
+            _4
+            _4
+            3
+            "Lobatto IIIA method of fourth order"
+
