@@ -369,3 +369,23 @@ with
         | R r -> r.ToString()
         | C c -> formatComplex c
         | QC (a, b) -> sprintf "%s/%s" (formatComplex a) (formatComplex b)
+
+    member this.ToLaTexString() =
+        let formatComplex (c: Complex) =
+            if c.Imaginary = 0.0 then c.Real.ToString()
+            else
+                if c.Real = 0.0 then sprintf "%fi" c.Imaginary
+                else 
+                    if c.Imaginary > 0.0 then
+                        sprintf "%f+%fi" c.Real c.Imaginary
+                    else
+                        sprintf "%f%fi" c.Real c.Imaginary
+        match this with
+        | NotANumber -> "\\text{NaN}"
+        | Z -> "0"
+        | N n -> n.ToString()
+        | NQ (a, b) -> sprintf "$\\frac{%d}{%d}$" a b
+        | Q (a, b) -> sprintf "$\\frac{%f}{%f}$" a b
+        | R r -> r.ToString()
+        | C c -> formatComplex c
+        | QC (a, b) -> sprintf "$\\frac{%s}{%s}$" (formatComplex a) (formatComplex b)

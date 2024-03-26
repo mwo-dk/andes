@@ -1,4 +1,6 @@
-﻿<div class="navmenu">
+﻿@using Andes.Services
+
+<div class="navmenu">
     <input type="checkbox" title="Menu expand/collapse toggle" id="navmenu-toggle" class="navmenu-icon" />
     <label for="navmenu-toggle" class="navmenu-icon"><FluentIcon Value="@(new Icons.Regular.Size20.Navigation())" Color="Color.Fill" /></label>
     <nav class="sitenav" aria-labelledby="main-menu" onclick="document.getElementById('navmenu-toggle').click();">
@@ -30,10 +32,13 @@
                     </FluentNavGroup>
                 </FluentNavGroup>
             </FluentNavGroup>
-            <FluentNavGroup Title="Test">
-                <FluentNavLink Href="test/numbers" Icon="@(new Icons.Regular.Size20.Info())" IconColor="Color.Accent">Numbers</FluentNavLink>
-                <FluentNavLink Href="test/expressions" Icon="@(new Icons.Regular.Size20.Info())" IconColor="Color.Accent">Expressions</FluentNavLink>
-            </FluentNavGroup>
+            @if (BuildService.IsDebug())
+            {
+                <FluentNavGroup Title="Test">
+                    <FluentNavLink Href="test/numbers" Icon="@(new Icons.Regular.Size20.Info())" IconColor="Color.Accent">Numbers</FluentNavLink>
+                    <FluentNavLink Href="test/expressions" Icon="@(new Icons.Regular.Size20.Info())" IconColor="Color.Accent">Expressions</FluentNavLink>
+                </FluentNavGroup>
+            }
             <FluentNavLink Href="about" Icon="@(new Icons.Regular.Size20.Info())" IconColor="Color.Accent">About</FluentNavLink>
         </FluentNavMenu>
     </nav>

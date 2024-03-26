@@ -413,6 +413,7 @@ module Tableaus =
     let _1_4 = NQ (1, 4)
     let _1_6 = NQ (1, 6)
     let _1_8 = NQ (1, 8)
+    let _1_9 = NQ (1, 9)
     let _2_3 = NQ (2, 3)
     let _2_9 = NQ (2, 9)
     let _3_4 = NQ (3, 4)
@@ -644,10 +645,30 @@ module Tableaus =
             4
             "Bogacki-Shampine method"
 
-    let fehlbergId = Guid("158be900-43c2-4fca-b3a0-fec31a1eeaab")
-    let fehlberg =
+    let rkn34Id = Guid("4979806B-0404-426D-AD16-F0EB6448997F")
+    let rkn34 =
+        let _9_16 = NQ(9,16)
         EmbeddedButcherTableauHelpers.createAndRegister
-            fehlbergId
+            rkn34Id
+            [|
+                [|Z;Z;Z;Z;Z|]
+                [|_3_8;Z;Z;Z;Z|]
+                [|Z;_9_16;Z;Z;Z|]
+                [|NQ(-125,672);NQ(325,336);Z;Z;Z|]
+                [|NQ(371,891);NQ(-200,297);NQ(1120,891);Z;Z|]
+            |]
+            [|NQ(25,162);NQ(32,135);NQ(256,567);Z;NQ(11,70)|]
+            [|NQ(37,225);NQ(44,117);Z;NQ(448,975);Z|]
+            [|Z;_3_8;_9_16;NQ(25,32);_1|]
+            _4
+            _3
+            5
+            "Runge-Kutta-Nørsett 3/4-order method"
+
+    let rkf45Id = Guid("158be900-43c2-4fca-b3a0-fec31a1eeaab")
+    let rkf45 =
+        EmbeddedButcherTableauHelpers.createAndRegister
+            rkf45Id
             [|
                 [|Z;Z;Z;Z;Z;Z|]
                 [|_1_4;Z;Z;Z;Z;Z|]
@@ -663,6 +684,28 @@ module Tableaus =
             _4
             6
             "Fehlberg's Runge-Kutta 4/5-order method"
+
+    let rkf56Id = Guid("8A3F6EC7-C39A-4B99-A38C-DB0D791C6847")
+    let rkf56 = 
+        EmbeddedButcherTableauHelpers.createAndRegister
+            rkf56Id
+            [|
+                [|Z;Z;Z;Z;Z;Z;Z;Z|]
+                [|_1_6;Z;Z;Z;Z;Z;Z;Z|]
+                [|NQ(4,75);NQ(16,75);Z;Z;Z;Z;Z;Z|]
+                [|NQ(5,6);NQ(-8,3);NQ(5,2);Z;Z;Z;Z;Z|]
+                [|NQ(-165,64);NQ(55,6);NQ(-425,64);NQ(85,96);Z;Z;Z;Z|]
+                [|NQ(12,5);N -8;NQ(4015,612);NQ(-11,36);NQ(88,255);Z;Z;Z|]
+                [|NQ(-8263,15000);NQ(124,75);NQ(-643,680);NQ(-81,250);NQ(2484,10625);Z;Z;Z|]
+                [|NQ(3501,1720);NQ(-300,43);NQ(297275,52632);NQ(-319,2322);NQ(24068,84065);Z;NQ(3850,26703);Z|]
+            |]
+            [|NQ(3,40);Z;NQ(875,2244);NQ(23,72);NQ(264,1955);Z;NQ(125,11592);NQ(43,616)|]
+            [|NQ(13,160);Z;NQ(2375,5984);NQ(5,16);NQ(12,85);NQ(3,44);Z;Z|]
+            [|Z;_1_6;NQ(4,15);_2_3;NQ(5,6);_1;NQ(1,15);_1|]
+            _6
+            _5
+            8
+            "Fehlberg's Runge-Kutta 5/6-order method"
 
     let cashCarpId = Guid("277e577f-a236-4946-a30c-ae918346776c")
     let cashCarp = 
@@ -877,3 +920,179 @@ module Tableaus =
             3
             "Lobatto IIIA method of fourth order"
 
+    let lobattoIIIB2id = Guid("96985671-1A60-46F6-AD84-4EEF8BEF470E")
+    let lobattoIIIB2 =
+        EmbeddedButcherTableauHelpers.createAndRegister
+            lobattoIIIB2id
+            [|
+                [|_1_2;Z|]
+                [|_1_2;Z|]
+            |]
+            [|_1_2;_1_2|]
+            [|_1;Z|]
+            [|Z;_1|]
+            _2
+            _2
+            2
+            "Lobatto IIIB method of second order"
+
+    let lobattoIIIB4id = Guid("7788914C-9DC3-452D-A43D-CA986FED7DB1")
+    let lobattoIIIB4 =
+        EmbeddedButcherTableauHelpers.createAndRegister
+            lobattoIIIB4id
+            [|
+                [|_1_6;-_1_6;Z|]
+                [|_1_6;_1_3;Z|]
+                [|_1_6;NQ(5,6);Z|]
+            |]
+            [|_1_6;_2_3;_1_6|]
+            [|-_1_2;_2;-_1_2|]
+            [|Z;_1_2;_1|]
+            _4
+            _4
+            3
+            "Lobatto IIIB method of fourth order"
+
+    let lobattoIIIC2Id = Guid("F55817B7-F371-446B-89EF-46FC0B1297FD")
+    let lobattoIIIC2 =
+        EmbeddedButcherTableauHelpers.createAndRegister
+            lobattoIIIC2Id
+            [|
+                [|_1_2;-_1_2|]
+                [|_1_2;_1_2|]
+            |]
+            [|_1_2;_1_2|]
+            [|_1;Z|]
+            [|Z;_1|]
+            _2
+            _2
+            2
+            "Lobatto IIIC method of second order"
+
+    let lobattoIIIC4Id = Guid("176B963E-7573-4B1B-8010-2AC7E905F66E")
+    let lobattoIIIC4 =
+        EmbeddedButcherTableauHelpers.createAndRegister
+            lobattoIIIC4Id
+            [|
+                [|_1_6;-_1_3;_1_6|]
+                [|_1_6;NQ(5,12);NQ(-1,12)|]
+                [|_1_6;_2_3;_1_6|]
+            |]
+            [|_1_6;_2_3;_1_6|]
+            [|-_1_2;_2;-_1_2|]
+            [|Z;_1_2;_1|]
+            _4
+            _4
+            3
+            "Lobatto IIIC method of fourth order"
+
+    let lobattoIIID2Id = Guid("29F5287D-30E6-444A-A9F8-6085EEF1F952")
+    let lobattoIIID2 =
+        ButcherTableauHelpers.createAndRegister
+            lobattoIIID2Id
+            [|
+                [|_1_2;_1_2|]
+                [|-_1_2;_1_2|]
+            |]
+            [|_1_2;_1_2|]
+            [|Z;_1|]
+            _2
+            2
+            "Lobatto IIID/IIINW method of second order"
+
+    let lobattoIIID4Id = Guid("A018012A-635D-42B2-954A-9F3BB3EB284B")
+    let lobattoIIID4 =
+        ButcherTableauHelpers.createAndRegister
+            lobattoIIID4Id
+            [|
+                [|_1_6;Z;_1_6|]
+                [|NQ(1,12);NQ(5,12);Z|]
+                [|_1_2;_1_3;_1_6|]
+            |]
+            [|_1_6;_2_3;_1_6|]
+            [|Z;_1_2;_1|]
+            _4
+            3
+            "Lobatto IIID/IIINW method of fourth order"
+
+    let radauIA3Id = Guid("BF4C93B8-41C3-4A56-A39D-2CB14DCBDD39")
+    let radauIA3 =
+        ButcherTableauHelpers.createAndRegister
+            radauIA3Id
+            [|
+                [|_1_4;-_1_4|]
+                [|_1_4;NQ(5,12)|]
+            |]
+            [|_1_4;_3_4|]
+            [|Z;_2_3|]
+            _3
+            2
+            "Radau IA method of third order"
+
+    let radauIA5Id = Guid("987F0263-A6FB-4E4F-AD5C-72020EE01524")
+    let radauIA5 =
+        let _7 = N 7
+        let _43 = N 43
+        let _18 = N 18
+        let _36 = N 36
+        let _360 = N 360
+        let sqrt6 = R (sqrt 6.0)
+        let sqrt6_10 = R (sqrt 6.0 / 10.0)
+        let _3_5 = NQ (3, 5)
+        let _11_45 = NQ (11, 45)
+        ButcherTableauHelpers.createAndRegister
+            radauIA5Id
+            [|
+                [|_1_9;(-_1-sqrt6)/_18;(-_1+sqrt6)/_18|]
+                [|_1_9;_11_45+_7*sqrt6/_360;_11_45-_43*sqrt6/_360|]
+                [|_1_9;_11_45+_43*sqrt6/_360;_11_45-_7*sqrt6/_360|]
+            |]
+            [|_1_9;_4_9+sqrt6/_36;_4_9-sqrt6/_36|]
+            [|Z;_3_5-sqrt6_10;_3_5+sqrt6_10|]
+            _5
+            3
+            "Radau IA method of fifth order"
+
+    let radauIIA3Id = Guid("51819526-C3E5-4149-9D1B-867D141479F4")
+    let radauIIA3 =
+        ButcherTableauHelpers.createAndRegister
+            radauIIA3Id
+            [|
+                [|_5_12;NQ(-1,12)|]
+                [|_3_4;_1_4|]
+            |]
+            [|_1_4;_3_4|]
+            [|_1_3;_1|]
+            _3
+            2
+            "Radau IIA method of third order"
+
+    let radauIIA5Id = Guid("CF363A92-7E07-4FED-AC09-E0E276DEA095")
+    let radauIIA5 =
+        let _7 = N 7
+        let _43 = N 43
+        let _18 = N 18
+        let _36 = N 36
+        let _75 = N 75
+        let _169 = N 169
+        let _360 = N 360
+        let _1800 = N 1800
+        let sqrt6 = R (sqrt 6.0)
+        let sqrt6_10 = R (sqrt 6.0 / 10.0)
+        let _2_5 = NQ (2, 5)
+        let _3_5 = NQ (3, 5)
+        let _11_45 = NQ (11, 45)
+        let _2_225 = NQ (2, 225)
+        let _37_225 = NQ (37, 225)
+        ButcherTableauHelpers.createAndRegister
+            radauIIA5Id
+            [|
+                [|_11_45-_7*sqrt6/_360;_37_225-_169*sqrt6/_1800;-_2_225+sqrt6/_75|]
+                [|_37_225+_169*sqrt6/_1800;_11_45+_7*sqrt6/_360;-_2_225-sqrt6/_75|]
+                [|_4_9-sqrt6/_36;_4_9+sqrt6/_36;_1_9|]
+            |]
+            [|_4_9-sqrt6/_36;_4_9+sqrt6/_36;_1_9|]
+            [|_2_5-sqrt6_10;_2_5+sqrt6_10;_1|]
+            _5
+            3
+            "Radau IA method of fifth order"

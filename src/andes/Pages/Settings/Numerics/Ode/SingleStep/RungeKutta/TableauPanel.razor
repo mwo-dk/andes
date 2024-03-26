@@ -69,10 +69,10 @@
                     @for (var i = 0; i < Content.Steps; i++)
                     {
                         <tr>
-                            <td>@Content.C[i]</td>
+                            <td>@Content.C[i].ToLaTexString()</td>
                             @for (var j = 0;j < Content.Steps;j++)
                             {
-                                <td>@Content.A[i][j]</td>
+                                <td>@Content.A[i][j].ToLaTexString()</td>
                             }
                         </tr>
                     }
@@ -82,14 +82,14 @@
                             <td><b>b<sub>1</sub></b></td>
                             @for (var i = 0; i < Content.Steps; i++)
                             {
-                                <td>@Content.B1[i]</td>
+                                <td>@Content.B1[i].ToLaTexString()</td>
                             } 
                         </tr>
                         <tr>
                             <td><b>b<sub>2</sub></b></td>
                             @for (var i = 0; i < Content.Steps; i++)
                             {
-                                <td>@Content.B2[i]</td>
+                                <td>@Content.B2[i].ToLaTexString()</td>
                             } 
                         </tr>
                     }
@@ -98,7 +98,7 @@
                             <td><b>b</b></td>
                             @for (var i = 0; i < Content.Steps; i++)
                             {
-                                <td>@Content.B[i]</td>
+                                <td>@Content.B[i].ToLaTexString()</td>
                             } 
                         </tr>
                     }
