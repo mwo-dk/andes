@@ -199,11 +199,13 @@ with
         | NQ (_, 0) -> NotANumber
         | NQ (a, b) when a = b -> N 1
         | NQ (a, b) when a = -b -> N (-1)
+        | NQ (a, b) when b < 0 -> (NQ (-a, -b)).Simplify()
         | Q (a, 1.0) -> (R a).Simplify()
         | Q (_, 0.0) -> NotANumber
         | Q (a, b) when a = b -> (R 1.0).Simplify()
         | Q (a, b) when a = -b -> (R -1.0).Simplify()
         | Q (a, b) when float (int a) = a && float (int b) = b -> (NQ (int a, int b)).Simplify()
+        | Q(a, b) when b < 0.0 -> (Q (-a, -b)).Simplify()
         | R x when float (int x) = x -> (N (int x)).Simplify()
         | C c when c.Imaginary = 0.0 -> (R c.Real).Simplify()
         | QC (a, b) when b = Complex.One -> (C a).Simplify()
@@ -360,7 +362,7 @@ with
                         sprintf "%f+%fi" c.Real c.Imaginary
                     else
                         sprintf "%f%fi" c.Real c.Imaginary
-        match this with
+        match this.Simplify() with
         | NotANumber -> "NaN"
         | Z -> "0"
         | N n -> n.ToString()
@@ -380,11 +382,13 @@ with
                         sprintf "%f+%fi" c.Real c.Imaginary
                     else
                         sprintf "%f%fi" c.Real c.Imaginary
-        match this with
+        match this.Simplify() with
         | NotANumber -> "\\text{NaN}"
         | Z -> "$0$"
         | N n -> $"$${n.ToString()}$$"
+        | NQ (a, b) when a < 0 -> sprintf "$$-\\frac{%d}{%d}$$" -a b 
         | NQ (a, b) -> sprintf "$$\\frac{%d}{%d}$$" a b
+        | Q (a, b) when a < 0.0 -> sprintf "$$-\\frac{%f}{%f}$$" -a b
         | Q (a, b) -> sprintf "$$\\frac{%f}{%f}$$" a b
         | R r -> $"$${r.ToString()}$$"
         | C c -> $"$${formatComplex c}$$"
