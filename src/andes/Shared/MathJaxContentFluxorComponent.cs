@@ -1,10 +1,5 @@
-using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 using Microsoft.JSInterop;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Andes.Shared;
 
@@ -28,7 +23,7 @@ public class MathJaxContentFluxorComponent : Fluxor.Blazor.Web.Components.Fluxor
     {
         if (firstRender)
         {
-            module = await jsRuntime!.InvokeAsync<IJSObjectReference>("import", "./_content/MathJaxBlazor/mathJaxBlazor.js");
+            module = await jsRuntime!.InvokeAsync<IJSObjectReference>("import", "./_content/andes/mathJaxBlazor.js");
         }
         if (module != null)
         {
