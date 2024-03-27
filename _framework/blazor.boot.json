@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "Andes",
   "resources": {
-    "hash": "sha256-jzVaB4fGSpJdbFbAN2ZV7Mjd/EXDT+qkzvtc3gpMAuE=",
+    "hash": "sha256-nbaZxZfvuU3oUUepdd1C7j7TxJ7LGPBGu9ysg86PHMk=",
     "jsModuleNative": {
       "dotnet.native.8.0.3.wzxwl5s97r.js": "sha256-D4sYBYmDfH/YekgYRgX959/2RG6k28sJSHmcsn+iikk="
     },
@@ -15,9 +15,9 @@
       "icudt.dat": "sha256-tO5O5YzMTVSaKBboxAqezOQL9ewmupzV2JrB5Rkc8a4="
     },
     "assembly": {
-      "Andes.Number.wasm": "sha256-kkZiNW/cUHTxgguD/8FEF8edmLqoCqhEGohbcz4SqVo=",
-      "Andes.Ode.SingleStep.RungeKutta.wasm": "sha256-7140RfFbBG/yzZ6nxjZz9ER0aWugoLM2ROuPA22Y55k=",
-      "Andes.wasm": "sha256-lgunxn3XE6s+cclAscAe30oBfsHSd+1txEXHeSvW6zk=",
+      "Andes.Number.wasm": "sha256-QBgnpOnVstz9YUjvdj1Tuw0IiNigSQq4PmxKpM5P4fg=",
+      "Andes.Ode.SingleStep.RungeKutta.wasm": "sha256-qR+4v4Tn1S/cfkinf7khQ0zUNjMUspAZMZvZsHSGoLs=",
+      "Andes.wasm": "sha256-mDpOSTL/zjdDM2xF7jCgT03E+Nx0ac6/VAxodjQ8UIo=",
       "Blazor.Extensions.Canvas.JS.wasm": "sha256-ctyeKHsvFswpiKQJpTUUWdSrDGr4UNirukOrWYnwW78=",
       "Blazor.Extensions.Canvas.wasm": "sha256-2AOrAB5tgoiK9wMMmwiE/pKPAtTjzgFudxSl6g4dt9s=",
       "DynamicObj.wasm": "sha256-QvvWROODrYXA6Wu6a6UVnClW6ei36+37TaMzKSSrBwk=",
@@ -41,7 +41,7 @@
       "Microsoft.Extensions.Options.wasm": "sha256-ezKJDNjeghS/qMdQmUpBPdH7bCDLrqkNqS6RsLxlpOY=",
       "Microsoft.Extensions.Primitives.wasm": "sha256-Ms2HR5Gpug/0uRAzdk4SUNT76Ml3CjFv9Jo+dUIMGac=",
       "Microsoft.FluentUI.AspNetCore.Components.Icons.wasm": "sha256-A8MGK56RWCGrIJ5+iCvVkByshh1dIWcLJ58FDXMgclw=",
-      "Microsoft.FluentUI.AspNetCore.Components.wasm": "sha256-+t7oiEvUGWdc4zk/5nPuPFvEoKRjyuy8ugDv7stMoS0=",
+      "Microsoft.FluentUI.AspNetCore.Components.wasm": "sha256-q7Jnm0vYDYdy1iM/+GK6xUFouL+/XK0YyJnBDa92sOQ=",
       "Microsoft.JSInterop.wasm": "sha256-FNkqegSmboLq/1QHGPIL+8r4+HaeqK6+mCYq/DtgpAA=",
       "Microsoft.JSInterop.WebAssembly.wasm": "sha256-Kr13V+6zGL8rPvFmuBAsaEJfoMlR4Q8keJHKaVGVbGA=",
       "netstandard.wasm": "sha256-cRg86nYv7nHonxv8CU9wuZC8rokjBIFCLv23q+HiUug=",
