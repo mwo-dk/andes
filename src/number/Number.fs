@@ -382,10 +382,10 @@ with
                         sprintf "%f%fi" c.Real c.Imaginary
         match this with
         | NotANumber -> "\\text{NaN}"
-        | Z -> "0"
-        | N n -> n.ToString()
+        | Z -> "$0$"
+        | N n -> $"$${n.ToString()}$$"
         | NQ (a, b) -> sprintf "$$\\frac{%d}{%d}$$" a b
         | Q (a, b) -> sprintf "$$\\frac{%f}{%f}$$" a b
-        | R r -> r.ToString()
-        | C c -> formatComplex c
+        | R r -> $"$${r.ToString()}$$"
+        | C c -> $"$${formatComplex c}$$"
         | QC (a, b) -> sprintf "$$\\frac{%s}{%s}$$" (formatComplex a) (formatComplex b)

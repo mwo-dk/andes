@@ -59,6 +59,7 @@ public partial class Home
             Content = item,
             Alignment = HorizontalAlignment.Right,
             Title = item.Name,
+            Width = "40%",
         });
         DialogResult result = await _dialog.Result;
         HandlePanel(result);

@@ -24,7 +24,7 @@ public class MathJaxSettings : ComponentBase
     {
         if (firstRender)
         {
-            module = await jsRuntime!.InvokeAsync<IJSObjectReference>("import", "./_content/andes/mathJaxBlazor.js");
+            module = await jsRuntime!.InvokeAsync<IJSObjectReference>("import", "./mathJaxBlazor.js");
             await ApplySettingsAsync();
             hasRendered = true;
         }

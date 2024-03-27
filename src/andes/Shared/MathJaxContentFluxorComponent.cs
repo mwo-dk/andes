@@ -23,7 +23,7 @@ public class MathJaxContentFluxorComponent : Fluxor.Blazor.Web.Components.Fluxor
     {
         if (firstRender)
         {
-            module = await jsRuntime!.InvokeAsync<IJSObjectReference>("import", "./_content/andes/mathJaxBlazor.js");
+            module = await jsRuntime!.InvokeAsync<IJSObjectReference>("import", "./mathJaxBlazor.js");
         }
         if (module != null)
         {
