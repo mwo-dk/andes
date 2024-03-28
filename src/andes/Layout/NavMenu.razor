@@ -6,11 +6,18 @@
     <nav class="sitenav" aria-labelledby="main-menu" onclick="document.getElementById('navmenu-toggle').click();">
         <FluentNavMenu Id="main-menu" Width="250" Collapsible="true" Title="Navigation menu" @bind-Expanded="expanded">
             <FluentNavLink Href="/" Match="NavLinkMatch.All" Icon="@(new Icons.Regular.Size20.Home())" IconColor="Color.Accent">Home</FluentNavLink>
-            <FluentNavGroup Title="Cellular automata" Href="cellular-automata" Icon="@(new Icons.Regular.Size20.Box())" IconColor="Color.Accent">
-                <FluentNavLink Href="game-of-life" Icon="@(new Icons.Regular.Size20.Info())" IconColor="Color.Accent">Game of Life</FluentNavLink>
-                <FluentNavLink Href="langtons-ant" Icon="@(new Icons.Regular.Size20.Info())" IconColor="Color.Accent">Langton's ant</FluentNavLink>
+            <FluentNavGroup Title="Dynamical systems" Icon="@(new Icons.Regular.Size20.ArrowFlowUpRight())" IconColor="Color.Accent">
+                <FluentNavGroup Title="Continuous time">
+                    <FluentNavLink Href="dynamical-systems/continuous-time/ode" Icon="@(new Icons.Regular.Size20.Info())" IconColor="Color.Accent" Tooltip="Ordinary differential equations">ODE</FluentNavLink>    
+                </FluentNavGroup>
+                <FluentNavGroup Title="Discrete time">
+                    <FluentNavLink Href="mandelbrot" Icon="@(new Icons.Regular.Size20.Info())" IconColor="Color.Accent">Mandelbrot</FluentNavLink>
+                    <FluentNavLink Href="julia" Icon="@(new Icons.Regular.Size20.Info())" IconColor="Color.Accent">Julia</FluentNavLink>
+                </FluentNavGroup>
+                @* <FluentNavLink Href="game-of-life" Icon="@(new Icons.Regular.Size20.Info())" IconColor="Color.Accent">Game of Life</FluentNavLink>
+                <FluentNavLink Href="langtons-ant" Icon="@(new Icons.Regular.Size20.Info())" IconColor="Color.Accent">Langton's ant</FluentNavLink> *@
             </FluentNavGroup>
-            <FluentNavGroup Title="Dynamical systems" Href="dynamical-systems" Icon="@(new Icons.Regular.Size20.ArrowFlowUpRight())" IconColor="Color.Accent">
+            <FluentNavGroup Title="Cellular automata" Href="cellular-automata" Icon="@(new Icons.Regular.Size20.Box())" IconColor="Color.Accent">
                 <FluentNavLink Href="game-of-life" Icon="@(new Icons.Regular.Size20.Info())" IconColor="Color.Accent">Game of Life</FluentNavLink>
                 <FluentNavLink Href="langtons-ant" Icon="@(new Icons.Regular.Size20.Info())" IconColor="Color.Accent">Langton's ant</FluentNavLink>
             </FluentNavGroup>

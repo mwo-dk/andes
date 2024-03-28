@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+		<RootNamespace>Andes.DynamicalSystems.ContinuousTime.Ode</RootNamespace>
+		<AssemblyName>Andes..DynamicalSystems.ContinuousTime.Ode</AssemblyName>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="Library.fs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\number\number.fsproj" />
+  </ItemGroup>
+
+</Project>
