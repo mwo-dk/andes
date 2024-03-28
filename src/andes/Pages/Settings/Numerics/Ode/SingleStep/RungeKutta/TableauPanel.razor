@@ -61,15 +61,15 @@
         </tr>
         <tr>
             <td colspan="2">
-                <table>
-                    <tr>
-                        <td><b>c</b></td>
+                <table style="text-align: center;border-collapse: true;">
+                    <tr style="border-bottom: solid 1px;">
+                        <td style="border-right: solid 1px;"><b>c</b></td>
                         <td><b>A</b></td>
                     </tr>
                     @for (var i = 0; i < Content.Steps; i++)
                     {
                         <tr>
-                            <td>@Content.C[i].ToLaTexString()</td>
+                            <td style="border-right: solid 1px;" >@Content.C[i].ToLaTexString()</td>
                             @for (var j = 0;j < Content.Steps;j++)
                             {
                                 <td>@Content.A[i][j].ToLaTexString()</td>
@@ -78,15 +78,15 @@
                     }
                     @if (Content.IsEmbedded)
                     {
-                        <tr>
-                            <td><b>b<sub>1</sub></b></td>
+                        <tr style="border-top: solid 1px;">
+                            <td style="border-right: solid 1px;"><b>b<sub>1</sub></b></td>
                             @for (var i = 0; i < Content.Steps; i++)
                             {
                                 <td>@Content.B1[i].ToLaTexString()</td>
                             } 
                         </tr>
                         <tr>
-                            <td><b>b<sub>2</sub></b></td>
+                            <td style="border-right: solid 1px;"><b>b<sub>2</sub></b></td>
                             @for (var i = 0; i < Content.Steps; i++)
                             {
                                 <td>@Content.B2[i].ToLaTexString()</td>
@@ -94,8 +94,8 @@
                         </tr>
                     }
                     else {
-                        <tr>
-                            <td><b>b</b></td>
+                        <tr style="border-top: solid 1px;">
+                            <td style="border-right: solid 1px;"><b>b</b></td>
                             @for (var i = 0; i < Content.Steps; i++)
                             {
                                 <td>@Content.B[i].ToLaTexString()</td>

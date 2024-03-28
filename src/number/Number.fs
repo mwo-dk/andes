@@ -384,7 +384,7 @@ with
                         sprintf "%f%fi" c.Real c.Imaginary
         match this.Simplify() with
         | NotANumber -> "\\text{NaN}"
-        | Z -> "$0$"
+        | Z -> "$$0$$"
         | N n -> $"$${n.ToString()}$$"
         | NQ (a, b) when a < 0 -> sprintf "$$-\\frac{%d}{%d}$$" -a b 
         | NQ (a, b) -> sprintf "$$\\frac{%d}{%d}$$" a b
