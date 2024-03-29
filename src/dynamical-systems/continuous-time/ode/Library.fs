@@ -10,38 +10,29 @@ type Parameter = {
     Value: Number
 }
 type ParameterSet = Parameter list
-[<Struct>]
-type State<'T> = 
-| Scalar of s: 'T
-| Vector of v: 'T array
 
-type OrdinayDifferentialEquation<'T> = 
-| Autonomous of Expression<Func<State<'T>, State<'T>>>
-| NonAutonomous of Expression<Func<State<'T>, 'T, State<'T>>>
-
-[<Extension>]
-type OrdinaryDifferentialEquationExtensions =
-    [<Extension>]
-    static member inline IsAutonomous 
-        (ode: OrdinayDifferentialEquation<'T>) = 
+type AutonomousRightHandSide<'T> = Expression<Func<'T, 'T>>
+type NonAutonomousRightHandSide<'T, 'U> = Expression<Func<'T, 'U, 'T>>
+type OrdinayDifferentialEquation<'T, 'U> = 
+| Autonomous of AutonomousRightHandSide<'T>*ParameterSet
+| NonAutonomous of NonAutonomousRightHandSide<'T, 'U>*ParameterSet
+module OrdinaryDifferentialEquationExtensions =
+    let getParameters (ode: OrdinayDifferentialEquation<'T, 'U>) =
         match ode with
-        | Autonomous _ -> true
-        | _ -> false
-
+        | Autonomous (_, parameters) -> parameters
+        | NonAutonomous (_, parameters) -> parameters
     [<Extension>]
-    static member inline IsNonAutonomous 
-        (ode: OrdinayDifferentialEquation<'T>) = 
-        match ode with
-        | NonAutonomous _ -> true
-        | _ -> false
+    type OrdinaryDifferentialEquationExtensions =
+        [<Extension>]
+        static member IsAutonomous 
+            (ode: OrdinayDifferentialEquation<'T, 'U>) = 
+            match ode with
+            | Autonomous _ -> true
+            | _ -> false
 
-module OrdinaryDifferentialEquationRegistry =
-    let private registry = 
-        ResizeArray<OrdinayDifferentialEquation<Number>>()
-
-    let Register (ode: OrdinayDifferentialEquation<Number>) = 
-        registry.Add(ode)
-
-    let GetRegisteredOdes () = 
-        registry.ToArray()
-    
+        [<Extension>]
+        static member IsNonAutonomous 
+            (ode: OrdinayDifferentialEquation<'T, 'U>) = 
+            match ode with
+            | NonAutonomous _ -> true
+            | _ -> false

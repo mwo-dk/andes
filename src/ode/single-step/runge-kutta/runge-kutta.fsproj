@@ -9,10 +9,12 @@
 
   <ItemGroup>
     <Compile Include="ButcherTableau.fs" />
+    <Compile Include="Step.fs" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\number\number.fsproj" />
+    <ProjectReference Include="..\..\..\dynamical-systems\continuous-time\ode\ode.fsproj" />
   </ItemGroup>
 
 </Project>
