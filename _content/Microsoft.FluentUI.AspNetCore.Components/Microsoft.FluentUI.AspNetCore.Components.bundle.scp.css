@@ -2521,6 +2521,34 @@ div[dragged-over][b-qxma62j335] {
     .fluent-profile-menu[b-rsm9d6pikk]  > .fluent-persona > .name {
         display: none;
     }
+/* _content/Microsoft.FluentUI.AspNetCore.Components/Components/PullToRefresh/FluentPullToRefresh.razor.rz.scp.css */
+.fluent-pull-container[b-rq0hhda1ik] {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    height: 100%;
+}
+
+    .fluent-pull-container div[part="tip"][b-rq0hhda1ik] {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--neutral-layer-2);
+        color: var(--neutral-base-color);
+        padding: 0.5rem;
+        height: var(--fluent-pull-refresh-head-height, 50px);
+        width: 100%;
+    }
+
+        .fluent-pull-container div[part="tip"][direction="down"][b-rq0hhda1ik] {
+            position: relative;
+            top: 0px;
+        }
+
+        .fluent-pull-container div[part="tip"][direction="up"][b-rq0hhda1ik] {
+            position: relative;
+            bottom: 0px;
+        }
 /* _content/Microsoft.FluentUI.AspNetCore.Components/Components/Radio/FluentRadio.razor.rz.scp.css */
 fluent-radio[b-98313echfq] {
     margin: calc(var(--design-unit) * 1px) 0;
