@@ -32,34 +32,13 @@ else
         </TemplateColumn>
         <PropertyColumn Title="Steps" Property="@(p => p.Steps)" Sortable="true" />
         <TemplateColumn Title="Explicit">
-            @if (context.IsExplicit)
-            {
-                <FluentIcon Value="@(new Icons.Regular.Size24.CheckboxChecked())" />
-            }
-            else
-            {
-                <FluentIcon Value="@(new Icons.Regular.Size24.CheckboxUnchecked())" />
-            }
+            <FluentIcon Value="@context.IsExplicit.ToIcon()" />
         </TemplateColumn>
         <TemplateColumn Title="Embedded">
-            @if (context.IsEmbedded)
-            {
-                <FluentIcon Value="@(new Icons.Regular.Size24.CheckboxChecked())" />
-            }
-            else
-            {
-                <FluentIcon Value="@(new Icons.Regular.Size24.CheckboxUnchecked())" />
-            }
+            <FluentIcon Value="@context.IsEmbedded.ToIcon()" />
         </TemplateColumn>
         <TemplateColumn Title="Built in">
-            @if (context.IsBuiltIn)
-            {
-                <FluentIcon Value="@(new Icons.Regular.Size24.CheckboxChecked())" />
-            }
-            else
-            {
-                <FluentIcon Value="@(new Icons.Regular.Size24.CheckboxUnchecked())" />
-            }
+            <FluentIcon Value="@context.IsBuiltIn.ToIcon()" />
         </TemplateColumn>
         <TemplateColumn Title="Order">
             @if (context.IsEmbedded) 

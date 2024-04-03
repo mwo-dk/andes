@@ -9,42 +9,15 @@
 
         <tr>
             <td>Explicit:</td>
-            <td>
-                @if (Content.IsExplicit)
-                {
-                    <FluentIcon Value="@(new Icons.Regular.Size24.CheckboxChecked())" />
-                }
-                else
-                {
-                    <FluentIcon Value="@(new Icons.Regular.Size24.CheckboxUnchecked())" />
-                }
-            </td>
+            <td><FluentIcon Value="@Content.IsExplicit.ToIcon()"/></td>
         </tr>
         <tr>
             <td>Embedded:</td>
-            <td>
-                @if (Content.IsEmbedded)
-                {
-                    <FluentIcon Value="@(new Icons.Regular.Size24.CheckboxChecked())" />
-                }
-                else
-                {
-                    <FluentIcon Value="@(new Icons.Regular.Size24.CheckboxUnchecked())" />
-                }
-            </td>
+            <td><FluentIcon Value="@Content.IsEmbedded.ToIcon()"/></td>
         </tr>
         <tr>
             <td>Built in:</td>
-            <td>
-                @if (Content.IsBuiltIn)
-                {
-                    <FluentIcon Value="@(new Icons.Regular.Size24.CheckboxChecked())" />
-                }
-                else
-                {
-                    <FluentIcon Value="@(new Icons.Regular.Size24.CheckboxUnchecked())" />
-                }
-            </td>
+            <td><FluentIcon Value="@Content.IsBuiltIn.ToIcon()"/></td>
         </tr>
         <tr>
             <td>Order</td>
