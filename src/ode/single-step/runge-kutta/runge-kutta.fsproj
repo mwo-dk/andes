@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\number\number.fsproj" />
+    <ProjectReference Include="..\..\..\expression\expression.fsproj" />
     <ProjectReference Include="..\..\..\dynamical-systems\continuous-time\ode\ode.fsproj" />
   </ItemGroup>
 

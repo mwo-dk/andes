@@ -69,10 +69,10 @@
                     @for (var i = 0; i < Content.Steps; i++)
                     {
                         <tr>
-                            <td style="border-right: solid 1px;" >@Content.C[i].ToLaTexString()</td>
+                            <td style="border-right: solid 1px;" >@(Content.C[i] as ILaTexFormattable).ToLaTexString()</td>
                             @for (var j = 0;j < Content.Steps;j++)
                             {
-                                <td>@Content.A[i][j].ToLaTexString()</td>
+                                <td>@(Content.A[i][j] as ILaTexFormattable).ToLaTexString()</td>
                             }
                         </tr>
                     }
@@ -82,14 +82,14 @@
                             <td style="border-right: solid 1px;"><b>b<sub>1</sub></b></td>
                             @for (var i = 0; i < Content.Steps; i++)
                             {
-                                <td>@Content.B1[i].ToLaTexString()</td>
+                                <td>@(Content.B1[i] as ILaTexFormattable).ToLaTexString()</td>
                             } 
                         </tr>
                         <tr>
                             <td style="border-right: solid 1px;"><b>b<sub>2</sub></b></td>
                             @for (var i = 0; i < Content.Steps; i++)
                             {
-                                <td>@Content.B2[i].ToLaTexString()</td>
+                                <td>@(Content.B2[i] as ILaTexFormattable).ToLaTexString()</td>
                             } 
                         </tr>
                     }
@@ -98,7 +98,7 @@
                             <td style="border-right: solid 1px;"><b>b</b></td>
                             @for (var i = 0; i < Content.Steps; i++)
                             {
-                                <td>@Content.B[i].ToLaTexString()</td>
+                                <td>@(Content.B[i] as ILaTexFormattable).ToLaTexString()</td>
                             } 
                         </tr>
                     }

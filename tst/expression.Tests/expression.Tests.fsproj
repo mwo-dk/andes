@@ -3,7 +3,7 @@
 	<PropertyGroup>
 		<TargetFramework>net8.0</TargetFramework>
 		<RootNamespace>Andes.Tests</RootNamespace>
-		<AssemblyName>Andes.Number.Tests</AssemblyName>
+		<AssemblyName>Andes.Expression.Tests</AssemblyName>
 		<IsPackable>false</IsPackable>
 		<GenerateProgramFile>false</GenerateProgramFile>
 		<IsTestProject>true</IsTestProject>
@@ -29,7 +29,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\..\src\number\number.fsproj" />
+	  <ProjectReference Include="..\..\src\expression\expression.fsproj" />
 	</ItemGroup>
 
 </Project>

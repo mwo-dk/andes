@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\number\number.fsproj" />
+    <ProjectReference Include="..\..\..\expression\expression.fsproj" />
   </ItemGroup>
 
 </Project>
