@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<RootNamespace>Andes.UI.Plotly</RootNamespace>
+		<AssemblyName>Andes.UI.Plotly</AssemblyName>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
+
+
+	<ItemGroup>
+		<SupportedPlatform Include="browser" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Fluxor.Blazor.Web" Version="5.9.1" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.3" />
+		<PackageReference Include="Plotly.Blazor" Version="4.2.0" />
+	</ItemGroup>
+
+</Project>

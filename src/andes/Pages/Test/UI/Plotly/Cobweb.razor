@@ -1,0 +1,35 @@
+﻿@page "/test/ui/plotly/cobweb"
+
+<h1>Cobweb in Plotly</h1>
+
+<Andes.UI.Plotly.Cobweb />
+
+<table>
+    <tr>
+        <td>μ: </td>
+        <td><input type="number" @bind="μ" /></td>
+    </tr>
+    <tr>
+        <td>x0: </td>
+        <td><input type="number" @bind="x0" /></td>
+    </tr>
+    <tr>
+        <td>N: </td>
+        <td><input type="number" @bind="N" /></td>
+    </tr>
+    <tr>
+        <td><FluentButton @onclick="@(() => Run())">Run</FluentButton></td>
+        <td/>
+    </tr>
+</table>
+
+@code {
+    private double μ = 3.5;
+    private double x0 = 0.5;
+    private double N = 100;
+
+    private void Run()
+    {
+        // TODO
+    }
+}
