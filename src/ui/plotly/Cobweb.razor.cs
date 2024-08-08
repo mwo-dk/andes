@@ -31,7 +31,7 @@ public partial class Cobweb
         new Scatter
         {
             Name = "ScatterTrace",
-            Mode = new  Nullable<ModeFlag>(ModeFlag.Lines | ModeFlag.Markers),
+            //Mode = new  Nullable<ModeFlag>(ModeFlag.Lines | ModeFlag.Markers),
             X = [1,2,3],
             Y = [1,2,3]
         }

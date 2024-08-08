@@ -19,14 +19,14 @@
                           Height="200px"
                           Width="250px"
                           @bind-SelectedOption="@OfficeColor">
-                <OptionTemplate>  
+                @* <OptionTemplate>  
                     <FluentStack>
                         <FluentIcon Value="@(new Icons.Filled.Size20.RectangleLandscape())"
                                     Color="Color.Custom"
                                     CustomColor="@(@context.ToAttributeValue() != "default" ? context.ToAttributeValue() : "#036ac4" )" />
                         <FluentLabel>@context</FluentLabel>  
                     </FluentStack>
-                </OptionTemplate> 
+                </OptionTemplate>  *@
             </FluentSelect>
         </FluentGridItem>
     </FluentGrid>
