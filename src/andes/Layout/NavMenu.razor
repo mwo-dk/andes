@@ -1,40 +1,41 @@
 ﻿@using Andes.Services
+@using Microsoft.FluentUI.AspNetCore.Components
 
 <div class="navmenu">
     <input type="checkbox" title="Menu expand/collapse toggle" id="navmenu-toggle" class="navmenu-icon" />
-    <label for="navmenu-toggle" class="navmenu-icon"><FluentIcon Value="@(new Icons.Regular.Size20.Navigation())" Color="Color.Fill" /></label>
+    <label for="navmenu-toggle" class="navmenu-icon"><FluentIcon Value="@(new Microsoft.FluentUI.AspNetCore.Components.Icons.Regular.Size20.Navigation())" Color="Color.Fill" /></label>
     <nav class="sitenav" aria-labelledby="main-menu" onclick="document.getElementById('navmenu-toggle').click();">
         <FluentNavMenu Id="main-menu" Width="250" Collapsible="true" Title="Navigation menu" @bind-Expanded="expanded">
-            <FluentNavLink Href="/" Match="NavLinkMatch.All" Icon="@(new Icons.Regular.Size20.Home())" IconColor="Color.Accent">Home</FluentNavLink>
-            <FluentNavGroup Title="Dynamical systems" Icon="@(new Icons.Regular.Size20.ArrowFlowUpRight())" IconColor="Color.Accent">
+            <FluentNavLink Href="/" Match="NavLinkMatch.All" Icon="@(new Microsoft.FluentUI.AspNetCore.Components.Icons.Regular.Size20.Home())" IconColor="Color.Accent">Home</FluentNavLink>
+            <FluentNavGroup Title="Dynamical systems" Icon="@(new Microsoft.FluentUI.AspNetCore.Components.Icons.Regular.Size20.ArrowFlowUpRight())" IconColor="Color.Accent">
                 <FluentNavGroup Title="Continuous time">
-                    <FluentNavLink Href="dynamical-systems/continuous-time/ode" Icon="@(new Icons.Regular.Size20.Info())" IconColor="Color.Accent" Tooltip="Ordinary differential equations">ODE</FluentNavLink>    
+                    <FluentNavLink Href="dynamical-systems/continuous-time/ode" Icon="@(new Microsoft.FluentUI.AspNetCore.Components.Icons.Regular.Size20.Info())" IconColor="Color.Accent" Tooltip="Ordinary differential equations">ODE</FluentNavLink>
                 </FluentNavGroup>
                 <FluentNavGroup Title="Discrete time">
-                    <FluentNavLink Href="mandelbrot" Icon="@(new Icons.Regular.Size20.Info())" IconColor="Color.Accent">Mandelbrot</FluentNavLink>
-                    <FluentNavLink Href="julia" Icon="@(new Icons.Regular.Size20.Info())" IconColor="Color.Accent">Julia</FluentNavLink>
+                    <FluentNavLink Href="mandelbrot" Icon="@(new Microsoft.FluentUI.AspNetCore.Components.Icons.Regular.Size20.Info())" IconColor="Color.Accent">Mandelbrot</FluentNavLink>
+                    <FluentNavLink Href="julia" Icon="@(new Microsoft.FluentUI.AspNetCore.Components.Icons.Regular.Size20.Info())" IconColor="Color.Accent">Julia</FluentNavLink>
                 </FluentNavGroup>
                 @* <FluentNavLink Href="game-of-life" Icon="@(new Icons.Regular.Size20.Info())" IconColor="Color.Accent">Game of Life</FluentNavLink>
                 <FluentNavLink Href="langtons-ant" Icon="@(new Icons.Regular.Size20.Info())" IconColor="Color.Accent">Langton's ant</FluentNavLink> *@
             </FluentNavGroup>
-            <FluentNavGroup Title="Cellular automata" Href="cellular-automata" Icon="@(new Icons.Regular.Size20.Box())" IconColor="Color.Accent">
-                <FluentNavLink Href="game-of-life" Icon="@(new Icons.Regular.Size20.Info())" IconColor="Color.Accent">Game of Life</FluentNavLink>
-                <FluentNavLink Href="langtons-ant" Icon="@(new Icons.Regular.Size20.Info())" IconColor="Color.Accent">Langton's ant</FluentNavLink>
+            <FluentNavGroup Title="Cellular automata" Href="cellular-automata" Icon="@(new Microsoft.FluentUI.AspNetCore.Components.Icons.Regular.Size20.Box())" IconColor="Color.Accent">
+                <FluentNavLink Href="game-of-life" Icon="@(new Microsoft.FluentUI.AspNetCore.Components.Icons.Regular.Size20.Info())" IconColor="Color.Accent">Game of Life</FluentNavLink>
+                <FluentNavLink Href="langtons-ant" Icon="@(new Microsoft.FluentUI.AspNetCore.Components.Icons.Regular.Size20.Info())" IconColor="Color.Accent">Langton's ant</FluentNavLink>
             </FluentNavGroup>
-            <FluentNavGroup Title="Fractals" Href="fractals" Icon="@(new Icons.Regular.Size20.ArrowFlowUpRight())" IconColor="Color.Accent">
-                <FluentNavLink Href="game-of-life" Icon="@(new Icons.Regular.Size20.Info())" IconColor="Color.Accent">Game of Life</FluentNavLink>
-                <FluentNavLink Href="langtons-ant" Icon="@(new Icons.Regular.Size20.Info())" IconColor="Color.Accent">Langton's ant</FluentNavLink>
+            <FluentNavGroup Title="Fractals" Href="fractals" Icon="@(new Microsoft.FluentUI.AspNetCore.Components.Icons.Regular.Size20.ArrowFlowUpRight())" IconColor="Color.Accent">
+                <FluentNavLink Href="game-of-life" Icon="@(new Microsoft.FluentUI.AspNetCore.Components.Icons.Regular.Size20.Info())" IconColor="Color.Accent">Game of Life</FluentNavLink>
+                <FluentNavLink Href="langtons-ant" Icon="@(new Microsoft.FluentUI.AspNetCore.Components.Icons.Regular.Size20.Info())" IconColor="Color.Accent">Langton's ant</FluentNavLink>
             </FluentNavGroup>
             <FluentNavGroup Title="Settings">
-                <FluentNavLink Href="settings/ui" Icon="@(new Icons.Regular.Size20.Info())" IconColor="Color.Accent">UI</FluentNavLink>
+                <FluentNavLink Href="settings/ui" Icon="@(new Microsoft.FluentUI.AspNetCore.Components.Icons.Regular.Size20.Info())" IconColor="Color.Accent">UI</FluentNavLink>
                 <FluentNavGroup Title="Numerics">
                     <FluentNavGroup Title="Ordinary differential equations">
                         <FluentNavGroup Title="Single step">
-                            <FluentNavLink Href="numerics/ode/single-step/runge-kutta" Icon="@(new Icons.Regular.Size20.Info())" IconColor="Color.Accent">Runge Kutta</FluentNavLink>
+                            <FluentNavLink Href="numerics/ode/single-step/runge-kutta" Icon="@(new Microsoft.FluentUI.AspNetCore.Components.Icons.Regular.Size20.Info())" IconColor="Color.Accent">Runge Kutta</FluentNavLink>
                         </FluentNavGroup>
                         <FluentNavGroup Title="Multi step" Disabled=true>
-                            <FluentNavLink Href="mandelbrot" Icon="@(new Icons.Regular.Size20.Info())" IconColor="Color.Accent">Mandelbrot</FluentNavLink>
-                            <FluentNavLink Href="julia" Icon="@(new Icons.Regular.Size20.Info())" IconColor="Color.Accent">Julia</FluentNavLink>
+                            <FluentNavLink Href="mandelbrot" Icon="@(new Microsoft.FluentUI.AspNetCore.Components.Icons.Regular.Size20.Info())" IconColor="Color.Accent">Mandelbrot</FluentNavLink>
+                            <FluentNavLink Href="julia" Icon="@(new Microsoft.FluentUI.AspNetCore.Components.Icons.Regular.Size20.Info())" IconColor="Color.Accent">Julia</FluentNavLink>
                         </FluentNavGroup>
                     </FluentNavGroup>
                 </FluentNavGroup>
@@ -42,16 +43,16 @@
             @if (BuildService.IsDebug())
             {
                 <FluentNavGroup Title="Test">
-                    <FluentNavLink Href="test/numbers" Icon="@(new Icons.Regular.Size20.Info())" IconColor="Color.Accent">Numbers</FluentNavLink>
-                    <FluentNavLink Href="test/expressions" Icon="@(new Icons.Regular.Size20.Info())" IconColor="Color.Accent">Expressions</FluentNavLink>
+                    <FluentNavLink Href="test/numbers" Icon="@(new Microsoft.FluentUI.AspNetCore.Components.Icons.Regular.Size20.Info())" IconColor="Color.Accent">Numbers</FluentNavLink>
+                    <FluentNavLink Href="test/expressions" Icon="@(new Microsoft.FluentUI.AspNetCore.Components.Icons.Regular.Size20.Info())" IconColor="Color.Accent">Expressions</FluentNavLink>
                     <FluentNavGroup Title="UI">
                         <FluentNavGroup Title="Plotly">
-                            <FluentNavLink Href="test/ui/plotly/cobweb" Icon="@(new Icons.Regular.Size20.Info())" IconColor="Color.Accent">Cobweb</FluentNavLink>
+                            <FluentNavLink Href="test/ui/plotly/cobweb" Icon="@(new Microsoft.FluentUI.AspNetCore.Components.Icons.Regular.Size20.Info())" IconColor="Color.Accent">Cobweb</FluentNavLink>
                         </FluentNavGroup>
                     </FluentNavGroup>
                 </FluentNavGroup>
             }
-            <FluentNavLink Href="about" Icon="@(new Icons.Regular.Size20.Info())" IconColor="Color.Accent">About</FluentNavLink>
+            <FluentNavLink Href="about" Icon="@(new Microsoft.FluentUI.AspNetCore.Components.Icons.Regular.Size20.Info())" IconColor="Color.Accent">About</FluentNavLink>
         </FluentNavMenu>
     </nav>
 </div>

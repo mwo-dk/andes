@@ -14,9 +14,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Fluxor.Blazor.Web" Version="5.9.1" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.3" />
-		<PackageReference Include="SkiaSharp.Views.Blazor" Version="2.88.7" />
+		<PackageReference Include="Fluxor.Blazor.Web" Version="6.1.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.11" />
+		<PackageReference Include="SkiaSharp.Views.Blazor" Version="3.116.1" />
 	</ItemGroup>
 
 </Project>

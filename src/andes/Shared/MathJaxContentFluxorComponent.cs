@@ -32,7 +32,7 @@ public class MathJaxContentFluxorComponent : Fluxor.Blazor.Web.Components.Fluxor
         await base.OnAfterRenderAsync(firstRender);
     }
 
-    public async ValueTask DisposeAsync()
+    public new async ValueTask DisposeAsync()
     {
         if (module != null)
         {
